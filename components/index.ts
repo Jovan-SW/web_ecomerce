@@ -12,3 +12,9 @@ export type { ProductGridSkeletonProps } from "./loading/ProductGridSkeleton";
 
 export { default as Button } from "./button/Button";
 export type { ButtonProps, ButtonVariant, ButtonSize } from "./button/Button";
+
+export { default as SearchBar } from "./searchBar/SearchBar";
+export type { SearchBarProps } from "./searchBar/SearchBar";
+
+export { default as Navbar } from "./navbar/Navbar";
+export type { NavbarProps } from "./navbar/Navbar";

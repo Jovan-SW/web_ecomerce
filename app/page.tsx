@@ -1,9 +1,38 @@
-import { Button } from "@/components";
+import { Button, SearchBar } from "@/components";
 
 export default async function Home() {
   return (
     <main className="min-h-screen bg-[#FDFBF7] py-10 sm:py-16 px-4 sm:px-8">
       <div className="max-w-4xl mx-auto space-y-12">
+        {/* ========================================================
+            SECTION SEARCHBAR (Premium, Elegant, White BG, Black Logo)
+           ======================================================== */}
+        <section className="bg-white p-6 sm:p-8 border border-[#ECE7E1] shadow-xs">
+          <div className="mb-5">
+            <span className="text-[10px] uppercase tracking-[0.25em] text-[#8C827A] font-semibold">
+              Katalog & Tren Busana
+            </span>
+            <h2 className="text-xl sm:text-2xl font-serif text-[#08080A] tracking-tight mt-0.5">
+              Temukan Produk & Merk Pilihan
+            </h2>
+            <p className="text-xs text-[#5b4257] mt-1">
+              Cari ribuan busana, potongan oversized, pakaian rajut vintage, atau merk favorit Anda.
+            </p>
+          </div>
+
+          <SearchBar
+            size="lg"
+            placeholder="Cari produk, tren gaya terkini, atau merk busana..."
+            trendingKeywords={[
+              "Heavyweight Boxy Tee",
+              "Vintage Washed",
+              "Textured Knit Polo",
+              "Oversized Fit",
+              "Linen Camp Collar",
+            ]}
+          />
+        </section>
+
         {/* Header Showcase */}
         <header className="border-b border-[#ECE7E1] pb-6">
           <p className="text-[11px] uppercase tracking-[0.25em] text-[#8C827A] font-semibold mb-1.5">
