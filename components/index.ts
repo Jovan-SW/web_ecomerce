@@ -9,3 +9,6 @@ export type { ProductCardSkeletonProps } from "./loading/ProductCardSkeleton";
 
 export { default as ProductGridSkeleton } from "./loading/ProductGridSkeleton";
 export type { ProductGridSkeletonProps } from "./loading/ProductGridSkeleton";
+
+export { default as Button } from "./button/Button";
+export type { ButtonProps, ButtonVariant, ButtonSize } from "./button/Button";

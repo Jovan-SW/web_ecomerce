@@ -38,7 +38,21 @@ export default function ProductCard({
       ? product.product_variants
       : [];
 
-  // Hitung total stok dari varian produk
+  // Ambil daftar varian warna unik dari database
+  const uniqueColors = Array.from(
+    new Map(
+      variants
+        .filter((v) => v.color_hex && v.color_name)
+        .map((v) => [v.color_hex.toLowerCase(), v])
+    ).values()
+  );
+
+  // Ambil daftar ukuran unik dari database
+  const availableSizes = Array.from(
+    new Set(variants.filter((v) => v.size && (v.stock ?? 0) > 0).map((v) => v.size))
+  );
+
+  // Hitung total stok asli dari seluruh varian produk di database
   const totalStock =
     variants.length > 0
       ? variants.reduce((acc, curr) => acc + (curr.stock || 0), 0)
@@ -47,7 +61,7 @@ export default function ProductCard({
   const isSoldOut = totalStock !== null && totalStock === 0;
   const isLowStock = totalStock !== null && totalStock > 0 && totalStock <= 5;
 
-  // Foto produk utama dan foto kedua (untuk efek hover flip khas luxury fashion)
+  // Foto produk utama dan foto kedua langsung dari array database images
   const primaryImage =
     product.images && product.images.length > 0
       ? product.images[0]
@@ -56,15 +70,25 @@ export default function ProductCard({
   const secondaryImage =
     product.images && product.images.length > 1 ? product.images[1] : null;
 
-  // Hitung persentase diskon jika compare_at_price tersedia
+  // Hitung persentase diskon jika compare_at_price tersedia di database
   const hasDiscount =
-    product.compare_at_price && product.compare_at_price > product.price;
-  const discountPercentage = hasDiscount
+    Boolean(product.compare_at_price) &&
+    Number(product.compare_at_price) > Number(product.price);
+  const discountPercentage = hasDiscount && product.compare_at_price
     ? Math.round(
         ((product.compare_at_price - product.price) / product.compare_at_price) *
           100
       )
     : 0;
+
+  // Kategori asli produk dari database
+  const categoryName =
+    "category" in product && product.category?.name
+      ? product.category.name
+      : null;
+
+  // Deskripsi / Tagline asli
+  const subtitle = product.tagline || product.description;
 
   // Handler klik tombol wishlist (Love)
   const handleWishlistClick = (e: React.MouseEvent) => {
@@ -234,16 +258,44 @@ export default function ProductCard({
             </div>
           </div>
 
-          {/* Nama Produk */}
+          {/* Kategori Asli dari Database */}
+          {categoryName && (
+            <p className="text-[10px] uppercase tracking-widest text-[#8C827A] font-semibold mb-0.5">
+              {categoryName}
+            </p>
+          )}
+
+          {/* Nama Produk Asli dari Database */}
           <h3 className="font-medium text-[15px] leading-snug text-[#000200] group-hover:text-[#311744] transition-colors duration-200 line-clamp-1 mb-1">
             <Link href={`/products/${product.slug}`}>{product.name}</Link>
           </h3>
 
-          {/* Tagline / Deskripsi Singkat */}
-          {product.tagline && (
-            <p className="text-xs text-[#5b4257] line-clamp-1 mb-2 font-normal">
-              {product.tagline}
+          {/* Tagline / Deskripsi Singkat Asli dari Database */}
+          {subtitle && (
+            <p className="text-xs text-[#5b4257] line-clamp-1 mb-1.5 font-normal" title={subtitle}>
+              {subtitle}
             </p>
+          )}
+
+          {/* Varian Warna & Ukuran Asli dari Database */}
+          {uniqueColors.length > 0 && (
+            <div className="flex items-center justify-between gap-1 mb-1.5">
+              <div className="flex items-center -space-x-1">
+                {uniqueColors.slice(0, 5).map((col) => (
+                  <span
+                    key={col.id}
+                    title={`${col.color_name} (Stok: ${col.stock})`}
+                    className="inline-block w-3.5 h-3.5 rounded-full border border-white shadow-2xs transition-transform hover:scale-125"
+                    style={{ backgroundColor: col.color_hex }}
+                  />
+                ))}
+              </div>
+              {availableSizes.length > 0 && (
+                <span className="text-[10px] text-[#8C827A] font-medium tracking-tight">
+                  {availableSizes.slice(0, 4).join(" · ")}
+                </span>
+              )}
+            </div>
           )}
         </div>
 
