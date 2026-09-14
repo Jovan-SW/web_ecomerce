@@ -132,3 +132,48 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* ==============================================================================
+   LUXURY SKELETON SHIMMER ANIMATION
+   ============================================================================== */
+@keyframes luxuryShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.45) 35%,
+    rgba(255, 255, 255, 0.75) 50%,
+    rgba(255, 255, 255, 0.45) 65%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: luxuryShimmer 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+.skeleton-bone {
+  background-color: #ECE7E1;
+}
+
+.skeleton-bone-dark {
+  background-color: #E2DBD2;
+}
+

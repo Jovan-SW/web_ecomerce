@@ -2,7 +2,10 @@
 
 import React from "react";
 import ProductCard from "../productCard/ProductCard";
+import ProductCardSkeleton from "../loading/ProductCardSkeleton";
 import type { Product, ProductWithDetails } from "@/types/database";
+
+export { ProductCardSkeleton };
 
 export interface ProductGridProps {
   products: (ProductWithDetails | Product)[];
@@ -12,39 +15,6 @@ export interface ProductGridProps {
   emptyMessage?: string;
   onWishlistToggle?: (productId: string, isWishlisted: boolean) => void;
   className?: string;
-}
-
-/**
- * Skeleton placeholder yang merefleksikan layout dan rasio aspek 3:4 ProductCard
- */
-export function ProductCardSkeleton() {
-  return (
-    <div className="flex flex-col bg-[#F9F7F4] border border-[#ECE7E1] animate-pulse overflow-hidden">
-      {/* Rasio 3:4 Gambar Skeleton */}
-      <div className="relative aspect-[3/4] w-full bg-[#EFECE6]" />
-
-      {/* Konten Skeleton */}
-      <div className="p-3 sm:p-4 flex flex-col gap-2.5">
-        {/* Rating & Stock row */}
-        <div className="flex items-center justify-between">
-          <div className="h-3 w-14 bg-[#E5E0D8]" />
-          <div className="h-3 w-10 bg-[#E5E0D8]" />
-        </div>
-
-        {/* Title row */}
-        <div className="space-y-1.5 pt-1">
-          <div className="h-3.5 w-5/6 bg-[#E5E0D8]" />
-          <div className="h-3.5 w-2/3 bg-[#E5E0D8]" />
-        </div>
-
-        {/* Price row */}
-        <div className="pt-2 flex items-baseline gap-2">
-          <div className="h-4 w-20 bg-[#DCD5CB]" />
-          <div className="h-3 w-12 bg-[#E5E0D8]" />
-        </div>
-      </div>
-    </div>
-  );
 }
 
 /**

@@ -1,5 +1,11 @@
 export { default as ProductCard } from "./productCard/ProductCard";
 export type { ProductCardProps } from "./productCard/ProductCard";
 
-export { default as ProductGrid, ProductCardSkeleton } from "./productGrid/ProductGrid";
+export { default as ProductGrid } from "./productGrid/ProductGrid";
 export type { ProductGridProps } from "./productGrid/ProductGrid";
+
+export { default as ProductCardSkeleton } from "./loading/ProductCardSkeleton";
+export type { ProductCardSkeletonProps } from "./loading/ProductCardSkeleton";
+
+export { default as ProductGridSkeleton } from "./loading/ProductGridSkeleton";
+export type { ProductGridSkeletonProps } from "./loading/ProductGridSkeleton";
