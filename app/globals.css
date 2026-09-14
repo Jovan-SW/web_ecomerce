@@ -1,26 +1,134 @@
 @import "tailwindcss";
 
+@theme {
+  /* Raw Palette Defined by User */
+  --color-white: #ffffff;
+  --color-black: #000200;
+  --color-plum: #311744;
+  --color-mauve: #5b4257;
+  --color-navy: #162953;
+  --color-blue: #1474ed;
+
+  /* Semantic Theme Tokens for Fashion E-Commerce */
+  --color-background: #ffffff;
+  --color-foreground: #000200;
+
+  /* Primary: Deep Royal Plum (#311744) */
+  --color-primary: #311744;
+  --color-primary-hover: #220f30;
+  --color-primary-light: #f5eff8;
+
+  /* Secondary: Electric Blue (#1474ed) */
+  --color-secondary: #1474ed;
+  --color-secondary-hover: #0f5ec2;
+  --color-secondary-light: #edf5fe;
+
+  /* Accent: Midnight Navy (#162953) */
+  --color-accent: #162953;
+  --color-accent-hover: #101e3d;
+  --color-accent-light: #eef2f8;
+
+  /* Muted / Neutral Violet: Dusty Mauve (#5b4257) */
+  --color-muted: #5b4257;
+  --color-muted-hover: #483445;
+  --color-muted-light: #f7f4f6;
+
+  /* Borders & Surfaces */
+  --color-border: #e8e3ea;
+  --color-border-subtle: #f1edf2;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #faf9fb;
+
+  /* Typography */
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+
+  /* Modern Fashion Shadows */
+  --shadow-fashion-sm: 0 2px 8px -2px rgba(49, 23, 68, 0.05), 0 1px 4px -1px rgba(0, 2, 0, 0.03);
+  --shadow-fashion-md: 0 8px 24px -4px rgba(49, 23, 68, 0.08), 0 4px 12px -2px rgba(0, 2, 0, 0.04);
+  --shadow-fashion-lg: 0 16px 36px -6px rgba(49, 23, 68, 0.12), 0 8px 20px -4px rgba(22, 41, 83, 0.08);
+  --shadow-fashion-hover: 0 20px 40px -8px rgba(49, 23, 68, 0.16), 0 8px 20px -4px rgba(20, 116, 237, 0.14);
+}
+
+/* Custom CSS Variables & Base Setup */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-primary-val: #311744;
+  --bg-secondary-val: #1474ed;
+  --bg-navy-val: #162953;
+  --bg-mauve-val: #5b4257;
+  --bg-white-val: #ffffff;
+  --text-black-val: #000200;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base Document Styling */
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Modern Selection Highlight */
+::selection {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+/* Elegant Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8f6f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cfc5d2;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* Fashion E-Commerce Gradient Utilities */
+.gradient-plum-navy {
+  background: linear-gradient(135deg, #311744 0%, #162953 100%);
+}
+
+.gradient-plum-mauve {
+  background: linear-gradient(135deg, #311744 0%, #5b4257 100%);
+}
+
+.gradient-blue-navy {
+  background: linear-gradient(135deg, #1474ed 0%, #162953 100%);
+}
+
+.gradient-luxury-subtle {
+  background: linear-gradient(180deg, #ffffff 0%, #faf8fa 100%);
+}
+
+/* Glassmorphic Luxury Surface */
+.glass-surface {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(91, 66, 87, 0.08);
+}
+
+.glass-surface-dark {
+  background: rgba(49, 23, 68, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
