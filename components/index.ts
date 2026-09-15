@@ -18,3 +18,6 @@ export type { SearchBarProps } from "./searchBar/SearchBar";
 
 export { default as Navbar } from "./navbar/Navbar";
 export type { NavbarProps } from "./navbar/Navbar";
+
+export { default as Footer } from "./footer/Footer";
+export type { FooterProps } from "./footer/Footer";
