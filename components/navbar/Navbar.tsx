@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { SearchBar, Button } from "@/components";
 
 export interface NavbarProps {
@@ -33,11 +34,22 @@ export default function Navbar({
   className = "",
   onSearchSubmit,
 }: NavbarProps) {
+  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productDropdownOpen, setProductDropdownOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+  const handleSearchSubmit = (query: string) => {
+    if (onSearchSubmit) {
+      onSearchSubmit(query);
+    } else if (query && query.trim()) {
+      router.push(`/products?q=${encodeURIComponent(query.trim())}`);
+      setMobileSearchOpen(false);
+      setMobileMenuOpen(false);
+    }
+  };
 
   // Efek transisi border & shadow saat di-scroll
   useEffect(() => {
@@ -146,9 +158,9 @@ export default function Navbar({
                 onMouseEnter={() => setProductDropdownOpen(true)}
                 onMouseLeave={() => setProductDropdownOpen(false)}
               >
-                <button
-                  type="button"
-                  onClick={() => setProductDropdownOpen(!productDropdownOpen)}
+                <Link
+                  href="/products"
+                  onClick={() => setProductDropdownOpen(false)}
                   className="group relative flex items-center gap-1.5 py-2 text-[#000200] hover:text-[#311744] transition-colors duration-200 focus:outline-none"
                 >
                   <span>Produk</span>
@@ -168,7 +180,7 @@ export default function Navbar({
                   </svg>
                   {/* Subtle Underline Hover Animation */}
                   <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#311744] group-hover:w-full transition-all duration-300 ease-out" />
-                </button>
+                </Link>
 
                 {/* Dropdown Menu Produk (Kategori) */}
                 <div
@@ -237,7 +249,7 @@ export default function Navbar({
               size="sm"
               showTrending={false}
               placeholder="Cari busana, tren, merk..."
-              onSearch={onSearchSubmit}
+              onSearch={handleSearchSubmit}
               className="w-full"
             />
           </div>
@@ -363,10 +375,7 @@ export default function Navbar({
             <SearchBar
               size="md"
               placeholder="Cari busana, tren, merk..."
-              onSearch={(q) => {
-                setMobileSearchOpen(false);
-                if (onSearchSubmit) onSearchSubmit(q);
-              }}
+              onSearch={handleSearchSubmit}
               autoFocus
             />
           </div>
@@ -412,10 +421,7 @@ export default function Navbar({
                   size="sm"
                   showTrending={false}
                   placeholder="Cari produk..."
-                  onSearch={(q) => {
-                    setMobileMenuOpen(false);
-                    if (onSearchSubmit) onSearchSubmit(q);
-                  }}
+                  onSearch={handleSearchSubmit}
                 />
               </div>
 
