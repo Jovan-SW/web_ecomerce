@@ -24,3 +24,9 @@ export type { FooterProps } from "./footer/Footer";
 
 export { default as HeroSlider } from "./heroSlider/HeroSlider";
 export type { HeroSliderProps } from "./heroSlider/HeroSlider";
+
+export { default as HomeFaq } from "./homeFaq/HomeFaq";
+
+export { default as ScrollReveal } from "./common/ScrollReveal";
+export type { ScrollRevealProps } from "./common/ScrollReveal";
+

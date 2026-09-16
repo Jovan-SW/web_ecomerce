@@ -3,6 +3,7 @@
 import React from "react";
 import ProductCard from "../productCard/ProductCard";
 import ProductCardSkeleton from "../loading/ProductCardSkeleton";
+import ScrollReveal from "../common/ScrollReveal";
 import type { Product, ProductWithDetails } from "@/types/database";
 
 export { ProductCardSkeleton };
@@ -15,6 +16,7 @@ export interface ProductGridProps {
   emptyMessage?: string;
   onWishlistToggle?: (productId: string, isWishlisted: boolean) => void;
   className?: string;
+  staggerReveal?: boolean;
 }
 
 /**
@@ -31,6 +33,7 @@ export default function ProductGrid({
   emptyMessage = "Saat ini belum ada produk yang ditemukan. Silakan periksa kembali nanti.",
   onWishlistToggle,
   className = "",
+  staggerReveal = false,
 }: ProductGridProps) {
   // 1. Loading Skeleton State
   if (isLoading) {
@@ -81,13 +84,27 @@ export default function ProductGrid({
     <div
       className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-5 lg:gap-6 ${className}`}
     >
-      {products.map((product) => (
-        <ProductCard
-          key={product.id}
-          product={product}
-          onWishlistToggle={onWishlistToggle}
-        />
-      ))}
+      {products.map((product, index) =>
+        staggerReveal ? (
+          <ScrollReveal
+            key={product.id}
+            delay={(index % 5) * 70}
+            direction="up"
+            className="h-full"
+          >
+            <ProductCard
+              product={product}
+              onWishlistToggle={onWishlistToggle}
+            />
+          </ScrollReveal>
+        ) : (
+          <ProductCard
+            key={product.id}
+            product={product}
+            onWishlistToggle={onWishlistToggle}
+          />
+        )
+      )}
     </div>
   );
 }
