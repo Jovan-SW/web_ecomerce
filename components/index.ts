@@ -21,3 +21,6 @@ export type { NavbarProps } from "./navbar/Navbar";
 
 export { default as Footer } from "./footer/Footer";
 export type { FooterProps } from "./footer/Footer";
+
+export { default as HeroSlider } from "./heroSlider/HeroSlider";
+export type { HeroSliderProps } from "./heroSlider/HeroSlider";

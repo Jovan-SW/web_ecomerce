@@ -10,3 +10,6 @@ export * from "./products";
 
 // Product Variants API
 export * from "./variants";
+
+// Banners API
+export * from "./banners";

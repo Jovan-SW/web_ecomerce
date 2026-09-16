@@ -55,3 +55,14 @@ export interface ProductWithDetails extends Product {
   category?: Category | null;
   product_variants: ProductVariant[];
 }
+
+export interface Banner {
+  id: string;
+  title: string | null;
+  subtitle: string | null;
+  image_url: string;
+  sort_order: number;
+  is_active: boolean;
+  created_at?: string;
+  updated_at?: string;
+}

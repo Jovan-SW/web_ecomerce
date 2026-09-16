@@ -314,9 +314,7 @@ export default function Footer({
                 {/* Link List */}
                 <ul
                   className={`mt-3 lg:mt-4 space-y-2.5 transition-all duration-300 ${
-                    expandedSection === sIndex || typeof window === "undefined"
-                      ? "block"
-                      : "hidden lg:block"
+                    expandedSection === sIndex ? "block" : "hidden lg:block"
                   }`}
                 >
                   {section.links.map((link) => (

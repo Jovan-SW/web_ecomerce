@@ -1,9 +1,17 @@
-import { Button, SearchBar } from "@/components";
+import { Button, SearchBar, HeroSlider } from "@/components";
+import { getActiveBanners } from "@/services";
 
 export default async function Home() {
+  const banners = await getActiveBanners().catch(() => []);
+
   return (
-    <main className="min-h-screen bg-[#FDFBF7] py-10 sm:py-16 px-4 sm:px-8">
-      <div className="max-w-4xl mx-auto space-y-12">
+    <main className="min-h-screen bg-[#FDFBF7]">
+      {/* ========================================================
+          HERO BANNER SLIDER (Auto-play, Supabase Integration, CTA)
+         ======================================================== */}
+      <HeroSlider initialBanners={banners} />
+
+      <div className="max-w-4xl mx-auto space-y-12 py-10 sm:py-16 px-4 sm:px-8">
         {/* ========================================================
             SECTION SEARCHBAR (Premium, Elegant, White BG, Black Logo)
            ======================================================== */}
