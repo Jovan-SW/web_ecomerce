@@ -7,9 +7,9 @@ import type { ProductSortOption } from "@/services";
 export const revalidate = 60; // ISR revalidate setiap 60 detik
 
 export const metadata: Metadata = {
-  title: "Katalog Seluruh Produk | Jovique Atelier",
+  title: "Katalog Produk Lengkap | Jovique Marketplace",
   description:
-    "Jelajahi seluruh koleksi busana esensial harian Jovique. Katun combed tebal 280–420 GSM, potongan modern yang nyaman, dan harga jujur langsung produsen yang ramah di kantong.",
+    "Jelajahi berbagai pilihan produk lengkap dari berbagai kategori, toko resmi, dan brand pilihan di Jovique. Dapatkan penawaran harga terbaik, ulasan asli pembeli, dan bebas ongkir ke seluruh Indonesia.",
 };
 
 interface PageProps {
@@ -47,7 +47,7 @@ export default async function ProductsPage(props: PageProps) {
         <div className="min-h-screen bg-warm-canvas flex items-center justify-center py-20">
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white border border-[#e8e3ea] shadow-xs text-sm text-[#5b4257]">
             <span className="w-2.5 h-2.5 rounded-full bg-[#1474ed] animate-ping" />
-            <span>Memuat katalog produk Jovique...</span>
+            <span>Memuat katalog produk...</span>
           </div>
         </div>
       }

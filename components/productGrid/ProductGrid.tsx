@@ -20,7 +20,7 @@ export interface ProductGridProps {
 }
 
 /**
- * ProductGrid: Komponen tata letak katalog produk luxury fashion.
+ * ProductGrid: Komponen tata letak katalog produk e-commerce & marketplace.
  * - Mobile (<768px): 2 kolom (grid-cols-2)
  * - Tablet (768px - 1023px): 3 kolom (md:grid-cols-3)
  * - Desktop (>=1024px): 5 kolom (lg:grid-cols-5)
@@ -29,8 +29,8 @@ export default function ProductGrid({
   products,
   isLoading = false,
   loadingCount = 10,
-  emptyTitle = "Koleksi Belum Tersedia",
-  emptyMessage = "Saat ini belum ada produk yang ditemukan. Silakan periksa kembali nanti.",
+  emptyTitle = "Produk Belum Tersedia",
+  emptyMessage = "Saat ini belum ada produk yang ditemukan. Silakan periksa kembali nanti atau gunakan kolom pencarian.",
   onWishlistToggle,
   className = "",
   staggerReveal = false,

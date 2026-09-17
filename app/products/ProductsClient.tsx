@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useTransition } from "react";
+import React, { useState, useEffect, useMemo, useTransition } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SearchBar, ProductGrid, Button, ScrollReveal } from "@/components";
@@ -16,17 +16,17 @@ export interface ProductsClientProps {
 }
 
 const TRENDING_KEYWORDS = [
-  "Kaos Boxy",
-  "Kemeja Flanel",
-  "Chore Jacket",
-  "Denim Selvedge",
-  "Suede Mules",
-  "Topi Beanie",
+  "Kaos Polos",
+  "Kemeja Pria",
+  "Sneakers Pria",
+  "Jaket & Outerwear",
+  "Celana Chino",
+  "Tas & Aksesoris",
 ];
 
 const SORT_OPTIONS: { value: ProductSortOption; label: string }[] = [
   { value: "newest", label: "Paling Baru Ditambahkan" },
-  { value: "price-asc", label: "Harga: Termurah (Ramah di Kantong)" },
+  { value: "price-asc", label: "Harga: Termurah" },
   { value: "price-desc", label: "Harga: Tertinggi" },
   { value: "rating", label: "Rating & Ulasan Tertinggi" },
   { value: "name-asc", label: "Nama Produk (A–Z)" },
@@ -47,6 +47,14 @@ export default function ProductsClient({
   const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [selectedSort, setSelectedSort] = useState<ProductSortOption>(initialSort);
+
+  // Sinkronisasi kategori dan pencarian saat URL berubah (misal navigasi dari Navbar)
+  useEffect(() => {
+    const cat = searchParams.get("category") || "all";
+    setSelectedCategory((prev) => (prev !== cat ? cat : prev));
+    const q = searchParams.get("q") || "";
+    setSearchQuery((prev) => (prev !== q ? q : prev));
+  }, [searchParams]);
 
   // Helper untuk sinkronisasi query string ke URL tanpa page reload
   const updateUrlParams = (newQuery: string, newCat: string, newSort: string) => {
@@ -216,10 +224,10 @@ export default function ProductsClient({
         {/* Section Title */}
         <div className="max-w-3xl">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#000200] tracking-tight leading-tight">
-            Katalog Busana Jovique
+            Katalog Produk & Marketplace
           </h1>
           <p className="mt-2.5 text-xs sm:text-sm text-[#5b4257] font-normal leading-relaxed">
-            Jelajahi seluruh busana harian berstandar katun tebal 280–420 GSM, potongan modern yang nyaman di badan, serta harga langsung workshop yang ramah di kantong.
+            Temukan berbagai produk berkualitas dari berbagai kategori, brand resmi, dan seller terpercaya dengan penawaran harga terbaik dan jaminan keaslian.
           </p>
         </div>
       </section>
@@ -236,7 +244,7 @@ export default function ProductsClient({
               onChange={handleSearchChange}
               onSearch={handleSearchSubmit}
               onClear={handleClearSearch}
-              placeholder="Cari kaos boxy, kemeja flanel, jaket canvas, denim, sepatu..."
+              placeholder="Cari produk, kategori, atau brand pilihanmu..."
               showTrending={true}
               trendingKeywords={TRENDING_KEYWORDS}
               className="w-full"
@@ -585,14 +593,14 @@ export default function ProductsClient({
                   <p className="text-xs sm:text-sm text-[#5b4257] leading-relaxed mb-6 font-normal">
                     {searchQuery.trim() ? (
                       <>
-                        Maaf, kami tidak menemukan busana yang cocok dengan kata kunci &ldquo;
+                        Maaf, kami tidak menemukan produk yang cocok dengan kata kunci &ldquo;
                         <strong className="text-[#000200] font-semibold">
                           {searchQuery}
                         </strong>
-                        &rdquo;. Silakan coba kata kunci lain atau pilih kategori pakaian di samping.
+                        &rdquo;. Silakan coba kata kunci lain atau pilih kategori di samping.
                       </>
                     ) : (
-                      "Belum ada produk untuk kategori yang dipilih. Silakan jelajahi kategori pakaian lainnya."
+                      "Belum ada produk untuk kategori yang dipilih. Silakan jelajahi kategori produk lainnya."
                     )}
                   </p>
                   <div className="flex items-center justify-center gap-3">

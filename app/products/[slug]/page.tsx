@@ -19,7 +19,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 
   if (!product) {
     return {
-      title: "Produk Tidak Ditemukan | Jovique Atelier",
+      title: "Produk Tidak Ditemukan | Jovique Marketplace",
       description: "Maaf, produk yang Anda cari tidak tersedia.",
     };
   }
@@ -40,7 +40,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   }).format(product.price);
 
   return {
-    title: `${product.name} | Jovique Atelier`,
+    title: `${product.name} | Jovique Marketplace`,
     description:
       product.tagline ||
       `${product.name} — ${priceFormatted}${discount ? ` (Diskon ${discount}%)` : ""}. ${product.description?.slice(0, 120)}`,

@@ -12,21 +12,22 @@ export interface NavbarProps {
   onSearchSubmit?: (query: string) => void;
 }
 
+// Kategori Produk di Marketplace Jovique
 const PRODUCT_CATEGORIES = [
-  { name: "Semua Produk", href: "/products", badge: "31 Items" },
-  { name: "T-Shirts & Polos", href: "/categories/t-shirts-polos", badge: "Popular" },
-  { name: "Shirts & Flannels", href: "/categories/shirts-flannels", badge: null },
-  { name: "Jackets & Outerwear", href: "/categories/jackets-outerwear", badge: "Winter" },
-  { name: "Pants & Trousers", href: "/categories/pants-trousers", badge: null },
-  { name: "Luxury Accessories", href: "/categories/accessories", badge: "New" },
+  { name: "Semua Produk", href: "/products", badge: "Lengkap" },
+  { name: "T-Shirts & Polos", href: "/products?category=t-shirts-polos", badge: "Populer" },
+  { name: "Shirts & Flannels", href: "/products?category=shirts-flannels", badge: null },
+  { name: "Jackets & Outerwear", href: "/products?category=jackets-outerwear", badge: "Trending" },
+  { name: "Pants & Denim", href: "/products?category=pants-denim", badge: null },
+  { name: "Footwear & Sandals", href: "/products?category=footwear-sandals", badge: "Baru" },
+  { name: "Headwear & Accessories", href: "/products?category=accessories-headwear", badge: null },
 ];
 
 /**
- * Navbar: Komponen navigasi utama brand luxury Jovique.
- * - Desain clean, glassmorphic blur, border subtle, aksen Deep Plum & Electric Blue.
- * - Terintegrasi dengan SearchBar, Wishlist (Hati), Keranjang, dan Login/Register.
- * - Responsif untuk Desktop, Tablet, dan Mobile dengan Slide-in Drawer mewah.
- * - Animasi hover smooth dan mahal (underline slide-in, soft lift, icon micro-scale).
+ * Navbar: Komponen navigasi utama platform e-commerce & marketplace Jovique.
+ * - Terintegrasi dengan SearchBar produk/brand, Wishlist, Keranjang Belanja, dan Login/Register.
+ * - Desain clean, glassmorphic blur, aksen Deep Plum & Electric Blue.
+ * - Responsif untuk Desktop, Tablet, dan Mobile dengan Slide-in Drawer marketplace.
  */
 export default function Navbar({
   wishlistCount = 3,
@@ -89,13 +90,13 @@ export default function Navbar({
   return (
     <>
       {/* ========================================================
-          1. TOP ANNOUNCEMENT BAR (Banner Info Mewah)
+          1. TOP ANNOUNCEMENT BAR (Marketplace Promo & Trust Info)
          ======================================================== */}
-      <div className="bg-[#000200] text-white text-[11px] font-medium tracking-[0.2em] uppercase py-2 px-4 text-center border-b border-white/10 flex items-center justify-center gap-3 select-none">
+      <div className="bg-[#000200] text-white text-[11px] font-medium tracking-[0.16em] uppercase py-2 px-4 text-center border-b border-white/10 flex items-center justify-center gap-3 select-none">
         <span className="w-1.5 h-1.5 rounded-full bg-[#1474ed] animate-pulse" />
-        <span>Gratis Ongkir ke Seluruh Indonesia • Garansi 100% Produk Asli</span>
+        <span>✓ Bebas Ongkir Seluruh Indonesia • Garansi 100% Original • Pembayaran Aman</span>
         <span className="hidden sm:inline text-white/40">|</span>
-        <span className="hidden sm:inline text-white/70">Koleksi Baru Tersedia</span>
+        <span className="hidden sm:inline text-white/80">Pilihan Terlengkap & Terpercaya</span>
       </div>
 
       {/* ========================================================
@@ -136,7 +137,7 @@ export default function Navbar({
               </svg>
             </button>
 
-            {/* BRAND LOGO: JOVIQUE */}
+            {/* BRAND LOGO: JOVIQUE MARKETPLACE */}
             <Link
               href="/"
               className="group flex flex-col items-start select-none focus:outline-none"
@@ -144,32 +145,34 @@ export default function Navbar({
               <span className="font-serif text-2xl sm:text-3xl font-bold tracking-[0.22em] uppercase text-[#000200] group-hover:text-[#311744] transition-colors duration-300">
                 JOVIQUE
               </span>
-              <span className="text-[8px] uppercase tracking-[0.38em] text-[#8C827A] -mt-0.5 group-hover:text-[#1474ed] transition-colors duration-300 font-medium">
-                Atelier
+              <span className="text-[8px] uppercase tracking-[0.34em] text-[#1474ed] -mt-0.5 group-hover:text-[#311744] transition-colors duration-300 font-semibold">
+                Marketplace
               </span>
             </Link>
 
             {/* Desktop Navigation Links */}
             <nav className="hidden lg:flex items-center gap-7 text-[13px] tracking-widest uppercase font-medium text-[#000200]">
-              {/* Menu Dropdown: PRODUK */}
+              {/* Menu Dropdown: JELAJAHI PRODUK */}
               <div
                 ref={dropdownRef}
                 className="relative"
                 onMouseEnter={() => setProductDropdownOpen(true)}
                 onMouseLeave={() => setProductDropdownOpen(false)}
               >
-                <Link
-                  href="/products"
-                  onClick={() => setProductDropdownOpen(false)}
-                  className="group relative flex items-center gap-1.5 py-2 text-[#000200] hover:text-[#311744] transition-colors duration-200 focus:outline-none"
+                <button
+                  type="button"
+                  onClick={() => setProductDropdownOpen((prev) => !prev)}
+                  className="group relative flex items-center gap-2 py-2 text-[#000200] hover:text-[#311744] transition-colors duration-200 focus:outline-none cursor-pointer"
+                  aria-expanded={productDropdownOpen}
+                  aria-haspopup="true"
                 >
-                  <span>Produk</span>
+                  <span className="font-semibold tracking-wider">Jelajahi Produk</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                     className={`w-3.5 h-3.5 transition-transform duration-300 ${
-                      productDropdownOpen ? "rotate-180 text-[#311744]" : "text-[#8C827A]"
+                      productDropdownOpen ? "rotate-180 text-[#311744]" : "text-[#8C827A] group-hover:text-[#311744]"
                     }`}
                   >
                     <path
@@ -180,29 +183,33 @@ export default function Navbar({
                   </svg>
                   {/* Subtle Underline Hover Animation */}
                   <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#311744] group-hover:w-full transition-all duration-300 ease-out" />
-                </Link>
+                </button>
 
-                {/* Dropdown Menu Produk (Kategori) */}
+                {/* Dropdown Menu Kategori Produk */}
                 <div
-                  className={`absolute top-full left-0 w-64 pt-2 transition-all duration-300 ease-out ${
+                  className={`absolute top-full left-0 w-64 pt-2 transition-all duration-200 ease-out z-50 ${
                     productDropdownOpen
                       ? "opacity-100 translate-y-0 pointer-events-auto visible"
                       : "opacity-0 -translate-y-2 pointer-events-none invisible"
                   }`}
                 >
-                  <div className="bg-white border border-[#ECE7E1] shadow-[0_12px_32px_-6px_rgba(0,2,0,0.12)] p-2.5 space-y-1">
+                  <div className="bg-white rounded-xl border border-[#ECE7E1] shadow-[0_16px_36px_-8px_rgba(0,2,0,0.12)] p-2 space-y-0.5">
+                    <div className="px-3 py-1.5 text-[10px] uppercase font-bold tracking-widest text-[#8C827A] border-b border-[#F2EFE9] mb-1 flex items-center justify-between">
+                      <span>Pilih Kategori</span>
+                      <span className="text-[9px] text-[#1474ed] font-medium lowercase">Lengkap</span>
+                    </div>
                     {PRODUCT_CATEGORIES.map((cat, idx) => (
                       <Link
                         key={`cat-nav-${idx}`}
                         href={cat.href}
                         onClick={() => setProductDropdownOpen(false)}
-                        className="group/item flex items-center justify-between px-3 py-2.5 text-xs text-[#000200] hover:bg-[#F9F7F4] hover:text-[#311744] transition-all duration-200"
+                        className="group/item flex items-center justify-between px-3 py-2 rounded-lg text-xs text-[#000200] hover:bg-[#F9F7F4] hover:text-[#311744] transition-all duration-150"
                       >
                         <span className="font-medium tracking-wide">
                           {cat.name}
                         </span>
                         {cat.badge && (
-                          <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 bg-[#F2EFE9] text-[#5b4257] group-hover/item:bg-[#311744] group-hover/item:text-white transition-colors duration-200 font-semibold">
+                          <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#F2EFE9] text-[#5b4257] group-hover/item:bg-[#311744] group-hover/item:text-white transition-colors duration-150 font-semibold">
                             {cat.badge}
                           </span>
                         )}
@@ -211,33 +218,6 @@ export default function Navbar({
                   </div>
                 </div>
               </div>
-
-              {/* Menu: KOLEKSI BARU */}
-              <Link
-                href="/new-arrivals"
-                className="group relative py-2 text-[#000200] hover:text-[#311744] transition-colors duration-200"
-              >
-                <span>Koleksi Baru</span>
-                <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#311744] group-hover:w-full transition-all duration-300 ease-out" />
-              </Link>
-
-              {/* Menu: TREN */}
-              <Link
-                href="/trends"
-                className="group relative py-2 text-[#000200] hover:text-[#311744] transition-colors duration-200"
-              >
-                <span>Tren</span>
-                <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#311744] group-hover:w-full transition-all duration-300 ease-out" />
-              </Link>
-
-              {/* Menu: MERK / ATELIER */}
-              <Link
-                href="/brands"
-                className="group relative py-2 text-[#000200] hover:text-[#311744] transition-colors duration-200"
-              >
-                <span>Merk</span>
-                <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#311744] group-hover:w-full transition-all duration-300 ease-out" />
-              </Link>
             </nav>
           </div>
 
@@ -248,7 +228,7 @@ export default function Navbar({
             <SearchBar
               size="sm"
               showTrending={false}
-              placeholder="Cari busana, tren, merk..."
+              placeholder="Cari produk, kategori, atau toko favorit..."
               onSearch={handleSearchSubmit}
               className="w-full"
             />
@@ -374,7 +354,7 @@ export default function Navbar({
           <div className="lg:hidden border-t border-[#ECE7E1] bg-white p-4 animate-in slide-in-from-top duration-300 shadow-sm">
             <SearchBar
               size="md"
-              placeholder="Cari busana, tren, merk..."
+              placeholder="Cari produk, kategori, atau toko favorit..."
               onSearch={handleSearchSubmit}
               autoFocus
             />
@@ -401,9 +381,14 @@ export default function Navbar({
                 <Link
                   href="/"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="font-serif text-2xl font-bold tracking-[0.2em] uppercase text-[#000200]"
+                  className="flex flex-col select-none focus:outline-none"
                 >
-                  JOVIQUE
+                  <span className="font-serif text-2xl font-bold tracking-[0.2em] uppercase text-[#000200]">
+                    JOVIQUE
+                  </span>
+                  <span className="text-[8px] uppercase tracking-[0.3em] text-[#1474ed] -mt-0.5 font-semibold">
+                    Marketplace
+                  </span>
                 </Link>
                 <button
                   type="button"
@@ -420,61 +405,37 @@ export default function Navbar({
                 <SearchBar
                   size="sm"
                   showTrending={false}
-                  placeholder="Cari produk..."
+                  placeholder="Cari produk, kategori, toko..."
                   onSearch={handleSearchSubmit}
                 />
               </div>
 
               {/* Mobile Navigation Links */}
               <div className="space-y-4 pt-2">
-                <p className="text-[10px] uppercase tracking-[0.25em] text-[#8C827A] font-semibold">
-                  Navigasi Katalog
-                </p>
+                <div className="flex items-center justify-between pb-2 border-b border-[#ECE7E1]">
+                  <p className="text-xs uppercase tracking-[0.2em] text-[#000200] font-bold">
+                    Jelajahi Produk
+                  </p>
+                  <span className="text-[10px] text-[#1474ed] font-medium">Pilih Kategori</span>
+                </div>
 
                 {/* Submenu Kategori Produk */}
-                <div className="space-y-1 pl-1">
-                  <span className="block text-xs font-bold uppercase tracking-wider text-[#000200] mb-2">
-                    Kategori Pilihan:
-                  </span>
+                <div className="space-y-1">
                   {PRODUCT_CATEGORIES.map((cat, i) => (
                     <Link
                       key={`mob-cat-${i}`}
                       href={cat.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center justify-between py-2 text-sm text-[#5b4257] hover:text-[#000200] transition-colors"
+                      className="flex items-center justify-between py-2.5 px-2 rounded-lg text-sm text-[#5b4257] hover:bg-[#F9F7F4] hover:text-[#000200] transition-colors"
                     >
-                      <span>{cat.name}</span>
+                      <span className="font-medium">{cat.name}</span>
                       {cat.badge && (
-                        <span className="text-[9px] px-1.5 py-0.5 bg-[#F2EFE9] text-[#000200] font-semibold">
+                        <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#F2EFE9] text-[#000200] font-semibold">
                           {cat.badge}
                         </span>
                       )}
                     </Link>
                   ))}
-                </div>
-
-                <div className="border-t border-[#ECE7E1] pt-4 space-y-3">
-                  <Link
-                    href="/new-arrivals"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block text-sm font-semibold tracking-wide uppercase text-[#000200] hover:text-[#311744]"
-                  >
-                    Koleksi Baru
-                  </Link>
-                  <Link
-                    href="/trends"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block text-sm font-semibold tracking-wide uppercase text-[#000200] hover:text-[#311744]"
-                  >
-                    Tren Musim Ini
-                  </Link>
-                  <Link
-                    href="/brands"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block text-sm font-semibold tracking-wide uppercase text-[#000200] hover:text-[#311744]"
-                  >
-                    Atelier & Merk
-                  </Link>
                 </div>
               </div>
             </div>

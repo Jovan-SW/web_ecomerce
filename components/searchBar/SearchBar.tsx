@@ -18,15 +18,16 @@ export interface SearchBarProps {
 }
 
 const DEFAULT_TRENDING = [
-  "Heavyweight Boxy Tee",
-  "Vintage Washed",
-  "Textured Knit Polo",
-  "Oversized Fit",
-  "Linen Shirt",
+  "Kaos Polos",
+  "Kemeja Pria",
+  "Sepatu Sneakers",
+  "Jaket & Outerwear",
+  "Celana Chino",
+  "Tas & Aksesoris",
 ];
 
 /**
- * SearchBar: Komponen pencarian produk, tren busana, dan merk berestetika luxury fashion.
+ * SearchBar: Komponen pencarian produk, kategori, dan brand di platform marketplace Jovique.
  * - Background putih bersih (bg-white)
  * - Logo search hitam pekat kontras tinggi
  * - Shortcut keyboard ⌘K / Ctrl+K
@@ -41,7 +42,7 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
       onChange,
       onSearch,
       onClear,
-      placeholder = "Cari produk, tren gaya, atau merk busana...",
+      placeholder = "Cari produk, kategori, atau brand pilihan...",
       showTrending = true,
       trendingKeywords = DEFAULT_TRENDING,
       isLoading = false,

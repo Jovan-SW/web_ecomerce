@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jovique | Luxury Fashion Atelier",
-  description: "Koleksi busana kontemporer, pakaian rajut vintage, dan produk esensial luxury dari Jovique.",
+  title: "Jovique | Situs Jual Beli Online Terlengkap, Aman & Terpercaya",
+  description:
+    "Platform e-commerce & marketplace jual beli online terlengkap. Temukan ribuan brand resmi, jutaan produk pilihan, diskon menarik, bebas ongkir, dan jaminan pembayaran aman.",
 };
 
 export default function RootLayout({

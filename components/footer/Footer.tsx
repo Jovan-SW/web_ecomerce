@@ -16,49 +16,49 @@ interface NavSection {
 
 const NAV_SECTIONS: NavSection[] = [
   {
-    title: "Koleksi & Kategori",
+    title: "Kategori Populer",
     links: [
-      { label: "Semua Koleksi", href: "/products", badge: "31 Items" },
-      { label: "Heavyweight Boxy Tees", href: "/categories/t-shirts-polos", badge: "Hot" },
-      { label: "Textured Knitwear & Polo", href: "/categories/textured-knit" },
-      { label: "Vintage Washed Flannels", href: "/categories/shirts-flannels" },
-      { label: "Tailored Outerwear & Coat", href: "/categories/jackets-outerwear", badge: "Winter" },
-      { label: "Pleated & Wide Trousers", href: "/categories/pants-trousers" },
-      { label: "Luxury Leather Accessories", href: "/categories/accessories", badge: "New" },
-      { label: "Private Archive Sale", href: "/sale" },
+      { label: "Semua Produk", href: "/products", badge: "Lengkap" },
+      { label: "Pakaian Pria & Wanita", href: "/categories/t-shirts-polos", badge: "Hot" },
+      { label: "Kemeja & Kasual", href: "/categories/shirts-flannels" },
+      { label: "Jaket & Outerwear", href: "/categories/jackets-outerwear" },
+      { label: "Celana & Trousers", href: "/categories/pants-trousers" },
+      { label: "Sepatu & Aksesoris", href: "/categories/accessories", badge: "Baru" },
+      { label: "Promo & Flash Sale", href: "/products", badge: "Diskon" },
+      { label: "Official Store", href: "/products" },
     ],
   },
   {
     title: "Layanan Pelanggan",
     links: [
+      { label: "Pusat Bantuan (FAQ)", href: "/faq" },
       { label: "Lacak Status Pesanan", href: "/track-order" },
-      { label: "Panduan Ukuran (Sizing Guide)", href: "/sizing" },
+      { label: "Cara Berbelanja Online", href: "/how-to-buy" },
       { label: "Kebijakan Retur & Garansi", href: "/returns" },
-      { label: "Janji Temu Atelier (Bespoke)", href: "/appointment" },
-      { label: "Perawatan Busana & Garment Care", href: "/care-guide" },
-      { label: "Pertanyaan Umum (FAQ)", href: "/faq" },
-      { label: "Hubungi Concierge 24/7", href: "/contact" },
+      { label: "Syarat Bebas Ongkir", href: "/free-shipping" },
+      { label: "Panduan Pembayaran & COD", href: "/payment-guide" },
+      { label: "Hubungi Customer Care 24/7", href: "/contact" },
     ],
   },
   {
-    title: "Tentang Jovique",
+    title: "Jelajahi & Jual",
     links: [
-      { label: "Filosofi & Craftsmanship", href: "/about" },
-      { label: "Material & Keberlanjutan", href: "/sustainability" },
-      { label: "Kolaborasi Desainer Tamu", href: "/collaborations" },
-      { label: "Liputan Media & Editorial", href: "/press" },
-      { label: "Karier di Jovique Atelier", href: "/careers", badge: "Hiring" },
-      { label: "Lokasi Flagship Butik", href: "/stores" },
+      { label: "Tentang Jovique", href: "/about" },
+      { label: "Buka Toko Gratis", href: "/sell" },
+      { label: "Mitra Seller & Brand Resmi", href: "/partners" },
+      { label: "Jovique Pay & Saldo", href: "/wallet" },
+      { label: "Pusat Edukasi Seller", href: "/seller-center" },
+      { label: "Karier di Jovique", href: "/careers", badge: "Hiring" },
     ],
   },
   {
-    title: "Kebijakan & Legalitas",
+    title: "Keamanan & Kebijakan",
     links: [
-      { label: "Syarat & Ketentuan Pembelian", href: "/terms" },
+      { label: "Syarat & Ketentuan Pengguna", href: "/terms" },
       { label: "Kebijakan Privasi Data", href: "/privacy" },
+      { label: "Perlindungan Pembeli (Escrow)", href: "/buyer-protection" },
+      { label: "Hak Kekayaan Intelektual", href: "/authenticity" },
       { label: "Pengaturan Cookie", href: "/cookies" },
-      { label: "Sertifikat Keaslian & Hak Cipta", href: "/authenticity" },
-      { label: "Whistleblowing & Etika Bisnis", href: "/compliance" },
     ],
   },
 ];
@@ -67,7 +67,7 @@ const SOCIAL_LINKS = [
   {
     name: "Instagram",
     href: "https://instagram.com",
-    handle: "@jovique.atelier",
+    handle: "@jovique.official",
     icon: (
       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
@@ -77,7 +77,7 @@ const SOCIAL_LINKS = [
   {
     name: "TikTok",
     href: "https://tiktok.com",
-    handle: "@jovique",
+    handle: "@jovique.id",
     icon: (
       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
         <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-1.01-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
@@ -87,7 +87,7 @@ const SOCIAL_LINKS = [
   {
     name: "YouTube",
     href: "https://youtube.com",
-    handle: "Jovique Atelier Official",
+    handle: "Jovique Official",
     icon: (
       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
         <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
@@ -99,7 +99,7 @@ const SOCIAL_LINKS = [
 export default function Footer({
   className = "",
   brandName = "JOVIQUE",
-  tagline = "Luxury Fashion Atelier",
+  tagline = "Marketplace & Jual Beli Online Terpercaya",
 }: FooterProps) {
   // State for interactive Newsletter
   const [email, setEmail] = useState("");
@@ -159,11 +159,11 @@ export default function Footer({
               {/* Left Column: Heading & Value */}
               <div className="lg:col-span-6 space-y-2">
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-white tracking-tight">
-                  Akses Kurasi Eksklusif & Diskon 10%
+                  Dapatkan Voucher Diskon & Info Promo Spesial
                 </h3>
                 <p className="text-xs sm:text-sm text-[#A89CAE] max-w-xl leading-relaxed">
-                  Jadilah yang pertama mengetahui rilis runway terkini, katalog lookbook rahasia,
-                  dan undangan private preview sebelum dibuka untuk umum.
+                  Daftarkan email Anda untuk mendapatkan kode voucher diskon belanja, kabar Flash Sale kilat,
+                  dan penawaran bebas ongkir dari toko pilihan setiap hari.
                 </p>
               </div>
 
@@ -178,22 +178,22 @@ export default function Footer({
                         </svg>
                       </div>
                       <div>
-                        <h4 className="text-sm font-semibold text-white">Selamat Datang di Jovique Privé!</h4>
-                        <p className="text-xs text-[#9D91A3]">Undangan dan kode voucher telah dikirim ke {email}</p>
+                        <h4 className="text-sm font-semibold text-white">Selamat Datang di Jovique Marketplace!</h4>
+                        <p className="text-xs text-[#9D91A3]">Kode voucher belanja hemat telah dikirim ke {email}</p>
                       </div>
                     </div>
                     <div className="p-3 bg-[#0E0817] border border-[#352148] flex items-center justify-between gap-3">
                       <div>
-                        <span className="text-[10px] uppercase font-mono tracking-wider text-[#8A7C92] block">Voucher Anda (10% Off):</span>
-                        <span className="font-mono text-xs font-bold text-[#1474ed] tracking-wider">JOVIQUE-PRIVE10</span>
+                        <span className="text-[10px] uppercase font-mono tracking-wider text-[#8A7C92] block">Voucher Belanja (10% Off):</span>
+                        <span className="font-mono text-xs font-bold text-[#1474ed] tracking-wider">BELANJAHEMAT10</span>
                       </div>
                       <button
                         type="button"
                         onClick={() => {
-                          navigator.clipboard.writeText("JOVIQUE-PRIVE10");
+                          navigator.clipboard.writeText("BELANJAHEMAT10");
                           alert("Kode voucher disalin!");
                         }}
-                        className="text-[11px] font-medium px-3 py-1.5 bg-[#251536] hover:bg-[#351D4D] text-white border border-[#44225E] transition-colors"
+                        className="text-[11px] font-medium px-3 py-1.5 bg-[#251536] hover:bg-[#351D4D] text-white border border-[#44225E] transition-colors cursor-pointer"
                       >
                         Salin Kode
                       </button>
@@ -207,7 +207,7 @@ export default function Footer({
                           type="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          placeholder="Masukkan alamat email resmi Anda..."
+                          placeholder="Masukkan alamat email Anda..."
                           required
                           className="w-full h-12 px-4 bg-[#0B0612] border border-[#38244A] focus:border-[#1474ed] focus:ring-2 focus:ring-[#1474ed]/20 text-white placeholder-[#6C5F74] text-xs transition-all outline-none rounded-xs"
                         />
@@ -215,13 +215,13 @@ export default function Footer({
                       <button
                         type="submit"
                         disabled={subscriptionState === "loading"}
-                        className="h-12 px-6 bg-white hover:bg-[#F2EFE9] text-[#000200] text-xs uppercase tracking-[0.18em] font-bold transition-all duration-300 flex items-center justify-center gap-2 shrink-0 group shadow-md hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] disabled:opacity-50"
+                        className="h-12 px-6 bg-white hover:bg-[#F2EFE9] text-[#000200] text-xs uppercase tracking-[0.18em] font-bold transition-all duration-300 flex items-center justify-center gap-2 shrink-0 group shadow-md hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] disabled:opacity-50 cursor-pointer"
                       >
                         {subscriptionState === "loading" ? (
                           <span className="inline-block w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
                         ) : (
                           <>
-                            <span>Bergabung</span>
+                            <span>Daftar Sekarang</span>
                             <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                           </>
                         )}
@@ -249,7 +249,7 @@ export default function Footer({
       </div>
 
       {/* =========================================================================
-          TIER 2: MAIN NAVIGATION DIRECTORY & ATELIER IDENTITY
+          TIER 2: MAIN NAVIGATION DIRECTORY & MARKETPLACE IDENTITY
           ========================================================================= */}
       <div className="relative max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-12 lg:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
@@ -265,13 +265,13 @@ export default function Footer({
             </Link>
 
             <p className="text-xs text-[#9E91A4] leading-relaxed max-w-sm">
-              Menghadirkan kurasi adibusana kontemporer, vintage knitwear berkualitas tinggi, dan siluet esensial modern yang dirancang untuk daya tahan gaya lintas generasi.
+              Platform e-commerce terlengkap untuk jual beli jutaan produk berkualitas dari ribuan toko dan brand resmi terpercaya dengan jaminan transaksi aman, promo setiap hari, dan bebas ongkir ke seluruh Indonesia.
             </p>
 
             {/* Social Channels */}
             <div className="space-y-2">
               <span className="text-[10px] font-mono uppercase tracking-widest text-[#7C6E82] block">
-                Kanal Sosial & Runway
+                Ikuti Komunitas & Promo Jovique
               </span>
               <div className="flex items-center gap-2">
                 {SOCIAL_LINKS.map((soc) => (
@@ -280,7 +280,7 @@ export default function Footer({
                     href={soc.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`Kunjungi ${soc.name} Jovique Atelier`}
+                    aria-label={`Kunjungi ${soc.name} Jovique Official`}
                     className="w-9 h-9 rounded-xs bg-[#160D22] border border-[#2B1B37] flex items-center justify-center text-[#A699AC] hover:text-white hover:bg-[#311744] hover:border-[#1474ed] transition-all duration-300 group shadow-xs"
                   >
                     <span className="group-hover:scale-110 transition-transform duration-200">

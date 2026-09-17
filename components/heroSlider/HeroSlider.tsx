@@ -17,28 +17,28 @@ export interface HeroSliderProps {
   secondaryCtaHref?: string;
 }
 
-// Fallback high-editorial fashion banners jika database Supabase belum terisi data banner
+// Fallback banner promo kampanye marketplace jika database Supabase belum terisi data banner
 const FALLBACK_BANNERS: Banner[] = [
   {
     id: "fallback-1",
-    title: "The Autumn / Winter Atelier Collection",
-    subtitle: "Siluet kontemporer dengan potongan presisi, kain wol premium, dan pakaian rajut vintage pilihan.",
+    title: "Pesta Promo Belanja & Bebas Ongkir Se-Indonesia",
+    subtitle: "Temukan jutaan produk dari berbagai brand resmi dan seller terpercaya. Diskon hingga 70% dan cashback spesial setiap hari!",
     image_url: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop",
     sort_order: 1,
     is_active: true,
   },
   {
     id: "fallback-2",
-    title: "Heavyweight Boxy & Minimalist Silhouettes",
-    subtitle: "Didesain untuk ketahanan gaya lintas era. Eksplorasi koleksi katun 280 GSM dengan fit oversized otentik.",
+    title: "Jovique Official Store — Jaminan 100% Original",
+    subtitle: "Belanja produk original langsung dari toko resmi dengan garansi uang kembali dan pengiriman cepat ke seluruh kota.",
     image_url: "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop",
     sort_order: 2,
     is_active: true,
   },
   {
     id: "fallback-3",
-    title: "Bespoke Outerwear & Tailored Trousers",
-    subtitle: "Kemewahan subtle yang menyatu dalam detail jahitan tangan dan tekstur kain drape yang berkarakter.",
+    title: "Pusat Fashion, Gaya Hidup & Kebutuhan Harian",
+    subtitle: "Pilihan terlengkap dari ribuan toko terverifikasi dengan ulasan asli pembeli dan sistem transaksi teraman.",
     image_url: "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=2071&auto=format&fit=crop",
     sort_order: 3,
     is_active: true,
@@ -49,10 +49,10 @@ export default function HeroSlider({
   initialBanners,
   autoPlayInterval = 5500,
   className = "",
-  ctaText = "Jelajahi Koleksi",
+  ctaText = "Mulai Belanja",
   ctaHref = "/products",
-  secondaryCtaText = "Lihat Lookbook",
-  secondaryCtaHref = "/categories/jackets-outerwear",
+  secondaryCtaText = "Lihat Promo Hari Ini",
+  secondaryCtaHref = "/products",
 }: HeroSliderProps) {
   const [fetchedBanners, setFetchedBanners] = useState<Banner[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -163,7 +163,7 @@ export default function HeroSlider({
       onKeyDown={handleKeyDown}
       tabIndex={0}
       aria-roledescription="carousel"
-      aria-label="Hero Banner Slider Jovique Atelier"
+      aria-label="Hero Banner Promo Jovique Marketplace"
     >
       {/* =========================================================================
           SLIDE IMAGES & SMOOTH TRANSITION OVERLAYS
@@ -211,7 +211,7 @@ export default function HeroSlider({
         <div className="max-w-2xl space-y-4 sm:space-y-6">
           {/* Title */}
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif text-white tracking-tight leading-[1.15] drop-shadow-md">
-            {activeBanner.title || "Kemewahan Gaya Kontemporer"}
+            {activeBanner.title || "Pusat Belanja Online Terlengkap & Terpercaya"}
           </h1>
 
           {/* Subtitle */}

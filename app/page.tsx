@@ -29,7 +29,7 @@ export default async function Home() {
       <HeroSlider initialBanners={banners} />
 
       {/* =========================================================================
-          2. SECTION: 10 KOLEKSI TERBAIK (ProductCard & ProductGrid 10 Items)
+          2. SECTION: PRODUK TERPOPULER & REKOMENDASI (ProductCard & ProductGrid)
           ========================================================================= */}
       <section
         className="py-16 sm:py-24 max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10"
@@ -41,16 +41,16 @@ export default async function Home() {
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#311744]/5 border border-[#311744]/12 text-[11px] font-mono tracking-wider text-[#311744] font-semibold mb-2.5">
                 <span className="w-2 h-2 rounded-full bg-[#1474ed]" />
-                Pilihan Paling Diminati • Rating Tertinggi
+                Pilihan Terlaris • Rekomendasi Hari Ini
               </div>
               <h2
                 id="featured-products-heading"
                 className="text-2xl sm:text-4xl lg:text-5xl font-serif text-[#000200] tracking-tight leading-tight"
               >
-                10 Koleksi Esensial Terfavorit
+                Produk Terpopuler & Paling Diminati
               </h2>
               <p className="text-xs sm:text-sm text-[#5b4257] mt-2 font-normal max-w-xl leading-relaxed">
-                Busana harian berpotongan rapi dengan bahan katun combed tebal 280–420 GSM yang adem dan awet dicuci bertahun-tahun. Kualitas jempolan, tetap ramah di kantong.
+                Pilihan produk terlaris dengan ulasan terbaik dari ribuan merchant dan brand resmi. Dapatkan penawaran harga bersaing serta jaminan kepuasan belanja.
               </p>
             </div>
 
@@ -60,7 +60,7 @@ export default async function Home() {
                 size="sm"
                 className="rounded-xl font-medium text-xs tracking-normal border-[#e8e3ea] hover:border-[#311744] hover:bg-[#f5eff8]"
               >
-                Lihat Semua Koleksi →
+                Lihat Semua Produk & Promo →
               </Button>
             </Link>
           </div>
@@ -71,15 +71,15 @@ export default async function Home() {
           products={topProducts}
           staggerReveal={true}
           loadingCount={10}
-          emptyTitle="Koleksi Terbaik Sedang Dipersiapkan"
-          emptyMessage="Koleksi terfavorit Jovique sedang diperbarui. Silakan jelajahi katalog produk kami."
+          emptyTitle="Produk Rekomendasi Sedang Dipersiapkan"
+          emptyMessage="Daftar produk terpopuler sedang diperbarui. Silakan jelajahi katalog produk marketplace kami."
         />
 
         {/* Footer CTA Section Produk dengan Smooth Scroll Reveal */}
         <ScrollReveal direction="up" delay={150}>
           <div className="mt-12 sm:mt-16 text-center pt-8 border-t border-[#e8e3ea]">
             <p className="text-xs text-[#5b4257] uppercase tracking-wider font-mono font-medium mb-4">
-              Menampilkan 10 dari 30+ Koleksi Busana Harian Jovique
+              Jelajahi Beragam Kategori & Pilihan Produk di Jovique Marketplace
             </p>
             <Link href="/products">
               <Button
@@ -87,22 +87,24 @@ export default async function Home() {
                 size="lg"
                 className="px-8 rounded-xl shadow-sm hover:shadow-[0_0_24px_rgba(49,23,68,0.25)]"
               >
-                Jelajahi Semua Produk Jovique →
+                Jelajahi Semua Produk & Promo →
               </Button>
             </Link>
-            <div className="mt-4 flex items-center justify-center gap-4 text-[11px] text-[#5b4257]">
-              <span>✓ Gratis Ongkir</span>
+            <div className="mt-4 flex items-center justify-center gap-4 text-[11px] text-[#5b4257] flex-wrap">
+              <span>✓ Bebas Ongkir Seluruh Indonesia</span>
               <span>•</span>
-              <span>✓ Garansi Tukar Ukuran 7 Hari</span>
+              <span>✓ Garansi 100% Original</span>
               <span>•</span>
-              <span>✓ Harga Jujur Mulai Rp 100rb-an</span>
+              <span>✓ Pembayaran Aman (Escrow & COD)</span>
+              <span>•</span>
+              <span>✓ Jaminan Retur 7 Hari</span>
             </div>
           </div>
         </ScrollReveal>
       </section>
 
       {/* =========================================================================
-          3. SECTION: TENTANG JOVIQUE & FAQ (Brand Story, Filosofi & Pertanyaan Umum)
+          3. SECTION: KEUNGGULAN JOVIQUE & FAQ MARKETPLACE
           ========================================================================= */}
       <HomeFaq />
     </main>
