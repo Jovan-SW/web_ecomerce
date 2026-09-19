@@ -71,8 +71,8 @@ export default function HomeFaq({ className = "" }: { className?: string }) {
     >
       {/* Subtle Background Glow Mesh */}
       <div className="absolute inset-0 pointer-events-none opacity-60">
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#311744]/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#1474ed]/4 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#1474ed]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#1D4ED8]/5 rounded-full blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
@@ -81,17 +81,17 @@ export default function HomeFaq({ className = "" }: { className?: string }) {
            ======================================================== */}
         <ScrollReveal direction="up">
           <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-18">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#311744]/5 border border-[#311744]/12 text-[11px] font-mono tracking-wider text-[#311744] font-semibold mb-3">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFF6FF] border border-[#BFDBFE] text-[11px] tracking-wider text-[#1D4ED8] font-semibold mb-3">
               <span className="w-2 h-2 rounded-full bg-[#1474ed]" />
               Kenapa Belanja di Jovique?
             </span>
             <h2
               id="home-about-faq-title"
-              className="text-3xl sm:text-4xl lg:text-[42px] font-serif text-[#000200] tracking-tight leading-tight"
+              className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#0F172A] tracking-tight leading-tight"
             >
               Belanja Online Lengkap, Aman, dan Tepercaya
             </h2>
-            <p className="mt-3.5 text-sm sm:text-base text-[#5b4257] font-normal leading-relaxed">
+            <p className="mt-3.5 text-sm sm:text-base text-[#475569] font-normal leading-relaxed">
               Jovique menghubungkan Anda dengan ribuan toko pilihan dan official brand di seluruh nusantara dengan jaminan belanja aman, harga bersaing, dan bebas cemas.
             </p>
           </div>
@@ -101,22 +101,22 @@ export default function HomeFaq({ className = "" }: { className?: string }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-20 sm:mb-24">
           {/* Card 1: Jutaan Produk & Brand Resmi */}
           <ScrollReveal direction="up" delay={0} className="h-full">
-            <div className="h-full bg-white/90 backdrop-blur-xs p-7 sm:p-8 rounded-2xl border border-[#e8e3ea] shadow-sm hover:shadow-md hover:border-[#311744]/30 transition-all duration-300 flex flex-col justify-between group">
+            <div className="h-full bg-white p-7 sm:p-8 rounded-2xl border border-[#E2E8F0] shadow-sm hover:shadow-md hover:border-[#1474ed]/40 transition-all duration-300 flex flex-col justify-between group">
               <div>
-                <div className="w-12 h-12 rounded-xl bg-[#f5eff8] text-[#311744] flex items-center justify-center font-serif text-lg font-bold mb-5 border border-[#311744]/10 group-hover:bg-[#311744] group-hover:text-white transition-colors duration-300">
+                <div className="w-12 h-12 rounded-xl bg-[#EFF6FF] text-[#1D4ED8] flex items-center justify-center font-bold text-lg mb-5 border border-[#BFDBFE] group-hover:bg-[#1474ed] group-hover:text-white transition-colors duration-300">
                   01
                 </div>
-                <span className="text-[11px] uppercase tracking-wider font-mono text-[#1474ed] font-semibold block mb-1">
+                <span className="text-[11px] uppercase tracking-wider text-[#1474ed] font-semibold block mb-1">
                   Pilihan Terlengkap
                 </span>
-                <h3 className="text-xl font-serif text-[#000200] tracking-tight mb-2.5">
+                <h3 className="text-xl font-bold text-[#0F172A] tracking-tight mb-2.5">
                   Jutaan Produk & Brand Resmi
                 </h3>
-                <p className="text-sm text-[#5b4257] leading-relaxed font-normal">
+                <p className="text-sm text-[#475569] leading-relaxed font-normal">
                   Temukan beragam kebutuhan harian mulai dari fashion, sepatu, aksesoris, hingga produk gaya hidup dari brand official dan seller terpercaya seluruh Indonesia.
                 </p>
               </div>
-              <div className="pt-5 mt-6 border-t border-[#f1edf2] flex items-center justify-between text-xs font-semibold text-[#311744]">
+              <div className="pt-5 mt-6 border-t border-[#F1F5F9] flex items-center justify-between text-xs font-semibold text-[#0B2545]">
                 <span>Ribuan Toko Pilihan</span>
                 <span className="text-[#1474ed] font-normal">✓ 100% Produk Asli</span>
               </div>
@@ -125,22 +125,22 @@ export default function HomeFaq({ className = "" }: { className?: string }) {
 
           {/* Card 2: Transaksi Aman & Terlindungi */}
           <ScrollReveal direction="up" delay={120} className="h-full">
-            <div className="h-full bg-white/90 backdrop-blur-xs p-7 sm:p-8 rounded-2xl border border-[#e8e3ea] shadow-sm hover:shadow-md hover:border-[#311744]/30 transition-all duration-300 flex flex-col justify-between group">
+            <div className="h-full bg-white p-7 sm:p-8 rounded-2xl border border-[#E2E8F0] shadow-sm hover:shadow-md hover:border-[#1474ed]/40 transition-all duration-300 flex flex-col justify-between group">
               <div>
-                <div className="w-12 h-12 rounded-xl bg-[#f5eff8] text-[#311744] flex items-center justify-center font-serif text-lg font-bold mb-5 border border-[#311744]/10 group-hover:bg-[#311744] group-hover:text-white transition-colors duration-300">
+                <div className="w-12 h-12 rounded-xl bg-[#EFF6FF] text-[#1D4ED8] flex items-center justify-center font-bold text-lg mb-5 border border-[#BFDBFE] group-hover:bg-[#1474ed] group-hover:text-white transition-colors duration-300">
                   02
                 </div>
-                <span className="text-[11px] uppercase tracking-wider font-mono text-[#1474ed] font-semibold block mb-1">
+                <span className="text-[11px] uppercase tracking-wider text-[#1474ed] font-semibold block mb-1">
                   Perlindungan Konsumen
                 </span>
-                <h3 className="text-xl font-serif text-[#000200] tracking-tight mb-2.5">
+                <h3 className="text-xl font-bold text-[#0F172A] tracking-tight mb-2.5">
                   Transaksi Aman & Terlindungi
                 </h3>
-                <p className="text-sm text-[#5b4257] leading-relaxed font-normal">
+                <p className="text-sm text-[#475569] leading-relaxed font-normal">
                   Dilindungi sistem rekening bersama (Escrow). Pembayaran Anda baru diteruskan ke penjual setelah barang diterima dengan aman dan sesuai pesanan Anda.
                 </p>
               </div>
-              <div className="pt-5 mt-6 border-t border-[#f1edf2] flex items-center justify-between text-xs font-semibold text-[#311744]">
+              <div className="pt-5 mt-6 border-t border-[#F1F5F9] flex items-center justify-between text-xs font-semibold text-[#0B2545]">
                 <span>Garansi Uang Kembali</span>
                 <span className="text-[#1474ed] font-normal">✓ Rekber & COD</span>
               </div>
@@ -149,22 +149,22 @@ export default function HomeFaq({ className = "" }: { className?: string }) {
 
           {/* Card 3: Bebas Ongkir & Pengiriman Cepat */}
           <ScrollReveal direction="up" delay={240} className="h-full">
-            <div className="h-full bg-white/90 backdrop-blur-xs p-7 sm:p-8 rounded-2xl border border-[#e8e3ea] shadow-sm hover:shadow-md hover:border-[#311744]/30 transition-all duration-300 flex flex-col justify-between group">
+            <div className="h-full bg-white p-7 sm:p-8 rounded-2xl border border-[#E2E8F0] shadow-sm hover:shadow-md hover:border-[#1474ed]/40 transition-all duration-300 flex flex-col justify-between group">
               <div>
-                <div className="w-12 h-12 rounded-xl bg-[#f5eff8] text-[#311744] flex items-center justify-center font-serif text-lg font-bold mb-5 border border-[#311744]/10 group-hover:bg-[#311744] group-hover:text-white transition-colors duration-300">
+                <div className="w-12 h-12 rounded-xl bg-[#EFF6FF] text-[#1D4ED8] flex items-center justify-center font-bold text-lg mb-5 border border-[#BFDBFE] group-hover:bg-[#1474ed] group-hover:text-white transition-colors duration-300">
                   03
                 </div>
-                <span className="text-[11px] uppercase tracking-wider font-mono text-[#1474ed] font-semibold block mb-1">
+                <span className="text-[11px] uppercase tracking-wider text-[#1474ed] font-semibold block mb-1">
                   Logistik Terintegrasi
                 </span>
-                <h3 className="text-xl font-serif text-[#000200] tracking-tight mb-2.5">
+                <h3 className="text-xl font-bold text-[#0F172A] tracking-tight mb-2.5">
                   Bebas Ongkir & Pengiriman Cepat
                 </h3>
-                <p className="text-sm text-[#5b4257] leading-relaxed font-normal">
+                <p className="text-sm text-[#475569] leading-relaxed font-normal">
                   Dukungan kurir pengiriman lengkap mulai dari Instant, Same Day, Reguler, hingga Kargo dengan subsidi bebas ongkir ke seluruh pelosok tanah air.
                 </p>
               </div>
-              <div className="pt-5 mt-6 border-t border-[#f1edf2] flex items-center justify-between text-xs font-semibold text-[#311744]">
+              <div className="pt-5 mt-6 border-t border-[#F1F5F9] flex items-center justify-between text-xs font-semibold text-[#0B2545]">
                 <span>Seluruh Indonesia</span>
                 <span className="text-[#1474ed] font-normal">✓ Bebas Ongkir</span>
               </div>
@@ -181,25 +181,25 @@ export default function HomeFaq({ className = "" }: { className?: string }) {
             <ScrollReveal direction="left">
               <div className="space-y-6">
                 <div>
-                  <span className="text-[11px] uppercase tracking-wider font-mono text-[#1474ed] font-semibold">
+                  <span className="text-[11px] uppercase tracking-wider text-[#1474ed] font-semibold">
                     Pusat Bantuan & Layanan Pembeli
                   </span>
-                  <h3 className="text-2xl sm:text-3xl font-serif text-[#000200] tracking-tight leading-tight mt-1.5">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-[#0F172A] tracking-tight leading-tight mt-1.5">
                     Punya Pertanyaan Seputar Belanja di Jovique?
                   </h3>
-                  <p className="text-sm text-[#5b4257] leading-relaxed mt-2.5 font-normal">
+                  <p className="text-sm text-[#475569] leading-relaxed mt-2.5 font-normal">
                     Berikut rangkuman jawaban seputar keamanan transaksi, metode pembayaran, garansi retur, dan kemudahan belanja di Jovique.
                   </p>
                 </div>
 
-                <div className="p-6 bg-white rounded-2xl border border-[#e8e3ea] shadow-sm space-y-4">
+                <div className="p-6 bg-white rounded-2xl border border-[#E2E8F0] shadow-sm space-y-4">
                   <div className="flex items-center gap-2.5">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#000200]">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#0F172A]">
                       Customer Care 24/7 Siaga
                     </span>
                   </div>
-                  <p className="text-xs sm:text-[13px] text-[#5b4257] leading-relaxed">
+                  <p className="text-xs sm:text-[13px] text-[#475569] leading-relaxed">
                     Butuh bantuan terkait status pesanan, verifikasi pembayaran, atau kendala transaksi lainnya? Tim ramah kami siap membantu Anda kapan pun.
                   </p>
                   <Link href="/products" className="block pt-1">
@@ -226,8 +226,8 @@ export default function HomeFaq({ className = "" }: { className?: string }) {
                   <div
                     className={`bg-white rounded-xl border transition-all duration-300 overflow-hidden ${
                       isOpen
-                        ? "border-[#311744] shadow-sm"
-                        : "border-[#e8e3ea] hover:border-[#311744]/40"
+                        ? "border-[#1474ed] shadow-sm ring-1 ring-[#1474ed]/10"
+                        : "border-[#E2E8F0] hover:border-[#1474ed]/40"
                     }`}
                   >
                     <button
@@ -237,8 +237,8 @@ export default function HomeFaq({ className = "" }: { className?: string }) {
                       aria-controls={`faq-answer-${item.id}`}
                       className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 focus:outline-none cursor-pointer select-none"
                     >
-                      <span className="font-serif text-base sm:text-lg font-medium text-[#000200] tracking-tight flex items-start sm:items-center">
-                        <span className="font-mono text-xs text-[#1474ed] mr-3 font-semibold shrink-0 mt-0.5 sm:mt-0">
+                      <span className="text-base sm:text-lg font-semibold text-[#0F172A] tracking-tight flex items-start sm:items-center">
+                        <span className="text-xs text-[#1474ed] mr-3 font-semibold shrink-0 mt-0.5 sm:mt-0">
                           {String(index + 1).padStart(2, "0")}.
                         </span>
                         <span>{item.question}</span>
@@ -246,8 +246,8 @@ export default function HomeFaq({ className = "" }: { className?: string }) {
                       <span
                         className={`shrink-0 w-8 h-8 rounded-full border flex items-center justify-center text-sm font-semibold transition-all duration-300 ${
                           isOpen
-                            ? "bg-[#311744] text-white rotate-45 border-[#311744]"
-                            : "bg-[#f5eff8] text-[#311744] border-[#e8e3ea] hover:bg-[#311744] hover:text-white"
+                            ? "bg-[#1474ed] text-white rotate-45 border-[#1474ed]"
+                            : "bg-[#EFF6FF] text-[#1D4ED8] border-[#BFDBFE] hover:bg-[#1474ed] hover:text-white"
                         }`}
                         aria-hidden="true"
                       >
@@ -262,7 +262,7 @@ export default function HomeFaq({ className = "" }: { className?: string }) {
                         isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
                       }`}
                     >
-                      <div className="px-5 pb-6 sm:px-6 sm:pb-7 pt-1 text-sm text-[#5b4257] leading-relaxed border-t border-[#f1edf2] font-normal">
+                      <div className="px-5 pb-6 sm:px-6 sm:pb-7 pt-1 text-sm text-[#475569] leading-relaxed border-t border-[#F1F5F9] font-normal">
                         {item.answer}
                       </div>
                     </div>

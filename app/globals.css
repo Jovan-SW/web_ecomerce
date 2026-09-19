@@ -1,69 +1,71 @@
 @import "tailwindcss";
 
 @theme {
-  /* Raw Palette Defined by User */
+  /* Raw Palette - Modern Tech Blue & Pure White */
   --color-white: #ffffff;
-  --color-black: #000200;
-  --color-plum: #311744;
-  --color-mauve: #5b4257;
-  --color-navy: #162953;
+  --color-black: #0f172a;
+  --color-plum: #1474ed;
+  --color-mauve: #475569;
+  --color-navy: #0b2545;
   --color-blue: #1474ed;
 
-  /* Semantic Theme Tokens for Fashion E-Commerce */
-  --color-background: #ffffff;
-  --color-foreground: #000200;
+  /* Semantic Theme Tokens for Modern Blue & White E-Commerce */
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
 
-  /* Primary: Deep Royal Plum (#311744) */
-  --color-primary: #311744;
-  --color-primary-hover: #220f30;
-  --color-primary-light: #f5eff8;
+  /* Primary: Vibrant Electric Blue (#1474ed) */
+  --color-primary: #1474ed;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-light: #eff6ff;
 
-  /* Secondary: Electric Blue (#1474ed) */
-  --color-secondary: #1474ed;
-  --color-secondary-hover: #0f5ec2;
-  --color-secondary-light: #edf5fe;
+  /* Secondary: Deep Navy / Royal Blue (#0b2545) */
+  --color-secondary: #0b2545;
+  --color-secondary-hover: #134074;
+  --color-secondary-light: #e0f2fe;
 
-  /* Accent: Midnight Navy (#162953) */
-  --color-accent: #162953;
-  --color-accent-hover: #101e3d;
-  --color-accent-light: #eef2f8;
+  /* Accent: Bright Cyan / Sky Blue (#0284c7) */
+  --color-accent: #0284c7;
+  --color-accent-hover: #0369a1;
+  --color-accent-light: #f0f9ff;
 
-  /* Muted / Neutral Violet: Dusty Mauve (#5b4257) */
-  --color-muted: #5b4257;
-  --color-muted-hover: #483445;
-  --color-muted-light: #f7f4f6;
+  /* Muted / Neutral Text: Slate Gray (#475569) */
+  --color-muted: #475569;
+  --color-muted-hover: #334155;
+  --color-muted-light: #f1f5f9;
 
   /* Borders & Surfaces */
-  --color-border: #e8e3ea;
-  --color-border-subtle: #f1edf2;
+  --color-border: #e2e8f0;
+  --color-border-subtle: #f1f5f9;
   --color-surface: #ffffff;
-  --color-surface-subtle: #faf9fb;
+  --color-surface-subtle: #f8fafc;
 
-  /* Typography */
-  --font-sans: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: var(--font-geist-mono), monospace;
+  /* Typography - Plus Jakarta Sans for All Elements */
+  --font-sans: var(--font-plus-jakarta-sans), "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: var(--font-plus-jakarta-sans), "Plus Jakarta Sans", sans-serif;
+  --font-mono: var(--font-plus-jakarta-sans), monospace;
 
-  /* Modern Fashion Shadows */
-  --shadow-fashion-sm: 0 2px 8px -2px rgba(49, 23, 68, 0.05), 0 1px 4px -1px rgba(0, 2, 0, 0.03);
-  --shadow-fashion-md: 0 8px 24px -4px rgba(49, 23, 68, 0.08), 0 4px 12px -2px rgba(0, 2, 0, 0.04);
-  --shadow-fashion-lg: 0 16px 36px -6px rgba(49, 23, 68, 0.12), 0 8px 20px -4px rgba(22, 41, 83, 0.08);
-  --shadow-fashion-hover: 0 20px 40px -8px rgba(49, 23, 68, 0.16), 0 8px 20px -4px rgba(20, 116, 237, 0.14);
+  /* Modern Blue Tech Shadows */
+  --shadow-fashion-sm: 0 2px 8px -2px rgba(20, 116, 237, 0.08), 0 1px 4px -1px rgba(15, 23, 42, 0.04);
+  --shadow-fashion-md: 0 8px 24px -4px rgba(20, 116, 237, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.05);
+  --shadow-fashion-lg: 0 16px 36px -6px rgba(20, 116, 237, 0.16), 0 8px 20px -4px rgba(11, 37, 69, 0.1);
+  --shadow-fashion-hover: 0 20px 40px -8px rgba(20, 116, 237, 0.22), 0 8px 20px -4px rgba(20, 116, 237, 0.18);
 }
 
 /* Custom CSS Variables & Base Setup */
 :root {
-  --bg-primary-val: #311744;
-  --bg-secondary-val: #1474ed;
-  --bg-navy-val: #162953;
-  --bg-mauve-val: #5b4257;
+  --bg-primary-val: #1474ed;
+  --bg-secondary-val: #0b2545;
+  --bg-navy-val: #0a192f;
+  --bg-mauve-val: #475569;
   --bg-white-val: #ffffff;
-  --text-black-val: #000200;
+  --text-black-val: #0f172a;
 }
 
 /* Base Document Styling */
 html {
   scroll-behavior: smooth;
   color-scheme: light;
+  font-family: var(--font-sans);
 }
 
 body {
@@ -75,9 +77,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Headings inherit Plus Jakarta Sans with crisp styling */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+}
+
 /* Modern Selection Highlight */
 ::selection {
-  background-color: var(--color-primary);
+  background-color: #1474ed;
   color: #ffffff;
 }
 
@@ -88,61 +95,61 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f8f6f9;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cfc5d2;
+  background: #cbd5e1;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-muted);
+  background: #1474ed;
 }
 
-/* Fashion E-Commerce Gradient Utilities */
+/* Modern Blue & White E-Commerce Gradients */
 .gradient-plum-navy {
-  background: linear-gradient(135deg, #311744 0%, #162953 100%);
+  background: linear-gradient(135deg, #1474ed 0%, #0b2545 100%);
 }
 
 .gradient-plum-mauve {
-  background: linear-gradient(135deg, #311744 0%, #5b4257 100%);
+  background: linear-gradient(135deg, #1d4ed8 0%, #0284c7 100%);
 }
 
 .gradient-blue-navy {
-  background: linear-gradient(135deg, #1474ed 0%, #162953 100%);
+  background: linear-gradient(135deg, #1474ed 0%, #0a192f 100%);
 }
 
 .gradient-luxury-subtle {
-  background: linear-gradient(180deg, #ffffff 0%, #faf8fa 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%);
 }
 
-/* Warm, Eye-Friendly Canvas (Tidak polos putih, nyaman & berkarakter) */
+/* Crisp, eye-friendly modern blue-white canvas */
 .bg-warm-canvas {
-  background: linear-gradient(180deg, #FBF9F6 0%, #F8F4F9 35%, #F4F7FB 70%, #FAF8F6 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 30%, #f0f7ff 70%, #f8fafc 100%);
 }
 
-/* Subtle Ambient Atmosphere Glow (Nuansa Plum & Blue dari globals.css) */
+/* Subtle Ambient Atmosphere Glow in Blue & White */
 .ambient-glow-mesh {
   background-image:
-    radial-gradient(ellipse 70% 50% at 85% 15%, rgba(49, 23, 68, 0.045) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 50% at 15% 45%, rgba(20, 116, 237, 0.035) 0%, transparent 60%),
-    radial-gradient(ellipse 75% 55% at 50% 80%, rgba(91, 66, 87, 0.04) 0%, transparent 70%);
+    radial-gradient(ellipse 70% 50% at 85% 15%, rgba(20, 116, 237, 0.055) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 15% 45%, rgba(29, 78, 216, 0.045) 0%, transparent 60%),
+    radial-gradient(ellipse 75% 55% at 50% 80%, rgba(11, 37, 69, 0.04) 0%, transparent 70%);
 }
 
-/* Glassmorphic Luxury Surface */
+/* Glassmorphic Clean White Surface */
 .glass-surface {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(91, 66, 87, 0.08);
+  border: 1px solid rgba(20, 116, 237, 0.12);
 }
 
 .glass-surface-dark {
-  background: rgba(49, 23, 68, 0.85);
+  background: rgba(11, 37, 69, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 /* ==============================================================================

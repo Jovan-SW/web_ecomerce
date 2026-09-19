@@ -132,37 +132,37 @@ export default function Footer({
 
   return (
     <footer
-      className={`relative w-full bg-[#08050B] text-[#EFEBE4] border-t border-[#25182C] overflow-hidden ${className}`}
+      className={`relative w-full bg-[#071324] text-[#E2E8F0] border-t border-[#1E293B] overflow-hidden ${className}`}
       aria-labelledby="footer-heading"
     >
       <h2 id="footer-heading" className="sr-only">
         Navigasi Footer {brandName}
       </h2>
 
-      {/* Ambient Luxury Glow in Background */}
+      {/* Ambient Blue Glow in Background */}
       <div
-        className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[350px] bg-gradient-to-b from-[#311744]/25 via-[#162953]/15 to-transparent blur-3xl opacity-60"
+        className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[350px] bg-gradient-to-b from-[#1474ed]/20 via-[#0B2545]/25 to-transparent blur-3xl opacity-60"
         aria-hidden="true"
       />
 
       {/* =========================================================================
           TIER 1: NEWSLETTER (High Conversion & Clean Luxury)
           ========================================================================= */}
-      <div className="relative border-b border-[#23172B] py-12 lg:py-16">
+      <div className="relative border-b border-[#1E293B] py-12 lg:py-16">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10">
-          <div className="relative rounded-xs border border-[#2B1B37] bg-gradient-to-br from-[#150D20] via-[#0D0715] to-[#12081E] p-6 sm:p-10 lg:p-12 overflow-hidden shadow-2xl">
+          <div className="relative rounded-2xl border border-[#1E3A8A]/50 bg-gradient-to-br from-[#0B2545] via-[#0A192F] to-[#071324] p-6 sm:p-10 lg:p-12 overflow-hidden shadow-2xl">
             {/* Subtle decorative grid lines */}
-            <div className="absolute top-0 right-0 w-80 h-80 bg-[#1474ed]/5 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-10 -left-10 w-80 h-80 bg-[#311744]/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-0 right-0 w-80 h-80 bg-[#1474ed]/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-10 -left-10 w-80 h-80 bg-[#1D4ED8]/15 rounded-full blur-3xl pointer-events-none" />
 
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               {/* Left Column: Heading & Value */}
               <div className="lg:col-span-6 space-y-2">
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-white tracking-tight">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
                   Dapatkan Voucher Diskon & Info Promo Spesial
                 </h3>
-                <p className="text-xs sm:text-sm text-[#A89CAE] max-w-xl leading-relaxed">
-                  Daftarkan email Anda untuk mendapatkan kode voucher diskon belanja, kabar Flash Sale kilat,
+                <p className="text-xs sm:text-sm text-[#94A3B8] max-w-xl leading-relaxed">
+                  Daftarkan email Anda untuk mendapatkan kode voucher diskon belanja, kabar promo kilat,
                   dan penawaran bebas ongkir dari toko pilihan setiap hari.
                 </p>
               </div>
@@ -170,7 +170,7 @@ export default function Footer({
               {/* Right Column: Interactive Subscription Form */}
               <div className="lg:col-span-6">
                 {subscriptionState === "success" ? (
-                  <div className="p-6 rounded-xs bg-[#191026] border border-[#1474ed]/50 text-left space-y-3 animate-fadeIn">
+                  <div className="p-6 rounded-xl bg-[#071324] border border-[#1474ed]/50 text-left space-y-3 animate-fadeIn">
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-[#1474ed]/20 text-[#1474ed] flex items-center justify-center">
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -179,13 +179,13 @@ export default function Footer({
                       </div>
                       <div>
                         <h4 className="text-sm font-semibold text-white">Selamat Datang di Jovique Marketplace!</h4>
-                        <p className="text-xs text-[#9D91A3]">Kode voucher belanja hemat telah dikirim ke {email}</p>
+                        <p className="text-xs text-[#94A3B8]">Kode voucher belanja hemat telah dikirim ke {email}</p>
                       </div>
                     </div>
-                    <div className="p-3 bg-[#0E0817] border border-[#352148] flex items-center justify-between gap-3">
+                    <div className="p-3 bg-[#0B2545] border border-[#1E3A8A] rounded-lg flex items-center justify-between gap-3">
                       <div>
-                        <span className="text-[10px] uppercase font-mono tracking-wider text-[#8A7C92] block">Voucher Belanja (10% Off):</span>
-                        <span className="font-mono text-xs font-bold text-[#1474ed] tracking-wider">BELANJAHEMAT10</span>
+                        <span className="text-[10px] uppercase font-mono tracking-wider text-[#94A3B8] block">Voucher Belanja (10% Off):</span>
+                        <span className="font-mono text-xs font-bold text-[#60A5FA] tracking-wider">BELANJAHEMAT10</span>
                       </div>
                       <button
                         type="button"
@@ -193,7 +193,7 @@ export default function Footer({
                           navigator.clipboard.writeText("BELANJAHEMAT10");
                           alert("Kode voucher disalin!");
                         }}
-                        className="text-[11px] font-medium px-3 py-1.5 bg-[#251536] hover:bg-[#351D4D] text-white border border-[#44225E] transition-colors cursor-pointer"
+                        className="text-[11px] font-medium px-3 py-1.5 bg-[#1474ed] hover:bg-[#1d4ed8] text-white rounded-lg transition-colors cursor-pointer"
                       >
                         Salin Kode
                       </button>
@@ -209,16 +209,16 @@ export default function Footer({
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Masukkan alamat email Anda..."
                           required
-                          className="w-full h-12 px-4 bg-[#0B0612] border border-[#38244A] focus:border-[#1474ed] focus:ring-2 focus:ring-[#1474ed]/20 text-white placeholder-[#6C5F74] text-xs transition-all outline-none rounded-xs"
+                          className="w-full h-12 px-4 bg-[#071324] border border-[#1E3A8A] focus:border-[#1474ed] focus:ring-2 focus:ring-[#1474ed]/20 text-white placeholder-[#64748B] text-xs transition-all outline-none rounded-xl"
                         />
                       </div>
                       <button
                         type="submit"
                         disabled={subscriptionState === "loading"}
-                        className="h-12 px-6 bg-white hover:bg-[#F2EFE9] text-[#000200] text-xs uppercase tracking-[0.18em] font-bold transition-all duration-300 flex items-center justify-center gap-2 shrink-0 group shadow-md hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] disabled:opacity-50 cursor-pointer"
+                        className="h-12 px-6 bg-white hover:bg-[#EFF6FF] text-[#0B2545] hover:text-[#1474ed] text-xs uppercase tracking-[0.16em] font-bold transition-all duration-300 flex items-center justify-center gap-2 shrink-0 group shadow-md hover:shadow-[0_0_20px_rgba(20,116,237,0.3)] disabled:opacity-50 rounded-xl cursor-pointer"
                       >
                         {subscriptionState === "loading" ? (
-                          <span className="inline-block w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                          <span className="inline-block w-4 h-4 border-2 border-[#0B2545] border-t-transparent rounded-full animate-spin" />
                         ) : (
                           <>
                             <span>Daftar Sekarang</span>
@@ -237,7 +237,7 @@ export default function Footer({
                       </p>
                     )}
 
-                    <p className="text-[10px] text-[#7A6D80] leading-relaxed">
+                    <p className="text-[10px] text-[#64748B] leading-relaxed">
                       Dengan berlangganan, Anda menyetujui Kebijakan Privasi Jovique. Anda dapat berhenti berlangganan kapan pun tanpa biaya.
                     </p>
                   </form>
@@ -256,21 +256,21 @@ export default function Footer({
           {/* Brand Identity & Social Channels (4 cols) */}
           <div className="lg:col-span-4 space-y-6">
             <Link href="/" className="inline-block group focus:outline-none">
-              <span className="font-serif text-3xl font-bold tracking-[0.24em] uppercase text-white group-hover:text-[#F3EFF8] transition-colors">
+              <span className="font-bold text-3xl tracking-[0.24em] uppercase text-white group-hover:text-[#93C5FD] transition-colors">
                 {brandName}
               </span>
-              <span className="block text-[9px] uppercase tracking-[0.42em] text-[#1474ed] -mt-0.5 font-medium">
+              <span className="block text-[9px] uppercase tracking-[0.42em] text-[#60A5FA] -mt-0.5 font-bold">
                 {tagline}
               </span>
             </Link>
 
-            <p className="text-xs text-[#9E91A4] leading-relaxed max-w-sm">
+            <p className="text-xs text-[#94A3B8] leading-relaxed max-w-sm">
               Platform e-commerce terlengkap untuk jual beli jutaan produk berkualitas dari ribuan toko dan brand resmi terpercaya dengan jaminan transaksi aman, promo setiap hari, dan bebas ongkir ke seluruh Indonesia.
             </p>
 
             {/* Social Channels */}
             <div className="space-y-2">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#7C6E82] block">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-[#64748B] block font-semibold">
                 Ikuti Komunitas & Promo Jovique
               </span>
               <div className="flex items-center gap-2">
@@ -281,7 +281,7 @@ export default function Footer({
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Kunjungi ${soc.name} Jovique Official`}
-                    className="w-9 h-9 rounded-xs bg-[#160D22] border border-[#2B1B37] flex items-center justify-center text-[#A699AC] hover:text-white hover:bg-[#311744] hover:border-[#1474ed] transition-all duration-300 group shadow-xs"
+                    className="w-9 h-9 rounded-lg bg-[#0B2545] border border-[#1E3A8A] flex items-center justify-center text-[#94A3B8] hover:text-white hover:bg-[#1474ed] hover:border-[#1474ed] transition-all duration-300 group shadow-xs"
                   >
                     <span className="group-hover:scale-110 transition-transform duration-200">
                       {soc.icon}
@@ -295,7 +295,7 @@ export default function Footer({
           {/* Directory Link Columns (8 cols) */}
           <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {NAV_SECTIONS.map((section, sIndex) => (
-              <div key={section.title} className="border-b lg:border-b-0 border-[#23152E] pb-4 lg:pb-0">
+              <div key={section.title} className="border-b lg:border-b-0 border-[#1E293B] pb-4 lg:pb-0">
                 {/* Mobile Accordion Header */}
                 <button
                   type="button"
@@ -303,10 +303,10 @@ export default function Footer({
                   className="w-full lg:cursor-default flex items-center justify-between text-left py-2 lg:py-0 focus:outline-none"
                   aria-expanded={expandedSection === sIndex}
                 >
-                  <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-white font-mono">
+                  <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-white">
                     {section.title}
                   </h4>
-                  <span className="lg:hidden text-sm text-[#7C6E82]">
+                  <span className="lg:hidden text-sm text-[#64748B]">
                     {expandedSection === sIndex ? "−" : "+"}
                   </span>
                 </button>
@@ -321,13 +321,13 @@ export default function Footer({
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="group inline-flex items-center gap-2 text-xs text-[#9D91A3] hover:text-white transition-colors duration-200 py-0.5"
+                        className="group inline-flex items-center gap-2 text-xs text-[#94A3B8] hover:text-white transition-colors duration-200 py-0.5"
                       >
                         <span className="group-hover:translate-x-1 transition-transform duration-200">
                           {link.label}
                         </span>
                         {link.badge && (
-                          <span className="text-[9px] font-mono px-1.5 py-0.2 bg-[#261538] text-[#1474ed] border border-[#3E2358] uppercase font-semibold">
+                          <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#0B2545] text-[#60A5FA] border border-[#1E3A8A] uppercase font-semibold">
                             {link.badge}
                           </span>
                         )}
@@ -344,14 +344,14 @@ export default function Footer({
       {/* =========================================================================
           TIER 3: BOTTOM COPYRIGHT (Jovan Sebastian William)
           ========================================================================= */}
-      <div className="relative border-t border-[#1C1026] bg-[#050308] py-6">
+      <div className="relative border-t border-[#1E293B] bg-[#040B14] py-6">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           {/* Copyright & Maison Credits */}
           <div className="space-y-1">
-            <p className="text-[11px] text-[#7A6E80]">
+            <p className="text-[11px] text-[#94A3B8]">
               © 2026 <strong className="text-white font-medium">Jovan Sebastian William</strong>. Seluruh hak cipta dilindungi undang-undang.
             </p>
-            <p className="text-[10px] text-[#5D5262]">
+            <p className="text-[10px] text-[#64748B]">
               Situs ini dilindungi enkripsi SSL 256-bit dan mematuhi standar perlindungan data pribadi konsumen.
             </p>
           </div>

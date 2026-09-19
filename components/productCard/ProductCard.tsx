@@ -103,14 +103,14 @@ export default function ProductCard({
 
   return (
     <div
-      className={`group relative flex flex-col bg-[#F9F7F4] border border-[#ECE7E1] rounded-none overflow-hidden transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-fashion-md hover:border-[#DCD5CB] ${className}`}
+      className={`group relative flex flex-col bg-white border border-[#E2E8F0] rounded-2xl overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_12px_28px_-6px_rgba(20,116,237,0.14)] hover:border-[#1474ed]/50 ${className}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* ========================================================
-          IMAGE CONTAINER (Sharp Frame, Aspect 3:4 Luxury Fashion)
+          IMAGE CONTAINER (Aspect 3:4 with Soft Border)
          ======================================================== */}
-      <div className="relative aspect-[3/4] w-full bg-[#F2EFE9] overflow-hidden">
+      <div className="relative aspect-[3/4] w-full bg-[#F8FAFC] overflow-hidden">
         {/* Link Wrapper untuk Gambar */}
         <Link
           href={`/products/${product.slug}`}
@@ -142,8 +142,8 @@ export default function ProductCard({
 
           {/* Sold Out Overlay */}
           {isSoldOut && (
-            <div className="absolute inset-0 bg-[#000200]/40 backdrop-blur-[2px] flex items-center justify-center">
-              <span className="bg-[#000200] text-white text-[11px] font-medium tracking-widest uppercase px-3.5 py-1.5 border border-white/20">
+            <div className="absolute inset-0 bg-[#0F172A]/40 backdrop-blur-[2px] flex items-center justify-center">
+              <span className="bg-[#0B2545] text-white text-[11px] font-medium tracking-widest uppercase px-3.5 py-1.5 rounded border border-white/20">
                 Habis Terjual
               </span>
             </div>
@@ -153,12 +153,12 @@ export default function ProductCard({
         {/* ================= BADGES TOP LEFT ================= */}
         <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10 pointer-events-none">
           {product.is_new_release && (
-            <span className="bg-[#311744] text-white text-[10px] font-semibold tracking-widest uppercase px-2.5 py-1 shadow-sm">
+            <span className="bg-[#0B2545] text-white text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded shadow-xs">
               New Arrival
             </span>
           )}
           {hasDiscount && (
-            <span className="bg-[#1474ed] text-white text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 shadow-sm">
+            <span className="bg-[#1474ed] text-white text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded shadow-xs">
               -{discountPercentage}%
             </span>
           )}
@@ -171,10 +171,10 @@ export default function ProductCard({
           aria-label={
             wishlisted ? "Hapus dari wishlist" : "Tambahkan ke wishlist"
           }
-          className={`absolute top-3 right-3 z-20 w-9 h-9 rounded-none flex items-center justify-center transition-all duration-300 shadow-sm ${
+          className={`absolute top-3 right-3 z-20 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 shadow-xs ${
             wishlisted
-              ? "bg-[#311744] text-white border border-[#311744]"
-              : "bg-white/90 text-[#000200] border border-[#E8E3EA] hover:bg-white hover:text-[#311744] hover:border-[#311744]"
+              ? "bg-[#1474ed] text-white border border-[#1474ed]"
+              : "bg-white/95 backdrop-blur-xs text-[#0F172A] border border-[#E2E8F0] hover:bg-white hover:text-[#1474ed] hover:border-[#1474ed]"
           }`}
         >
           <svg
@@ -196,7 +196,7 @@ export default function ProductCard({
         {/* ================= FIT TYPE FLOATING PILL ================= */}
         {product.fit_type && (
           <div className="absolute bottom-3 left-3 z-10 pointer-events-none">
-            <span className="bg-white/90 backdrop-blur-xs text-[#5b4257] text-[10px] font-semibold tracking-widest uppercase px-2.5 py-1 border border-[#ECE7E1]">
+            <span className="bg-white/90 backdrop-blur-xs text-[#475569] text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded border border-[#E2E8F0]">
               {product.fit_type}
             </span>
           </div>
@@ -206,7 +206,7 @@ export default function ProductCard({
       {/* ========================================================
           CARD CONTENT & DETAILS (Text, Price, Rating, Stock)
          ======================================================== */}
-      <div className="flex flex-col flex-1 p-4 bg-[#F9F7F4] justify-between">
+      <div className="flex flex-col flex-1 p-4 bg-white justify-between">
         <div>
           {/* Row Atas: Rating & Stock Indicator */}
           <div className="flex items-center justify-between gap-2 mb-1.5">
@@ -226,11 +226,11 @@ export default function ProductCard({
                   />
                 </svg>
               </div>
-              <span className="text-xs font-semibold text-[#000200]">
+              <span className="text-xs font-semibold text-[#0F172A]">
                 {product.rating ? Number(product.rating).toFixed(1) : "5.0"}
               </span>
               {product.reviews_count > 0 && (
-                <span className="text-[11px] text-[#5b4257]">
+                <span className="text-[11px] text-[#64748B]">
                   ({product.reviews_count})
                 </span>
               )}
@@ -247,7 +247,7 @@ export default function ProductCard({
                   Sisa {totalStock} pcs
                 </span>
               ) : totalStock !== null ? (
-                <span className="text-[11px] text-[#5b4257] font-medium tracking-wide">
+                <span className="text-[11px] text-[#64748B] font-medium tracking-wide">
                   Stok: {totalStock}
                 </span>
               ) : (
@@ -260,19 +260,19 @@ export default function ProductCard({
 
           {/* Kategori Asli dari Database */}
           {categoryName && (
-            <p className="text-[10px] uppercase tracking-widest text-[#8C827A] font-semibold mb-0.5">
+            <p className="text-[10px] uppercase tracking-widest text-[#64748B] font-semibold mb-0.5">
               {categoryName}
             </p>
           )}
 
           {/* Nama Produk Asli dari Database */}
-          <h3 className="font-medium text-[15px] leading-snug text-[#000200] group-hover:text-[#311744] transition-colors duration-200 line-clamp-1 mb-1">
+          <h3 className="font-semibold text-[15px] leading-snug text-[#0F172A] group-hover:text-[#1474ed] transition-colors duration-200 line-clamp-1 mb-1">
             <Link href={`/products/${product.slug}`}>{product.name}</Link>
           </h3>
 
           {/* Tagline / Deskripsi Singkat Asli dari Database */}
           {subtitle && (
-            <p className="text-xs text-[#5b4257] line-clamp-1 mb-1.5 font-normal" title={subtitle}>
+            <p className="text-xs text-[#475569] line-clamp-1 mb-1.5 font-normal" title={subtitle}>
               {subtitle}
             </p>
           )}
@@ -291,7 +291,7 @@ export default function ProductCard({
                 ))}
               </div>
               {availableSizes.length > 0 && (
-                <span className="text-[10px] text-[#8C827A] font-medium tracking-tight">
+                <span className="text-[10px] text-[#64748B] font-medium tracking-tight">
                   {availableSizes.slice(0, 4).join(" · ")}
                 </span>
               )}
@@ -300,13 +300,13 @@ export default function ProductCard({
         </div>
 
         {/* Harga & Tombol Aksi Cepat */}
-        <div className="pt-2 border-t border-[#ECE7E1] mt-2 flex items-baseline justify-between gap-2">
+        <div className="pt-2.5 border-t border-[#E2E8F0] mt-2 flex items-baseline justify-between gap-2">
           <div className="flex items-baseline gap-2 flex-wrap">
-            <span className="text-base font-bold text-[#000200] tracking-tight">
+            <span className="text-base font-bold text-[#0F172A] tracking-tight">
               {formatPrice(product.price)}
             </span>
             {hasDiscount && (
-              <span className="text-xs text-[#5b4257] line-through">
+              <span className="text-xs text-[#94A3B8] line-through">
                 {formatPrice(product.compare_at_price)}
               </span>
             )}
@@ -316,7 +316,7 @@ export default function ProductCard({
           <Link
             href={`/products/${product.slug}`}
             aria-label={`Lihat detail ${product.name}`}
-            className="text-[#5b4257] group-hover:text-[#1474ed] transition-colors duration-200"
+            className="text-[#1474ed] hover:text-[#1d4ed8] transition-colors duration-200"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

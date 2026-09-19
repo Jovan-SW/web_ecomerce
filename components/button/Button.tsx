@@ -72,26 +72,27 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const baseStyles =
       "group relative inline-flex items-center justify-center font-medium tracking-wide uppercase overflow-hidden select-none cursor-pointer transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-40 disabled:pointer-events-none active:scale-[0.98]";
 
-    // 2. Variant Styles dengan Perpaduan Neon Glow & High-Contrast
+    // 2. Variant Styles dengan Perpaduan Blue & White Modern E-Commerce
     const variantStyles: Record<ButtonVariant, string> = {
-      // Primary: Hitam pekat kontras tinggi -> Hover: Neon Cyan/Violet aura, micro-lift, border glow
+      // Primary: Biru Elektrik -> Hover: Deep Royal Blue, micro-lift, blue glow
       primary:
-        "bg-[#08080A] text-white border border-[#222226] shadow-sm hover:border-[#00F5FF]/80 hover:bg-gradient-to-r hover:from-[#08080A] hover:via-[#161226] hover:to-[#08080A] hover:shadow-[0_0_24px_-2px_rgba(0,245,255,0.45),0_0_14px_-2px_rgba(157,0,255,0.35)] hover:-translate-y-0.5 focus-visible:ring-[#00F5FF]",
+        "bg-[#1474ed] text-white border border-[#1474ed] shadow-sm hover:bg-[#1d4ed8] hover:border-[#1d4ed8] hover:shadow-[0_6px_24px_-2px_rgba(20,116,237,0.4)] hover:-translate-y-0.5 focus-visible:ring-[#1474ed]",
 
-      // Secondary / Outline: Kontras putih tajam -> Hover: Dark sleek dengan neon cyan border & glow
+      // Secondary: Putih bersih dengan aksen biru -> Hover: Soft blue fill & deep blue border
       secondary:
-        "bg-white text-[#08080A] border-2 border-[#141416] shadow-xs hover:border-[#00F5FF] hover:text-[#00F5FF] hover:bg-[#08080A] hover:shadow-[0_0_22px_-2px_rgba(0,245,255,0.4)] hover:-translate-y-0.5 focus-visible:ring-[#00F5FF]",
+        "bg-white text-[#1474ed] border-2 border-[#1474ed] shadow-xs hover:bg-[#eff6ff] hover:text-[#1d4ed8] hover:border-[#1d4ed8] hover:shadow-[0_4px_18px_-2px_rgba(20,116,237,0.25)] hover:-translate-y-0.5 focus-visible:ring-[#1474ed]",
 
+      // Outline: Putih dengan border slate halus -> Hover: Blue border & text
       outline:
-        "bg-white text-[#08080A] border-2 border-[#141416] shadow-xs hover:border-[#00F5FF] hover:text-[#00F5FF] hover:bg-[#08080A] hover:shadow-[0_0_22px_-2px_rgba(0,245,255,0.4)] hover:-translate-y-0.5 focus-visible:ring-[#00F5FF]",
+        "bg-white text-[#0f172a] border border-[#e2e8f0] shadow-xs hover:border-[#1474ed] hover:text-[#1474ed] hover:bg-[#eff6ff] hover:-translate-y-0.5 focus-visible:ring-[#1474ed]",
 
-      // Ghost: Transparan bersih -> Hover: Holographic neon tint, border neon halus, micro-scale
+      // Ghost: Transparan bersih -> Hover: Soft blue wash
       ghost:
-        "bg-transparent text-[#08080A] border border-transparent hover:bg-gradient-to-r hover:from-cyan-500/10 hover:via-purple-500/10 hover:to-blue-500/10 hover:text-cyan-600 hover:border-cyan-400/30 hover:shadow-[0_0_16px_rgba(0,245,255,0.25)] hover:scale-105 active:scale-95 focus-visible:ring-cyan-400",
+        "bg-transparent text-[#0f172a] border border-transparent hover:bg-[#eff6ff] hover:text-[#1474ed] hover:scale-105 active:scale-95 focus-visible:ring-[#1474ed]",
 
-      // Destructive: Merah kontras -> Hover: Crimson laser neon glow, solid red fill
+      // Destructive: Merah kontras -> Hover: Crimson solid fill
       destructive:
-        "bg-[#FFF1F2] text-[#E11D48] border border-[#FECDD3] shadow-xs hover:bg-[#FF0055] hover:text-white hover:border-[#FF0055] hover:shadow-[0_0_25px_rgba(255,0,85,0.55)] hover:-translate-y-0.5 focus-visible:ring-[#FF0055]",
+        "bg-[#fff1f2] text-[#e11d48] border border-[#fecdd3] shadow-xs hover:bg-[#e11d48] hover:text-white hover:border-[#e11d48] hover:shadow-[0_4px_16px_rgba(225,29,72,0.3)] hover:-translate-y-0.5 focus-visible:ring-[#e11d48]",
     };
 
     // 3. Size Styles

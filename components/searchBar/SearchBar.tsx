@@ -155,22 +155,22 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
         <form
           onSubmit={handleSubmit}
           className={`
-            group relative flex items-center bg-white border transition-all duration-300 ease-out
+            group relative flex items-center bg-white border rounded-xl transition-all duration-300 ease-out
             ${currentSize.container}
             ${
               isFocused
-                ? "border-[#000200] shadow-[0_4px_24px_-4px_rgba(0,2,0,0.12)] -translate-y-0.5"
-                : "border-[#ECE7E1] hover:border-[#000200]/60 hover:shadow-xs"
+                ? "border-[#1474ed] ring-2 ring-[#1474ed]/20 shadow-[0_4px_24px_-4px_rgba(20,116,237,0.25)] -translate-y-0.5"
+                : "border-[#E2E8F0] hover:border-[#1474ed]/50 hover:shadow-xs"
             }
           `}
         >
           {/* ========================================================
-              LOGO SEARCH HITAM PEKAT (High-Contrast Black Logo)
+              LOGO SEARCH (Blue & White Tech Accent)
              ======================================================== */}
           <button
             type="submit"
             aria-label="Lakukan pencarian"
-            className="shrink-0 text-[#000200] hover:scale-110 active:scale-95 transition-transform duration-200 focus:outline-none mr-3"
+            className="shrink-0 text-[#0B2545] hover:text-[#1474ed] hover:scale-110 active:scale-95 transition-transform duration-200 focus:outline-none mr-3"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -202,7 +202,7 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
             autoComplete="off"
             spellCheck="false"
             className={`
-              w-full bg-transparent text-[#000200] placeholder-[#8C827A] font-normal tracking-wide
+              w-full bg-transparent text-[#0F172A] placeholder-[#94A3B8] font-normal tracking-wide
               focus:outline-none
               ${currentSize.input}
             `}
@@ -215,7 +215,7 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
             {/* Loading Spinner */}
             {isLoading && (
               <svg
-                className="animate-spin w-4 h-4 text-[#000200]"
+                className="animate-spin w-4 h-4 text-[#1474ed]"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -242,7 +242,7 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
                 type="button"
                 onClick={handleClear}
                 aria-label="Hapus kata kunci pencarian"
-                className="w-5 h-5 flex items-center justify-center text-[#8C827A] hover:text-[#000200] hover:bg-[#F2EFE9] transition-all duration-150 focus:outline-none"
+                className="w-5 h-5 rounded-full flex items-center justify-center text-[#64748B] hover:text-[#0F172A] hover:bg-[#EFF6FF] transition-all duration-150 focus:outline-none"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -257,7 +257,7 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
 
             {/* Shortcut Keyboard Badge (⌘K / Ctrl+K) */}
             {(!query || query.length === 0) && (
-              <span className="hidden sm:inline-flex items-center px-1.5 py-0.5 border border-[#ECE7E1] bg-[#F9F7F4] text-[10px] font-mono text-[#8C827A] tracking-wider select-none">
+              <span className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded border border-[#E2E8F0] bg-[#F8FAFC] text-[10px] font-mono text-[#64748B] tracking-wider select-none">
                 ⌘K
               </span>
             )}
@@ -269,12 +269,12 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
            ======================================================== */}
         {showTrending && trendingKeywords.length > 0 && (
           <div className="flex items-center gap-1.5 flex-wrap pt-0.5 px-0.5">
-            <span className="text-[11px] uppercase tracking-wider font-semibold text-[#8C827A] shrink-0 mr-1 flex items-center gap-1">
+            <span className="text-[11px] uppercase tracking-wider font-semibold text-[#64748B] shrink-0 mr-1 flex items-center gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                className="w-3 h-3 text-[#000200]"
+                className="w-3 h-3 text-[#1474ed]"
               >
                 <path
                   fillRule="evenodd"
@@ -289,7 +289,7 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
                 key={`trending-${index}`}
                 type="button"
                 onClick={() => handleTrendingClick(keyword)}
-                className="text-[11px] text-[#5b4257] bg-white border border-[#ECE7E1] px-2.5 py-1 hover:border-[#000200] hover:text-[#000200] hover:-translate-y-0.5 active:scale-95 transition-all duration-200 tracking-normal"
+                className="text-[11px] text-[#475569] bg-white border border-[#E2E8F0] rounded-lg px-2.5 py-1 hover:border-[#1474ed] hover:text-[#1474ed] hover:bg-[#EFF6FF] hover:-translate-y-0.5 active:scale-95 transition-all duration-200 tracking-normal font-medium"
               >
                 {keyword}
               </button>

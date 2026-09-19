@@ -92,7 +92,7 @@ export default function Navbar({
       {/* ========================================================
           1. TOP ANNOUNCEMENT BAR (Marketplace Promo & Trust Info)
          ======================================================== */}
-      <div className="bg-[#000200] text-white text-[11px] font-medium tracking-[0.16em] uppercase py-2 px-4 text-center border-b border-white/10 flex items-center justify-center gap-3 select-none">
+      <div className="bg-[#0B2545] text-white text-[11px] font-medium tracking-[0.16em] uppercase py-2 px-4 text-center border-b border-white/10 flex items-center justify-center gap-3 select-none">
         <span className="w-1.5 h-1.5 rounded-full bg-[#1474ed] animate-pulse" />
         <span>✓ Bebas Ongkir Seluruh Indonesia • Garansi 100% Original • Pembayaran Aman</span>
         <span className="hidden sm:inline text-white/40">|</span>
@@ -100,13 +100,13 @@ export default function Navbar({
       </div>
 
       {/* ========================================================
-          2. MAIN STICKY NAVBAR CONTAINER (Glassmorphic Luxury)
+          2. MAIN STICKY NAVBAR CONTAINER (Glassmorphic Clean Blue-White)
          ======================================================== */}
       <header
         className={`sticky top-0 z-40 w-full transition-all duration-300 ease-out ${
           isScrolled
-            ? "bg-white/95 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(0,2,0,0.06)] border-b border-[#ECE7E1]"
-            : "bg-white/90 backdrop-blur-sm border-b border-[#ECE7E1]"
+            ? "bg-white/95 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(20,116,237,0.08)] border-b border-[#E2E8F0]"
+            : "bg-white/90 backdrop-blur-sm border-b border-[#E2E8F0]"
         } ${className}`}
       >
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 h-18 sm:h-20 flex items-center justify-between gap-4 sm:gap-6">
@@ -119,7 +119,7 @@ export default function Navbar({
               type="button"
               onClick={() => setMobileMenuOpen(true)}
               aria-label="Buka navigasi menu"
-              className="lg:hidden w-10 h-10 -ml-1.5 flex items-center justify-center text-[#000200] hover:text-[#311744] hover:bg-[#F2EFE9] transition-colors duration-200 focus:outline-none"
+              className="lg:hidden w-10 h-10 -ml-1.5 flex items-center justify-center text-[#0F172A] hover:text-[#1474ed] hover:bg-[#EFF6FF] transition-colors duration-200 focus:outline-none rounded-lg"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -142,16 +142,16 @@ export default function Navbar({
               href="/"
               className="group flex flex-col items-start select-none focus:outline-none"
             >
-              <span className="font-serif text-2xl sm:text-3xl font-bold tracking-[0.22em] uppercase text-[#000200] group-hover:text-[#311744] transition-colors duration-300">
+              <span className="font-bold text-2xl sm:text-3xl tracking-[0.22em] uppercase text-[#0B2545] group-hover:text-[#1474ed] transition-colors duration-300">
                 JOVIQUE
               </span>
-              <span className="text-[8px] uppercase tracking-[0.34em] text-[#1474ed] -mt-0.5 group-hover:text-[#311744] transition-colors duration-300 font-semibold">
+              <span className="text-[8px] uppercase tracking-[0.34em] text-[#1474ed] -mt-0.5 font-bold">
                 Marketplace
               </span>
             </Link>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-7 text-[13px] tracking-widest uppercase font-medium text-[#000200]">
+            <nav className="hidden lg:flex items-center gap-7 text-[13px] tracking-widest uppercase font-medium text-[#0F172A]">
               {/* Menu Dropdown: JELAJAHI PRODUK */}
               <div
                 ref={dropdownRef}
@@ -162,7 +162,7 @@ export default function Navbar({
                 <button
                   type="button"
                   onClick={() => setProductDropdownOpen((prev) => !prev)}
-                  className="group relative flex items-center gap-2 py-2 text-[#000200] hover:text-[#311744] transition-colors duration-200 focus:outline-none cursor-pointer"
+                  className="group relative flex items-center gap-2 py-2 text-[#0F172A] hover:text-[#1474ed] transition-colors duration-200 focus:outline-none cursor-pointer"
                   aria-expanded={productDropdownOpen}
                   aria-haspopup="true"
                 >
@@ -172,7 +172,7 @@ export default function Navbar({
                     viewBox="0 0 20 20"
                     fill="currentColor"
                     className={`w-3.5 h-3.5 transition-transform duration-300 ${
-                      productDropdownOpen ? "rotate-180 text-[#311744]" : "text-[#8C827A] group-hover:text-[#311744]"
+                      productDropdownOpen ? "rotate-180 text-[#1474ed]" : "text-[#64748B] group-hover:text-[#1474ed]"
                     }`}
                   >
                     <path
@@ -182,7 +182,7 @@ export default function Navbar({
                     />
                   </svg>
                   {/* Subtle Underline Hover Animation */}
-                  <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#311744] group-hover:w-full transition-all duration-300 ease-out" />
+                  <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#1474ed] group-hover:w-full transition-all duration-300 ease-out" />
                 </button>
 
                 {/* Dropdown Menu Kategori Produk */}
@@ -193,8 +193,8 @@ export default function Navbar({
                       : "opacity-0 -translate-y-2 pointer-events-none invisible"
                   }`}
                 >
-                  <div className="bg-white rounded-xl border border-[#ECE7E1] shadow-[0_16px_36px_-8px_rgba(0,2,0,0.12)] p-2 space-y-0.5">
-                    <div className="px-3 py-1.5 text-[10px] uppercase font-bold tracking-widest text-[#8C827A] border-b border-[#F2EFE9] mb-1 flex items-center justify-between">
+                  <div className="bg-white rounded-xl border border-[#E2E8F0] shadow-[0_16px_36px_-8px_rgba(20,116,237,0.14)] p-2 space-y-0.5">
+                    <div className="px-3 py-1.5 text-[10px] uppercase font-bold tracking-widest text-[#64748B] border-b border-[#F1F5F9] mb-1 flex items-center justify-between">
                       <span>Pilih Kategori</span>
                       <span className="text-[9px] text-[#1474ed] font-medium lowercase">Lengkap</span>
                     </div>
@@ -203,13 +203,13 @@ export default function Navbar({
                         key={`cat-nav-${idx}`}
                         href={cat.href}
                         onClick={() => setProductDropdownOpen(false)}
-                        className="group/item flex items-center justify-between px-3 py-2 rounded-lg text-xs text-[#000200] hover:bg-[#F9F7F4] hover:text-[#311744] transition-all duration-150"
+                        className="group/item flex items-center justify-between px-3 py-2 rounded-lg text-xs text-[#0F172A] hover:bg-[#EFF6FF] hover:text-[#1474ed] transition-all duration-150"
                       >
                         <span className="font-medium tracking-wide">
                           {cat.name}
                         </span>
                         {cat.badge && (
-                          <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#F2EFE9] text-[#5b4257] group-hover/item:bg-[#311744] group-hover/item:text-white transition-colors duration-150 font-semibold">
+                          <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#EFF6FF] text-[#1D4ED8] group-hover/item:bg-[#1474ed] group-hover/item:text-white transition-colors duration-150 font-semibold">
                             {cat.badge}
                           </span>
                         )}
@@ -291,7 +291,7 @@ export default function Navbar({
             <Link
               href="/wishlist"
               aria-label={`Lihat wishlist (${wishlistCount} produk)`}
-              className="group relative w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center text-[#000200] hover:text-[#311744] hover:bg-[#F9F7F4] border border-transparent hover:border-[#ECE7E1] transition-all duration-300 focus:outline-none"
+              className="group relative w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center text-[#0F172A] hover:text-[#1474ed] hover:bg-[#EFF6FF] border border-transparent hover:border-[#BFDBFE] rounded-lg transition-all duration-300 focus:outline-none"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -310,7 +310,7 @@ export default function Navbar({
 
               {/* Badge Jumlah Wishlist */}
               {wishlistCount > 0 && (
-                <span className="absolute top-1 right-1 sm:top-1.5 sm:right-1.5 min-w-4 h-4 px-1 rounded-full bg-[#311744] text-white text-[10px] font-bold flex items-center justify-center shadow-xs transition-transform duration-300 group-hover:scale-110">
+                <span className="absolute top-1 right-1 sm:top-1.5 sm:right-1.5 min-w-4 h-4 px-1 rounded-full bg-[#1474ed] text-white text-[10px] font-bold flex items-center justify-center shadow-xs transition-transform duration-300 group-hover:scale-110">
                   {wishlistCount}
                 </span>
               )}
@@ -320,7 +320,7 @@ export default function Navbar({
             <Link
               href="/cart"
               aria-label={`Buka keranjang belanja (${cartCount} produk)`}
-              className="group relative w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center text-[#000200] hover:text-[#1474ed] hover:bg-[#F9F7F4] border border-transparent hover:border-[#ECE7E1] transition-all duration-300 focus:outline-none"
+              className="group relative w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center text-[#0F172A] hover:text-[#1474ed] hover:bg-[#EFF6FF] border border-transparent hover:border-[#BFDBFE] rounded-lg transition-all duration-300 focus:outline-none"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -351,7 +351,7 @@ export default function Navbar({
             DROPDOWN SEARCHBAR UNTUK TABLET & MOBILE
            ======================================================== */}
         {mobileSearchOpen && (
-          <div className="lg:hidden border-t border-[#ECE7E1] bg-white p-4 animate-in slide-in-from-top duration-300 shadow-sm">
+          <div className="lg:hidden border-t border-[#E2E8F0] bg-white p-4 animate-in slide-in-from-top duration-300 shadow-sm">
             <SearchBar
               size="md"
               placeholder="Cari produk, kategori, atau toko favorit..."
@@ -370,23 +370,23 @@ export default function Navbar({
           {/* Backdrop Blur */}
           <div
             onClick={() => setMobileMenuOpen(false)}
-            className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity duration-300 animate-in fade-in"
+            className="fixed inset-0 bg-[#0B2545]/40 backdrop-blur-xs transition-opacity duration-300 animate-in fade-in"
           />
 
           {/* Slide-out Menu Panel */}
-          <div className="fixed inset-y-0 left-0 w-[85%] max-w-sm bg-white border-r border-[#ECE7E1] shadow-2xl flex flex-col justify-between animate-in slide-in-from-left duration-300">
+          <div className="fixed inset-y-0 left-0 w-[85%] max-w-sm bg-white border-r border-[#E2E8F0] shadow-2xl flex flex-col justify-between animate-in slide-in-from-left duration-300">
             <div className="p-6 space-y-6 overflow-y-auto">
               {/* Drawer Top Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-[#ECE7E1]">
+              <div className="flex items-center justify-between pb-4 border-b border-[#E2E8F0]">
                 <Link
                   href="/"
                   onClick={() => setMobileMenuOpen(false)}
                   className="flex flex-col select-none focus:outline-none"
                 >
-                  <span className="font-serif text-2xl font-bold tracking-[0.2em] uppercase text-[#000200]">
+                  <span className="font-bold text-2xl tracking-[0.2em] uppercase text-[#0B2545]">
                     JOVIQUE
                   </span>
-                  <span className="text-[8px] uppercase tracking-[0.3em] text-[#1474ed] -mt-0.5 font-semibold">
+                  <span className="text-[8px] uppercase tracking-[0.3em] text-[#1474ed] -mt-0.5 font-bold">
                     Marketplace
                   </span>
                 </Link>
@@ -394,7 +394,7 @@ export default function Navbar({
                   type="button"
                   onClick={() => setMobileMenuOpen(false)}
                   aria-label="Tutup menu"
-                  className="w-9 h-9 flex items-center justify-center text-[#000200] hover:bg-[#F2EFE9] transition-colors duration-150"
+                  className="w-9 h-9 rounded-lg flex items-center justify-center text-[#0F172A] hover:bg-[#EFF6FF] hover:text-[#1474ed] transition-colors duration-150"
                 >
                   ✕
                 </button>
@@ -412,8 +412,8 @@ export default function Navbar({
 
               {/* Mobile Navigation Links */}
               <div className="space-y-4 pt-2">
-                <div className="flex items-center justify-between pb-2 border-b border-[#ECE7E1]">
-                  <p className="text-xs uppercase tracking-[0.2em] text-[#000200] font-bold">
+                <div className="flex items-center justify-between pb-2 border-b border-[#E2E8F0]">
+                  <p className="text-xs uppercase tracking-[0.2em] text-[#0B2545] font-bold">
                     Jelajahi Produk
                   </p>
                   <span className="text-[10px] text-[#1474ed] font-medium">Pilih Kategori</span>
@@ -426,11 +426,11 @@ export default function Navbar({
                       key={`mob-cat-${i}`}
                       href={cat.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center justify-between py-2.5 px-2 rounded-lg text-sm text-[#5b4257] hover:bg-[#F9F7F4] hover:text-[#000200] transition-colors"
+                      className="flex items-center justify-between py-2.5 px-3 rounded-lg text-sm text-[#475569] hover:bg-[#EFF6FF] hover:text-[#1474ed] transition-colors"
                     >
                       <span className="font-medium">{cat.name}</span>
                       {cat.badge && (
-                        <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#F2EFE9] text-[#000200] font-semibold">
+                        <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#EFF6FF] text-[#1D4ED8] font-semibold">
                           {cat.badge}
                         </span>
                       )}
@@ -441,7 +441,7 @@ export default function Navbar({
             </div>
 
             {/* Drawer Bottom (Auth & Info) */}
-            <div className="p-6 bg-[#FAF9F6] border-t border-[#ECE7E1] space-y-3">
+            <div className="p-6 bg-[#F8FAFC] border-t border-[#E2E8F0] space-y-3">
               <Link
                 href="/auth/login"
                 onClick={() => setMobileMenuOpen(false)}
@@ -452,7 +452,7 @@ export default function Navbar({
                 </Button>
               </Link>
 
-              <div className="flex items-center justify-between pt-2 text-[11px] text-[#8C827A]">
+              <div className="flex items-center justify-between pt-2 text-[11px] text-[#64748B]">
                 <span>Bantuan & Layanan</span>
                 <span>IDR (Rp)</span>
               </div>

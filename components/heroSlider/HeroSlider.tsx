@@ -197,9 +197,9 @@ export default function HeroSlider({
               </div>
             </div>
 
-            {/* Gradient Overlay Mewah: Dark Vignette & High Contrast */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#060408] via-[#060408]/40 to-black/20 pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#060408]/80 via-[#060408]/30 to-transparent pointer-events-none" />
+            {/* Gradient Overlay Mewah: Tech Navy Vignette & High Contrast */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#07172C] via-[#07172C]/40 to-black/20 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#07172C]/85 via-[#07172C]/40 to-transparent pointer-events-none" />
           </div>
         );
       })}
@@ -210,13 +210,13 @@ export default function HeroSlider({
       <div className="relative z-20 h-full max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-16 flex flex-col justify-end pb-16 sm:pb-20 lg:pb-24">
         <div className="max-w-2xl space-y-4 sm:space-y-6">
           {/* Title */}
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif text-white tracking-tight leading-[1.15] drop-shadow-md">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.15] drop-shadow-md">
             {activeBanner.title || "Pusat Belanja Online Terlengkap & Terpercaya"}
           </h1>
 
           {/* Subtitle */}
           {activeBanner.subtitle && (
-            <p className="text-xs sm:text-base text-[#D4CDD8] max-w-xl leading-relaxed drop-shadow-sm font-light">
+            <p className="text-xs sm:text-base text-[#E2E8F0] max-w-xl leading-relaxed drop-shadow-sm font-normal">
               {activeBanner.subtitle}
             </p>
           )}
@@ -224,7 +224,7 @@ export default function HeroSlider({
           {/* CTA Buttons */}
           <div className="pt-2 sm:pt-4 flex flex-wrap items-center gap-3 sm:gap-4">
             <Link href={ctaHref}>
-              <Button variant="primary" size="lg" className="shadow-lg hover:shadow-[0_0_25px_rgba(20,116,237,0.35)]">
+              <Button variant="primary" size="lg" className="shadow-lg hover:shadow-[0_0_25px_rgba(20,116,237,0.45)]">
                 {ctaText} →
               </Button>
             </Link>
@@ -234,7 +234,7 @@ export default function HeroSlider({
                 <Button
                   variant="outline"
                   size="lg"
-                  className="!bg-white !text-[#08080A] border-2 border-white hover:!bg-[#08080A] hover:!text-white hover:border-[#08080A] transition-all duration-300 shadow-md font-semibold tracking-wide"
+                  className="!bg-white !text-[#0B2545] border-2 border-white hover:!bg-[#EFF6FF] hover:!text-[#1474ed] transition-all duration-300 shadow-md font-semibold tracking-wide"
                 >
                   {secondaryCtaText}
                 </Button>
@@ -254,7 +254,7 @@ export default function HeroSlider({
             type="button"
             onClick={handlePrev}
             aria-label="Slide sebelumnya"
-            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/30 hover:bg-black/70 backdrop-blur-md border border-white/20 hover:border-white/50 text-white flex items-center justify-center transition-all duration-300 shadow-md hover:scale-105 focus:outline-none"
+            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/30 hover:bg-[#1474ed]/80 backdrop-blur-md border border-white/20 hover:border-[#1474ed] text-white flex items-center justify-center transition-all duration-300 shadow-md hover:scale-105 focus:outline-none"
           >
             <svg className="w-5 h-5 -translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -266,7 +266,7 @@ export default function HeroSlider({
             type="button"
             onClick={handleNext}
             aria-label="Slide berikutnya"
-            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/30 hover:bg-black/70 backdrop-blur-md border border-white/20 hover:border-white/50 text-white flex items-center justify-center transition-all duration-300 shadow-md hover:scale-105 focus:outline-none"
+            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/30 hover:bg-[#1474ed]/80 backdrop-blur-md border border-white/20 hover:border-[#1474ed] text-white flex items-center justify-center transition-all duration-300 shadow-md hover:scale-105 focus:outline-none"
           >
             <svg className="w-5 h-5 translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
@@ -290,8 +290,8 @@ export default function HeroSlider({
                 aria-label={`Buka slide ${dotIndex + 1}`}
                 className={`h-1.5 rounded-full transition-all duration-500 focus:outline-none ${
                   isCurrent
-                    ? "w-8 bg-white shadow-[0_0_10px_rgba(255,255,255,0.7)]"
-                    : "w-2 bg-white/30 hover:bg-white/60"
+                    ? "w-8 bg-[#1474ed] shadow-[0_0_12px_rgba(20,116,237,0.8)]"
+                    : "w-2 bg-white/40 hover:bg-white/70"
                 }`}
               />
             );
