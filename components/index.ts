@@ -30,3 +30,8 @@ export { default as HomeFaq } from "./homeFaq/HomeFaq";
 export { default as ScrollReveal } from "./common/ScrollReveal";
 export type { ScrollRevealProps } from "./common/ScrollReveal";
 
+export { default as AuthCard } from "./auth/AuthCard";
+export type { AuthCardProps } from "./auth/AuthCard";
+
+export { default as ProfileClient } from "./profile/ProfileClient";
+

@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SearchBar, Button } from "@/components";
+import { createClient } from "@/utils/supabase/client";
+import type { User, AuthChangeEvent, Session } from "@supabase/supabase-js";
 
 export interface NavbarProps {
   wishlistCount?: number;
@@ -42,6 +44,42 @@ export default function Navbar({
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
+  // Supabase User Auth State
+  const [user, setUser] = useState<User | null>(null);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const userDropdownRef = useRef<HTMLDivElement | null>(null);
+
+  // Monitor Supabase Auth State
+  useEffect(() => {
+    const supabase = createClient();
+
+    supabase.auth.getUser().then(({ data }: { data: { user: User | null } }) => {
+      setUser(data?.user ?? null);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(
+      (_event: AuthChangeEvent, session: Session | null) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const handleSignOut = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    setUser(null);
+    setUserDropdownOpen(false);
+    setMobileMenuOpen(false);
+    router.push("/");
+    router.refresh();
+  };
+
   const handleSearchSubmit = (query: string) => {
     if (onSearchSubmit) {
       onSearchSubmit(query);
@@ -69,6 +107,12 @@ export default function Navbar({
         !dropdownRef.current.contains(e.target as Node)
       ) {
         setProductDropdownOpen(false);
+      }
+      if (
+        userDropdownRef.current &&
+        !userDropdownRef.current.contains(e.target as Node)
+      ) {
+        setUserDropdownOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -258,33 +302,214 @@ export default function Navbar({
               </svg>
             </button>
 
-            {/* Login / Register Button (Desktop) */}
+            {/* Login / Register / User Profile (Desktop) */}
             <div className="hidden sm:flex items-center">
-              <Link href="/auth/login">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  leftIcon={
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.75"
-                      stroke="currentColor"
-                      className="w-4 h-4"
+              {user ? (
+                <div className="relative" ref={userDropdownRef}>
+                  <div className="flex items-center rounded-xl border border-[#E2E8F0] hover:border-[#1474ED] bg-white hover:bg-[#F8FAFC] transition-all p-1 shadow-2xs group">
+                    <Link
+                      href="/profile"
+                      className="flex items-center gap-2 pl-1 pr-2 py-0.5"
+                      title="Buka Halaman Profil"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-                      />
-                    </svg>
-                  }
-                  className="font-normal uppercase tracking-wider text-[11px]"
-                >
-                  Masuk / Daftar
-                </Button>
-              </Link>
+                      {user.user_metadata?.avatar_url || user.user_metadata?.picture ? (
+                        <img
+                          src={user.user_metadata.avatar_url || user.user_metadata.picture}
+                          alt="Foto Profil"
+                          className="w-7 h-7 rounded-lg object-cover ring-1 ring-[#1474ED]/30 group-hover:ring-[#1474ED]"
+                          referrerPolicy="no-referrer"
+                        />
+                      ) : (
+                        <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-[#1474ED] to-[#00F5FF] text-white flex items-center justify-center font-bold text-xs uppercase shadow-xs">
+                          {user.user_metadata?.full_name
+                            ? user.user_metadata.full_name[0]
+                            : user.email
+                            ? user.email[0]
+                            : "U"}
+                        </div>
+                      )}
+                      <div className="flex flex-col">
+                        <span className="text-xs font-semibold text-[#0F172A] group-hover:text-[#1474ED] transition-colors max-w-[110px] truncate">
+                          {user.user_metadata?.full_name?.split(" ")[0] ||
+                            user.email?.split("@")[0] ||
+                            "Profil Saya"}
+                        </span>
+                        <span className="text-[10px] text-[#64748B]">Lihat Profil</span>
+                      </div>
+                    </Link>
+
+                    {/* Quick Dropdown Trigger Chevron */}
+                    <button
+                      type="button"
+                      onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+                      aria-label="Menu akun"
+                      className="p-1.5 text-[#64748B] hover:text-[#1474ED] rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
+                    >
+                      <svg
+                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                          userDropdownOpen ? "rotate-180 text-[#1474ED]" : ""
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+
+                  {/* Dropdown Menu Pengguna */}
+                  {userDropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-56 rounded-2xl bg-white border border-[#E2E8F0] shadow-xl p-2 z-50 animate-fade-in">
+                      <div className="px-3 py-2 border-b border-[#F1F5F9]">
+                        <p className="text-xs font-bold text-[#0F172A] truncate">
+                          {user.user_metadata?.full_name || "Member Jovique"}
+                        </p>
+                        <p className="text-[11px] text-[#64748B] truncate mt-0.5">
+                          {user.email}
+                        </p>
+                      </div>
+
+                      <div className="py-1 space-y-0.5">
+                        <Link
+                          href="/profile"
+                          onClick={() => setUserDropdownOpen(false)}
+                          className="flex items-center gap-2.5 px-3 py-2 text-xs text-[#0F172A] hover:text-[#1474ED] hover:bg-[#F8FAFC] rounded-xl transition-colors font-medium"
+                        >
+                          <svg
+                            className="w-4 h-4 text-[#1474ED]"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                            />
+                          </svg>
+                          <span>Halaman Profil</span>
+                        </Link>
+                        <Link
+                          href="/profile?tab=cart"
+                          onClick={() => setUserDropdownOpen(false)}
+                          className="flex items-center gap-2.5 px-3 py-2 text-xs text-[#0F172A] hover:text-[#1474ED] hover:bg-[#F8FAFC] rounded-xl transition-colors"
+                        >
+                          <svg
+                            className="w-4 h-4 text-[#64748B]"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                            />
+                          </svg>
+                          <span>Keranjang Belanja</span>
+                        </Link>
+                        <Link
+                          href="/profile?tab=wishlist"
+                          onClick={() => setUserDropdownOpen(false)}
+                          className="flex items-center gap-2.5 px-3 py-2 text-xs text-[#0F172A] hover:text-[#1474ED] hover:bg-[#F8FAFC] rounded-xl transition-colors"
+                        >
+                          <svg
+                            className="w-4 h-4 text-[#64748B]"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                            />
+                          </svg>
+                          <span>Wishlist Saya</span>
+                        </Link>
+                        <Link
+                          href="/profile?tab=orders"
+                          onClick={() => setUserDropdownOpen(false)}
+                          className="flex items-center gap-2.5 px-3 py-2 text-xs text-[#0F172A] hover:text-[#1474ED] hover:bg-[#F8FAFC] rounded-xl transition-colors"
+                        >
+                          <svg
+                            className="w-4 h-4 text-[#64748B]"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                            />
+                          </svg>
+                          <span>Produk yang Dibeli</span>
+                        </Link>
+                      </div>
+
+                      <div className="pt-1 border-t border-[#F1F5F9]">
+                        <button
+                          type="button"
+                          onClick={handleSignOut}
+                          className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-xl transition-colors text-left cursor-pointer"
+                        >
+                          <svg
+                            className="w-4 h-4 text-rose-600"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                            />
+                          </svg>
+                          <span>Keluar (Logout)</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link href="/auth/login">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    leftIcon={
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.75"
+                        stroke="currentColor"
+                        className="w-4 h-4"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                        />
+                      </svg>
+                    }
+                    className="font-normal uppercase tracking-wider text-[11px]"
+                  >
+                    Masuk / Daftar
+                  </Button>
+                </Link>
+              )}
             </div>
 
             {/* WISHLIST BUTTON (Gambar Hati) */}
@@ -442,15 +667,72 @@ export default function Navbar({
 
             {/* Drawer Bottom (Auth & Info) */}
             <div className="p-6 bg-[#F8FAFC] border-t border-[#E2E8F0] space-y-3">
-              <Link
-                href="/auth/login"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block w-full"
-              >
-                <Button variant="primary" size="md" fullWidth>
-                  Masuk / Daftar Akun
-                </Button>
-              </Link>
+              {user ? (
+                <div className="space-y-3">
+                  <Link
+                    href="/profile"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-3 p-3 rounded-2xl bg-white border border-[#E2E8F0] hover:border-[#1474ED] transition-all group shadow-2xs"
+                  >
+                    {user.user_metadata?.avatar_url || user.user_metadata?.picture ? (
+                      <img
+                        src={user.user_metadata.avatar_url || user.user_metadata.picture}
+                        alt="Foto Profil"
+                        className="w-10 h-10 rounded-xl object-cover ring-1 ring-[#1474ED]/30 group-hover:ring-[#1474ED]"
+                        referrerPolicy="no-referrer"
+                      />
+                    ) : (
+                      <div className="w-10 h-10 rounded-xl bg-[#1474ED] text-white flex items-center justify-center font-bold text-sm uppercase shadow-xs">
+                        {user.user_metadata?.full_name
+                          ? user.user_metadata.full_name[0]
+                          : user.email
+                          ? user.email[0]
+                          : "U"}
+                      </div>
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-bold text-[#0F172A] group-hover:text-[#1474ED] transition-colors truncate">
+                        {user.user_metadata?.full_name || "Member Jovique"}
+                      </p>
+                      <p className="text-[11px] text-[#1474ED] font-medium flex items-center gap-1 mt-0.5">
+                        <span>Buka Halaman Profil</span>
+                        <span>→</span>
+                      </p>
+                    </div>
+                  </Link>
+
+                  <button
+                    type="button"
+                    onClick={handleSignOut}
+                    className="w-full h-11 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 font-semibold text-xs flex items-center justify-center gap-2 hover:bg-rose-100 transition-colors cursor-pointer"
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                      />
+                    </svg>
+                    <span>Keluar dari Akun</span>
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  href="/auth/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block w-full"
+                >
+                  <Button variant="primary" size="md" fullWidth>
+                    Masuk / Daftar Akun
+                  </Button>
+                </Link>
+              )}
 
               <div className="flex items-center justify-between pt-2 text-[11px] text-[#64748B]">
                 <span>Bantuan & Layanan</span>
