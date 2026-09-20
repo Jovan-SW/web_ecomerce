@@ -14,9 +14,9 @@ export interface NavbarProps {
   onSearchSubmit?: (query: string) => void;
 }
 
-// Kategori Produk di Marketplace Jovique
+// Kategori Koleksi di Jovique Official Store
 const PRODUCT_CATEGORIES = [
-  { name: "Semua Produk", href: "/products", badge: "Lengkap" },
+  { name: "Semua Koleksi", href: "/products", badge: "Koleksi" },
   { name: "T-Shirts & Polos", href: "/products?category=t-shirts-polos", badge: "Populer" },
   { name: "Shirts & Flannels", href: "/products?category=shirts-flannels", badge: null },
   { name: "Jackets & Outerwear", href: "/products?category=jackets-outerwear", badge: "Trending" },
@@ -26,10 +26,10 @@ const PRODUCT_CATEGORIES = [
 ];
 
 /**
- * Navbar: Komponen navigasi utama platform e-commerce & marketplace Jovique.
- * - Terintegrasi dengan SearchBar produk/brand, Wishlist, Keranjang Belanja, dan Login/Register.
+ * Navbar: Komponen navigasi utama platform Jovique Official Store.
+ * - Terintegrasi dengan SearchBar busana/koleksi, Wishlist, Keranjang Belanja, dan Login/Register.
  * - Desain clean, glassmorphic blur, aksen Deep Plum & Electric Blue.
- * - Responsif untuk Desktop, Tablet, dan Mobile dengan Slide-in Drawer marketplace.
+ * - Responsif untuk Desktop, Tablet, dan Mobile dengan Slide-in Drawer navigasi.
  */
 export default function Navbar({
   wishlistCount = 3,
@@ -134,13 +134,13 @@ export default function Navbar({
   return (
     <>
       {/* ========================================================
-          1. TOP ANNOUNCEMENT BAR (Marketplace Promo & Trust Info)
+          1. TOP ANNOUNCEMENT BAR (Jovique Brand Info)
          ======================================================== */}
       <div className="bg-[#0B2545] text-white text-[11px] font-medium tracking-[0.16em] uppercase py-2 px-4 text-center border-b border-white/10 flex items-center justify-center gap-3 select-none">
         <span className="w-1.5 h-1.5 rounded-full bg-[#1474ed] animate-pulse" />
-        <span>✓ Bebas Ongkir Seluruh Indonesia • Garansi 100% Original • Pembayaran Aman</span>
+        <span>✓ Bebas Ongkir Seluruh Indonesia • 100% Orisinal Jovique • Transaksi Aman</span>
         <span className="hidden sm:inline text-white/40">|</span>
-        <span className="hidden sm:inline text-white/80">Pilihan Terlengkap & Terpercaya</span>
+        <span className="hidden sm:inline text-white/80">Official Online Store</span>
       </div>
 
       {/* ========================================================
@@ -181,7 +181,7 @@ export default function Navbar({
               </svg>
             </button>
 
-            {/* BRAND LOGO: JOVIQUE MARKETPLACE */}
+            {/* BRAND LOGO: JOVIQUE OFFICIAL */}
             <Link
               href="/"
               className="group flex flex-col items-start select-none focus:outline-none"
@@ -190,13 +190,13 @@ export default function Navbar({
                 JOVIQUE
               </span>
               <span className="text-[8px] uppercase tracking-[0.34em] text-[#1474ed] -mt-0.5 font-bold">
-                Marketplace
+                Official Store
               </span>
             </Link>
 
             {/* Desktop Navigation Links */}
             <nav className="hidden lg:flex items-center gap-7 text-[13px] tracking-widest uppercase font-medium text-[#0F172A]">
-              {/* Menu Dropdown: JELAJAHI PRODUK */}
+              {/* Menu Dropdown: KOLEKSI PRODUK */}
               <div
                 ref={dropdownRef}
                 className="relative"
@@ -210,7 +210,7 @@ export default function Navbar({
                   aria-expanded={productDropdownOpen}
                   aria-haspopup="true"
                 >
-                  <span className="font-semibold tracking-wider">Jelajahi Produk</span>
+                  <span className="font-semibold tracking-wider">Koleksi Produk</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
@@ -239,7 +239,7 @@ export default function Navbar({
                 >
                   <div className="bg-white rounded-xl border border-[#E2E8F0] shadow-[0_16px_36px_-8px_rgba(20,116,237,0.14)] p-2 space-y-0.5">
                     <div className="px-3 py-1.5 text-[10px] uppercase font-bold tracking-widest text-[#64748B] border-b border-[#F1F5F9] mb-1 flex items-center justify-between">
-                      <span>Pilih Kategori</span>
+                      <span>Kategori Koleksi</span>
                       <span className="text-[9px] text-[#1474ed] font-medium lowercase">Lengkap</span>
                     </div>
                     {PRODUCT_CATEGORIES.map((cat, idx) => (
@@ -272,7 +272,7 @@ export default function Navbar({
             <SearchBar
               size="sm"
               showTrending={false}
-              placeholder="Cari produk, kategori, atau toko favorit..."
+              placeholder="Cari koleksi busana & aksesori Jovique..."
               onSearch={handleSearchSubmit}
               className="w-full"
             />
@@ -579,7 +579,7 @@ export default function Navbar({
           <div className="lg:hidden border-t border-[#E2E8F0] bg-white p-4 animate-in slide-in-from-top duration-300 shadow-sm">
             <SearchBar
               size="md"
-              placeholder="Cari produk, kategori, atau toko favorit..."
+              placeholder="Cari koleksi busana & aksesori Jovique..."
               onSearch={handleSearchSubmit}
               autoFocus
             />
@@ -612,7 +612,7 @@ export default function Navbar({
                     JOVIQUE
                   </span>
                   <span className="text-[8px] uppercase tracking-[0.3em] text-[#1474ed] -mt-0.5 font-bold">
-                    Marketplace
+                    Official Store
                   </span>
                 </Link>
                 <button
@@ -630,7 +630,7 @@ export default function Navbar({
                 <SearchBar
                   size="sm"
                   showTrending={false}
-                  placeholder="Cari produk, kategori, toko..."
+                  placeholder="Cari koleksi busana Jovique..."
                   onSearch={handleSearchSubmit}
                 />
               </div>
@@ -639,9 +639,9 @@ export default function Navbar({
               <div className="space-y-4 pt-2">
                 <div className="flex items-center justify-between pb-2 border-b border-[#E2E8F0]">
                   <p className="text-xs uppercase tracking-[0.2em] text-[#0B2545] font-bold">
-                    Jelajahi Produk
+                    Koleksi Jovique
                   </p>
-                  <span className="text-[10px] text-[#1474ed] font-medium">Pilih Kategori</span>
+                  <span className="text-[10px] text-[#1474ed] font-medium">Kategori Koleksi</span>
                 </div>
 
                 {/* Submenu Kategori Produk */}

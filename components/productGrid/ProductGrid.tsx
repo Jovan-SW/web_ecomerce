@@ -20,7 +20,7 @@ export interface ProductGridProps {
 }
 
 /**
- * ProductGrid: Komponen tata letak katalog produk e-commerce & marketplace.
+ * ProductGrid: Komponen tata letak katalog koleksi Jovique Official Store.
  * - Mobile (<768px): 2 kolom (grid-cols-2)
  * - Tablet (768px - 1023px): 3 kolom (md:grid-cols-3)
  * - Desktop (>=1024px): 5 kolom (lg:grid-cols-5)
@@ -29,8 +29,8 @@ export default function ProductGrid({
   products,
   isLoading = false,
   loadingCount = 10,
-  emptyTitle = "Produk Belum Tersedia",
-  emptyMessage = "Saat ini belum ada produk yang ditemukan. Silakan periksa kembali nanti atau gunakan kolom pencarian.",
+  emptyTitle = "Koleksi Belum Tersedia",
+  emptyMessage = "Saat ini belum ada koleksi yang ditemukan. Silakan periksa kembali nanti atau gunakan kolom pencarian.",
   onWishlistToggle,
   className = "",
   staggerReveal = false,
@@ -40,7 +40,7 @@ export default function ProductGrid({
     return (
       <div
         className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-5 lg:gap-6 ${className}`}
-        aria-label="Memuat katalog produk"
+        aria-label="Memuat koleksi produk Jovique"
       >
         {Array.from({ length: loadingCount }).map((_, index) => (
           <ProductCardSkeleton key={`product-skeleton-${index}`} />

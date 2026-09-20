@@ -240,13 +240,13 @@ export default function AuthCard({ initialMode = "login" }: AuthCardProps) {
               </span>
               <h2 className="text-2xl xl:text-3xl font-bold tracking-tight text-white leading-snug">
                 {mode === "login"
-                  ? "Akses Ribuan Koleksi Produk Pilihan Terbaik."
-                  : "Nikmati Keuntungan Belanja Eksklusif di Jovique."}
+                  ? "Akses Koleksi Busana & Privilese Eksklusif Jovique."
+                  : "Bergabung dengan Jovique Circle & Nikmati Keistimewaan Eksklusif."}
               </h2>
               <p className="text-sm text-slate-300 leading-relaxed">
                 {mode === "login"
-                  ? "Masuk untuk melanjutkan pesanan, melacak pengiriman, dan mengakses penawaran promo spesial member."
-                  : "Daftar sekarang untuk mendapatkan voucher promo perdana, bebas ongkir, dan jaminan produk 100% original."}
+                  ? "Masuk untuk melihat pesanan Anda, menyimpan wishlist favorit, dan menikmati layanan personal Jovique."
+                  : "Daftar sekarang untuk mendapatkan voucher selamat datang, akses peluncuran koleksi perdana, dan bebas ongkir ke seluruh Indonesia."}
               </p>
             </div>
           </div>
@@ -272,7 +272,7 @@ export default function AuthCard({ initialMode = "login" }: AuthCardProps) {
               <div className="text-xs">
                 <p className="font-semibold text-white">100% Produk Original</p>
                 <p className="text-slate-300 text-[11px]">
-                  Semua brand resmi terverifikasi & bergaransi.
+                  Koleksi autentik langsung dari rumah mode Jovique.
                 </p>
               </div>
             </div>
@@ -304,7 +304,7 @@ export default function AuthCard({ initialMode = "login" }: AuthCardProps) {
 
           {/* Bottom Social Proof */}
           <div className="relative z-10 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-300">
-            <span>Dipercaya 50.000+ Pengguna</span>
+            <span>Dipercaya 50.000+ Pelanggan Setia</span>
             <div className="flex items-center gap-1 text-amber-400 font-semibold">
               <span>★ 4.9</span>
               <span className="text-slate-400 font-normal">/ 5.0</span>
@@ -362,7 +362,7 @@ export default function AuthCard({ initialMode = "login" }: AuthCardProps) {
             <p className="text-sm text-[#64748B] mt-1">
               {mode === "login"
                 ? "Masukkan email dan kata sandi yang sudah terdaftar."
-                : "Lengkapi formulir di bawah ini untuk memulai belanja."}
+                : "Lengkapi formulir di bawah ini untuk memulai pengalaman bersama Jovique."}
             </p>
           </div>
 

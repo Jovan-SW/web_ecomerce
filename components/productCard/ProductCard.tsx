@@ -229,7 +229,7 @@ export default function ProductCard({
               <span className="text-xs font-semibold text-[#0F172A]">
                 {product.rating ? Number(product.rating).toFixed(1) : "5.0"}
               </span>
-              {product.reviews_count > 0 && (
+              {(product.reviews_count ?? 0) > 0 && (
                 <span className="text-[11px] text-[#64748B]">
                   ({product.reviews_count})
                 </span>
@@ -244,7 +244,7 @@ export default function ProductCard({
                 </span>
               ) : isLowStock ? (
                 <span className="text-[11px] font-medium text-amber-700 uppercase tracking-wider">
-                  Sisa {totalStock} pcs
+                  Tersisa {totalStock} item
                 </span>
               ) : totalStock !== null ? (
                 <span className="text-[11px] text-[#64748B] font-medium tracking-wide">
@@ -307,7 +307,7 @@ export default function ProductCard({
             </span>
             {hasDiscount && (
               <span className="text-xs text-[#94A3B8] line-through">
-                {formatPrice(product.compare_at_price)}
+                {formatPrice(product.compare_at_price!)}
               </span>
             )}
           </div>

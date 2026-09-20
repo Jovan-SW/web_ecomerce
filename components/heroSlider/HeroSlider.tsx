@@ -17,31 +17,37 @@ export interface HeroSliderProps {
   secondaryCtaHref?: string;
 }
 
-// Fallback banner promo kampanye marketplace jika database Supabase belum terisi data banner
+// Fallback banner promo kampanye Jovique jika database Supabase belum terisi data banner
 const FALLBACK_BANNERS: Banner[] = [
   {
     id: "fallback-1",
-    title: "Pesta Promo Belanja & Bebas Ongkir Se-Indonesia",
-    subtitle: "Temukan jutaan produk dari berbagai brand resmi dan seller terpercaya. Diskon hingga 70% dan cashback spesial setiap hari!",
+    title: "Koleksi Eksklusif Jovique — Elegansi Tanpa Batas",
+    subtitle: "Hadirkan pesona gaya modern dengan siluet anggun, material premium, dan kenyamanan sempurna yang dirancang khusus untuk Anda.",
     image_url: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop",
     sort_order: 1,
     is_active: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   },
   {
     id: "fallback-2",
-    title: "Jovique Official Store — Jaminan 100% Original",
-    subtitle: "Belanja produk original langsung dari toko resmi dengan garansi uang kembali dan pengiriman cepat ke seluruh kota.",
+    title: "Kemewahan Berbusana Bersama Jovique Official",
+    subtitle: "Didesain dengan standar craftsmanship tinggi. Nikmati koleksi busana istimewa langsung dari rumah mode Jovique.",
     image_url: "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop",
     sort_order: 2,
     is_active: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   },
   {
     id: "fallback-3",
-    title: "Pusat Fashion, Gaya Hidup & Kebutuhan Harian",
-    subtitle: "Pilihan terlengkap dari ribuan toko terverifikasi dengan ulasan asli pembeli dan sistem transaksi teraman.",
+    title: "Koleksi Musim Ini — Ekspresikan Keunikan Gayamu",
+    subtitle: "Eksplorasi perpaduan estetika kontemporer dan kenyamanan harian. Temukan signature look terbaik Anda di Jovique.",
     image_url: "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=2071&auto=format&fit=crop",
     sort_order: 3,
     is_active: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   },
 ];
 
@@ -49,9 +55,9 @@ export default function HeroSlider({
   initialBanners,
   autoPlayInterval = 5500,
   className = "",
-  ctaText = "Mulai Belanja",
+  ctaText = "Jelajahi Koleksi",
   ctaHref = "/products",
-  secondaryCtaText = "Lihat Promo Hari Ini",
+  secondaryCtaText = "Lihat Koleksi Baru",
   secondaryCtaHref = "/products",
 }: HeroSliderProps) {
   const [fetchedBanners, setFetchedBanners] = useState<Banner[]>([]);
@@ -163,7 +169,7 @@ export default function HeroSlider({
       onKeyDown={handleKeyDown}
       tabIndex={0}
       aria-roledescription="carousel"
-      aria-label="Hero Banner Promo Jovique Marketplace"
+      aria-label="Hero Banner Koleksi Jovique Official"
     >
       {/* =========================================================================
           SLIDE IMAGES & SMOOTH TRANSITION OVERLAYS
@@ -211,7 +217,7 @@ export default function HeroSlider({
         <div className="max-w-2xl space-y-4 sm:space-y-6">
           {/* Title */}
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.15] drop-shadow-md">
-            {activeBanner.title || "Pusat Belanja Online Terlengkap & Terpercaya"}
+            {activeBanner.title || "Koleksi Busana Eksklusif & Elegan Jovique"}
           </h1>
 
           {/* Subtitle */}

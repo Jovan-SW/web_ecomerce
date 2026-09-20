@@ -285,7 +285,7 @@ export default function ProfileClient() {
           >
             <p className="text-[11px] text-[#64748B] font-medium">Keranjang Belanja</p>
             <p className="text-lg font-bold text-[#0F172A] group-hover:text-[#1474ED] transition-colors mt-0.5">
-              {cartProducts.length} Produk
+              {cartProducts.length} Item
             </p>
           </div>
 
@@ -295,7 +295,7 @@ export default function ProfileClient() {
           >
             <p className="text-[11px] text-[#64748B] font-medium">Wishlist Saya</p>
             <p className="text-lg font-bold text-[#0F172A] group-hover:text-[#1474ED] transition-colors mt-0.5">
-              {wishlistProducts.length} Disimpan
+              {wishlistProducts.length} Koleksi
             </p>
           </div>
 
@@ -303,9 +303,9 @@ export default function ProfileClient() {
             onClick={() => setActiveTab("orders")}
             className="p-3.5 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#1474ED] transition-colors cursor-pointer group"
           >
-            <p className="text-[11px] text-[#64748B] font-medium">Produk Dibeli</p>
+            <p className="text-[11px] text-[#64748B] font-medium">Pesanan Selesai</p>
             <p className="text-lg font-bold text-[#0F172A] group-hover:text-[#1474ED] transition-colors mt-0.5">
-              {orderProducts.length} Transaksi
+              {orderProducts.length} Pesanan
             </p>
           </div>
 
@@ -383,7 +383,7 @@ export default function ProfileClient() {
               : "border-transparent text-[#64748B] hover:text-[#0F172A]"
           }`}
         >
-          <span>Produk yang Sudah Dibeli</span>
+          <span>Riwayat Pesanan</span>
           <span
             className={`px-2 py-0.5 rounded-full text-[10px] ${
               activeTab === "orders"
@@ -467,13 +467,13 @@ export default function ProfileClient() {
               <span className="px-2.5 py-0.5 rounded-full bg-white/20 text-[10px] uppercase font-bold tracking-wider">
                 Bantuan 24/7
               </span>
-              <h3 className="text-base font-bold">Punya Kendala Belanja?</h3>
+              <h3 className="text-base font-bold">Butuh Bantuan Pesanan?</h3>
               <p className="text-xs text-slate-200 leading-relaxed">
-                Tim Support Jovique siap membantu status pesanan, pembayaran, hingga retur barang dengan respon cepat.
+                Tim Jovique siap membantu informasi pesanan, pengiriman, hingga panduan perawatan produk Anda.
               </p>
               <Link href="/products" className="inline-block pt-2">
                 <Button variant="secondary" size="sm">
-                  Mulai Belanja Lagi
+                  Eksplorasi Koleksi
                 </Button>
               </Link>
             </div>
@@ -503,11 +503,11 @@ export default function ProfileClient() {
               </div>
               <h3 className="text-lg font-bold text-[#0F172A]">Keranjang Belanja Masih Kosong</h3>
               <p className="text-xs sm:text-sm text-[#64748B] max-w-sm mx-auto">
-                Yuk jelajahi ribuan produk fashion & lifestyle menarik dan tambahkan ke keranjangmu!
+                Yuk jelajahi koleksi busana eksklusif Jovique dan temukan gaya favoritmu!
               </p>
               <Link href="/products">
                 <Button variant="primary" size="md">
-                  Jelajahi Produk Sekarang
+                  Jelajahi Koleksi Jovique
                 </Button>
               </Link>
             </div>
@@ -544,7 +544,7 @@ export default function ProfileClient() {
                       {/* Detail Produk */}
                       <div className="flex-1 min-w-0 space-y-1">
                         <span className="text-[10px] font-bold uppercase tracking-wider text-[#1474ED]">
-                          {product.category?.name || "Koleksi Resmi"}
+                          {product.category?.name || "Koleksi Jovique"}
                         </span>
                         <Link
                           href={`/products/${product.slug}`}
@@ -630,7 +630,7 @@ export default function ProfileClient() {
                 </Button>
 
                 <p className="text-[11px] text-center text-[#94A3B8]">
-                  🔒 Transaksi Aman & Terverifikasi dengan Garansi Jovique
+                  🔒 Transaksi Aman & Terenkripsi Langsung oleh Jovique
                 </p>
               </div>
             </div>
@@ -643,10 +643,10 @@ export default function ProfileClient() {
         <div className="animate-fade-in space-y-6">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-bold text-[#0F172A]">
-              Produk Favorit Tersimpan ({wishlistProducts.length})
+              Koleksi Favorit Tersimpan ({wishlistProducts.length})
             </h2>
             <Link href="/products" className="text-xs font-semibold text-[#1474ED] hover:underline">
-              Cari Produk Lain →
+              Lihat Koleksi Lain →
             </Link>
           </div>
 
@@ -678,7 +678,7 @@ export default function ProfileClient() {
                   {/* Info Produk */}
                   <div className="p-4 space-y-1">
                     <p className="text-[11px] text-[#64748B] uppercase tracking-wider font-semibold">
-                      {product.category?.name || "Official Brand"}
+                      {product.category?.name || "Jovique Official"}
                     </p>
                     <Link
                       href={`/products/${product.slug}`}
@@ -696,7 +696,7 @@ export default function ProfileClient() {
                 <div className="p-4 pt-0">
                   <Link href={`/products/${product.slug}`} className="block w-full">
                     <Button variant="secondary" size="sm" fullWidth>
-                      Lihat Produk
+                      Lihat Detail
                     </Button>
                   </Link>
                 </div>
@@ -711,9 +711,9 @@ export default function ProfileClient() {
         <div className="animate-fade-in space-y-6">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-bold text-[#0F172A]">
-              Riwayat Pembelian Produk ({orderProducts.length} Transaksi)
+              Riwayat Pesanan Koleksi ({orderProducts.length} Pesanan)
             </h2>
-            <span className="text-xs text-[#64748B]">Semua transaksi terverifikasi resmi</span>
+            <span className="text-xs text-[#64748B]">Semua pesanan diproses langsung oleh Jovique</span>
           </div>
 
           <div className="space-y-4">
@@ -774,7 +774,7 @@ export default function ProfileClient() {
                           1 Barang x {formatRupiah(product.price)}
                         </p>
                         <p className="text-[11px] text-emerald-600 font-medium">
-                          Bebas Ongkir Reguler (JNE Express)
+                          Bebas Ongkir (Pengiriman Khusus Jovique)
                         </p>
                       </div>
                     </div>

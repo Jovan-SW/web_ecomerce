@@ -17,42 +17,42 @@ const FAQ_ITEMS: FaqItem[] = [
     id: "faq-1",
     question: "Bagaimana sistem keamanan transaksi dan pembayaran di Jovique?",
     answer:
-      "Belanja di Jovique 100% aman dengan sistem Rekening Bersama (Escrow Jovique Proteksi). Dana pembayaran Anda disimpan aman oleh platform dan baru akan dicairkan ke pihak penjual setelah pesanan sampai di tangan Anda dalam kondisi baik dan sesuai ekspektasi.",
+      "Belanja langsung di Jovique 100% aman dan terenkripsi. Kami bekerja sama dengan payment gateway berstandar enkripsi tinggi untuk melindungi setiap transaksi Anda. Pesanan Anda diproses langsung dari warehouse resmi Jovique dengan jaminan kepuasan belanja.",
     category: "layanan",
   },
   {
     id: "faq-2",
-    question: "Apakah semua produk yang dijual di Jovique terjamin original?",
+    question: "Apakah semua produk yang tersedia di Jovique terjamin original?",
     answer:
-      "Pasti! Seluruh produk berlabel Official Store dan merchant terverifikasi dijamin 100% original langsung dari brand pemegang lisensi resmi. Jika produk yang Anda terima terbukti palsu atau tidak asli, Jovique menyediakan jaminan 100% garansi uang kembali.",
+      "Pasti! Seluruh busana dan aksesori yang Anda temukan di website ini adalah produk original 100% yang dirancang dan diproduksi eksklusif oleh Jovique. Setiap jahitan, material, dan detail melalui quality control ketat sebelum dikirimkan ke tangan Anda.",
     category: "produk",
   },
   {
     id: "faq-3",
-    question: "Metode pembayaran apa saja yang didukung di platform Jovique?",
+    question: "Metode pembayaran apa saja yang didukung di Jovique?",
     answer:
-      "Jovique menyediakan pilihan pembayaran lengkap dan fleksibel untuk kenyamanan Anda: Transfer Bank / Virtual Account (BCA, Mandiri, BRI, BNI, Permata), E-Wallet (GoPay, OVO, ShopeePay, DANA), Kartu Kredit/Debit Visa/Mastercard, PayLater, serta fitur COD (Bayar di Tempat).",
+      "Jovique menyediakan pilihan pembayaran lengkap dan fleksibel untuk kenyamanan Anda: Transfer Bank / Virtual Account (BCA, Mandiri, BRI, BNI, Permata), E-Wallet (GoPay, OVO, ShopeePay, DANA), Kartu Kredit/Debit Visa/Mastercard, serta berbagai pilihan pembayaran digital resmi lainnya.",
     category: "layanan",
   },
   {
     id: "faq-4",
-    question: "Apakah tersedia program Bebas Ongkir dan berapa estimasi pengirimannya?",
+    question: "Apakah tersedia layanan Bebas Ongkir dan berapa estimasi pengirimannya?",
     answer:
-      "Ya! Anda bisa menikmati subsidi Bebas Ongkir ke seluruh wilayah Indonesia dengan memilih produk bertanda promo. Estimasi pengiriman bervariasi mulai dari beberapa jam untuk kurir Instant & Same Day, hingga 1–3 hari kerja untuk pengiriman Reguler antar-kota.",
+      "Ya! Anda bisa menikmati promo Bebas Ongkir ke seluruh wilayah Indonesia untuk setiap pembelian koleksi Jovique. Estimasi pengiriman berkisar 1–3 hari kerja untuk area Jabodetabek dan kota-kota besar, dikemas secara rapi dan terlindungi.",
     category: "layanan",
   },
   {
     id: "faq-5",
-    question: "Bagaimana jika barang yang saya terima rusak, salah ukuran, atau tidak sesuai?",
+    question: "Bagaimana jika produk yang saya terima salah ukuran atau ingin ditukar?",
     answer:
-      "Tenang dan bebas khawatir! Setiap transaksi dilindungi Garansi Perlindungan Pembeli 7 Hari. Anda cukup mengajukan komplain atau permohonan retur melalui halaman pesanan, dan tim kami bersama penjual akan memfasilitasi penukaran barang atau pengembalian dana (refund) secara cepat.",
+      "Kepuasan Anda adalah prioritas kami! Setiap pembelian di Jovique dilindungi Garansi Penukaran Ukuran & Pengembalian 7 Hari. Anda cukup menghubungi tim layanan pelanggan kami, dan tim Jovique akan memfasilitasi proses penukaran produk atau pengembalian dengan mudah.",
     category: "produk",
   },
   {
     id: "faq-6",
-    question: "Bagaimana cara mendaftar dan mulai berjualan sebagai seller di Jovique?",
+    question: "Apakah Jovique merilis koleksi eksklusif atau edisi terbatas (limited edition)?",
     answer:
-      "Membuka toko di Jovique sangat mudah, cepat, dan tanpa biaya pendaftaran! Cukup buat akun, lengkapi data profil toko, unggah produk Anda, dan Anda siap menjangkau jutaan calon pembeli di seluruh Indonesia dengan dukungan logistik terintegrasi.",
+      "Ya! Jovique secara berkala merilis koleksi kapsul (capsule collection) dan edisi terbatas dengan desain eksklusif yang hanya diproduksi dalam kuantitas tertentu. Pastikan Anda memiliki akun Jovique agar tidak ketinggalan peluncuran koleksi terbaru.",
     category: "tentang",
   },
 ];
@@ -77,29 +77,29 @@ export default function HomeFaq({ className = "" }: { className?: string }) {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         {/* ========================================================
-            1. MARKETPLACE VALUE PROPOSITION (3 PILAR KEUNGGULAN)
+            1. JOVIQUE VALUE PROPOSITION (3 PILAR KEUNGGULAN)
            ======================================================== */}
         <ScrollReveal direction="up">
           <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-18">
             <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFF6FF] border border-[#BFDBFE] text-[11px] tracking-wider text-[#1D4ED8] font-semibold mb-3">
               <span className="w-2 h-2 rounded-full bg-[#1474ed]" />
-              Kenapa Belanja di Jovique?
+              Kenapa Memilih Jovique?
             </span>
             <h2
               id="home-about-faq-title"
               className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#0F172A] tracking-tight leading-tight"
             >
-              Belanja Online Lengkap, Aman, dan Tepercaya
+              Dedikasi Kami untuk Keanggunan & Kualitas Terbaik
             </h2>
             <p className="mt-3.5 text-sm sm:text-base text-[#475569] font-normal leading-relaxed">
-              Jovique menghubungkan Anda dengan ribuan toko pilihan dan official brand di seluruh nusantara dengan jaminan belanja aman, harga bersaing, dan bebas cemas.
+              Jovique menghadirkan koleksi busana eksklusif dengan sentuhan material premium dan jahitan presisi, menjamin tampilan memukau di setiap momen istimewa Anda.
             </p>
           </div>
         </ScrollReveal>
 
-        {/* 3 Kartu Keunggulan Marketplace */}
+        {/* 3 Kartu Keunggulan Jovique */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-20 sm:mb-24">
-          {/* Card 1: Jutaan Produk & Brand Resmi */}
+          {/* Card 1: Desain Orisinal & Material Premium */}
           <ScrollReveal direction="up" delay={0} className="h-full">
             <div className="h-full bg-white p-7 sm:p-8 rounded-2xl border border-[#E2E8F0] shadow-sm hover:shadow-md hover:border-[#1474ed]/40 transition-all duration-300 flex flex-col justify-between group">
               <div>
@@ -107,23 +107,23 @@ export default function HomeFaq({ className = "" }: { className?: string }) {
                   01
                 </div>
                 <span className="text-[11px] uppercase tracking-wider text-[#1474ed] font-semibold block mb-1">
-                  Pilihan Terlengkap
+                  Koleksi Eksklusif
                 </span>
                 <h3 className="text-xl font-bold text-[#0F172A] tracking-tight mb-2.5">
-                  Jutaan Produk & Brand Resmi
+                  Desain Orisinal & Material Premium
                 </h3>
                 <p className="text-sm text-[#475569] leading-relaxed font-normal">
-                  Temukan beragam kebutuhan harian mulai dari fashion, sepatu, aksesoris, hingga produk gaya hidup dari brand official dan seller terpercaya seluruh Indonesia.
+                  Setiap busana Jovique dirancang khusus dengan material berkualitas tinggi, memadukan kenyamanan sepanjang hari dengan estetika kontemporer yang elegan.
                 </p>
               </div>
               <div className="pt-5 mt-6 border-t border-[#F1F5F9] flex items-center justify-between text-xs font-semibold text-[#0B2545]">
-                <span>Ribuan Toko Pilihan</span>
-                <span className="text-[#1474ed] font-normal">✓ 100% Produk Asli</span>
+                <span>Atelier Resmi Jovique</span>
+                <span className="text-[#1474ed] font-normal">✓ 100% Orisinal Jovique</span>
               </div>
             </div>
           </ScrollReveal>
 
-          {/* Card 2: Transaksi Aman & Terlindungi */}
+          {/* Card 2: Craftsmanship & Transaksi Aman */}
           <ScrollReveal direction="up" delay={120} className="h-full">
             <div className="h-full bg-white p-7 sm:p-8 rounded-2xl border border-[#E2E8F0] shadow-sm hover:shadow-md hover:border-[#1474ed]/40 transition-all duration-300 flex flex-col justify-between group">
               <div>
@@ -131,23 +131,23 @@ export default function HomeFaq({ className = "" }: { className?: string }) {
                   02
                 </div>
                 <span className="text-[11px] uppercase tracking-wider text-[#1474ed] font-semibold block mb-1">
-                  Perlindungan Konsumen
+                  Standar Kualitas
                 </span>
                 <h3 className="text-xl font-bold text-[#0F172A] tracking-tight mb-2.5">
-                  Transaksi Aman & Terlindungi
+                  Craftsmanship & Transaksi Aman
                 </h3>
                 <p className="text-sm text-[#475569] leading-relaxed font-normal">
-                  Dilindungi sistem rekening bersama (Escrow). Pembayaran Anda baru diteruskan ke penjual setelah barang diterima dengan aman dan sesuai pesanan Anda.
+                  Setiap jahitan melalui kendali mutu (quality control) teliti. Sistem pembayaran kami terenkripsi penuh menjamin kenyamanan belanja Anda dari awal hingga akhir.
                 </p>
               </div>
               <div className="pt-5 mt-6 border-t border-[#F1F5F9] flex items-center justify-between text-xs font-semibold text-[#0B2545]">
-                <span>Garansi Uang Kembali</span>
-                <span className="text-[#1474ed] font-normal">✓ Rekber & COD</span>
+                <span>Jaminan Kepuasan</span>
+                <span className="text-[#1474ed] font-normal">✓ Garansi Retur 7 Hari</span>
               </div>
             </div>
           </ScrollReveal>
 
-          {/* Card 3: Bebas Ongkir & Pengiriman Cepat */}
+          {/* Card 3: Bebas Ongkir & Pengemasan Eksklusif */}
           <ScrollReveal direction="up" delay={240} className="h-full">
             <div className="h-full bg-white p-7 sm:p-8 rounded-2xl border border-[#E2E8F0] shadow-sm hover:shadow-md hover:border-[#1474ed]/40 transition-all duration-300 flex flex-col justify-between group">
               <div>
@@ -155,18 +155,18 @@ export default function HomeFaq({ className = "" }: { className?: string }) {
                   03
                 </div>
                 <span className="text-[11px] uppercase tracking-wider text-[#1474ed] font-semibold block mb-1">
-                  Logistik Terintegrasi
+                  Pengemasan Mewah
                 </span>
                 <h3 className="text-xl font-bold text-[#0F172A] tracking-tight mb-2.5">
-                  Bebas Ongkir & Pengiriman Cepat
+                  Bebas Ongkir & Pengemasan Eksklusif
                 </h3>
                 <p className="text-sm text-[#475569] leading-relaxed font-normal">
-                  Dukungan kurir pengiriman lengkap mulai dari Instant, Same Day, Reguler, hingga Kargo dengan subsidi bebas ongkir ke seluruh pelosok tanah air.
+                  Pesanan dikemas secara mewah dan aman untuk menjaga keutuhan produk, didukung layanan pengiriman cepat dan subsidi bebas ongkir ke seluruh nusantara.
                 </p>
               </div>
               <div className="pt-5 mt-6 border-t border-[#F1F5F9] flex items-center justify-between text-xs font-semibold text-[#0B2545]">
-                <span>Seluruh Indonesia</span>
-                <span className="text-[#1474ed] font-normal">✓ Bebas Ongkir</span>
+                <span>Pengiriman Seluruh Nusantara</span>
+                <span className="text-[#1474ed] font-normal">✓ Packaging Eksklusif</span>
               </div>
             </div>
           </ScrollReveal>
@@ -182,13 +182,13 @@ export default function HomeFaq({ className = "" }: { className?: string }) {
               <div className="space-y-6">
                 <div>
                   <span className="text-[11px] uppercase tracking-wider text-[#1474ed] font-semibold">
-                    Pusat Bantuan & Layanan Pembeli
+                    Layanan Pelanggan & Bantuan
                   </span>
                   <h3 className="text-2xl sm:text-3xl font-bold text-[#0F172A] tracking-tight leading-tight mt-1.5">
-                    Punya Pertanyaan Seputar Belanja di Jovique?
+                    Punya Pertanyaan Seputar Koleksi Jovique?
                   </h3>
                   <p className="text-sm text-[#475569] leading-relaxed mt-2.5 font-normal">
-                    Berikut rangkuman jawaban seputar keamanan transaksi, metode pembayaran, garansi retur, dan kemudahan belanja di Jovique.
+                    Berikut informasi penting mengenai pemesanan, panduan ukuran, jaminan orisinalitas, dan layanan purna jual Jovique.
                   </p>
                 </div>
 
@@ -196,15 +196,15 @@ export default function HomeFaq({ className = "" }: { className?: string }) {
                   <div className="flex items-center gap-2.5">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                     <span className="text-xs font-bold uppercase tracking-wider text-[#0F172A]">
-                      Customer Care 24/7 Siaga
+                      Layanan Konsultasi & CS Jovique
                     </span>
                   </div>
                   <p className="text-xs sm:text-[13px] text-[#475569] leading-relaxed">
-                    Butuh bantuan terkait status pesanan, verifikasi pembayaran, atau kendala transaksi lainnya? Tim ramah kami siap membantu Anda kapan pun.
+                    Butuh panduan memilih ukuran, rekomendasi gaya busana, atau informasi pengiriman? Tim Jovique siap membantu Anda dengan ramah.
                   </p>
                   <Link href="/products" className="block pt-1">
                     <Button variant="outline" size="sm" fullWidth className="rounded-xl font-medium text-xs">
-                      Pusat Bantuan & Layanan →
+                      Hubungi Layanan Pelanggan →
                     </Button>
                   </Link>
                 </div>

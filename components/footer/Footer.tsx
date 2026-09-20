@@ -18,14 +18,14 @@ const NAV_SECTIONS: NavSection[] = [
   {
     title: "Kategori Populer",
     links: [
-      { label: "Semua Produk", href: "/products", badge: "Lengkap" },
+      { label: "Semua Koleksi", href: "/products", badge: "Koleksi" },
       { label: "Pakaian Pria & Wanita", href: "/categories/t-shirts-polos", badge: "Hot" },
       { label: "Kemeja & Kasual", href: "/categories/shirts-flannels" },
       { label: "Jaket & Outerwear", href: "/categories/jackets-outerwear" },
       { label: "Celana & Trousers", href: "/categories/pants-trousers" },
       { label: "Sepatu & Aksesoris", href: "/categories/accessories", badge: "Baru" },
-      { label: "Promo & Flash Sale", href: "/products", badge: "Diskon" },
-      { label: "Official Store", href: "/products" },
+      { label: "Promo & Rilis Spesial", href: "/products", badge: "Diskon" },
+      { label: "Koleksi Terbaru", href: "/products" },
     ],
   },
   {
@@ -36,18 +36,18 @@ const NAV_SECTIONS: NavSection[] = [
       { label: "Cara Berbelanja Online", href: "/how-to-buy" },
       { label: "Kebijakan Retur & Garansi", href: "/returns" },
       { label: "Syarat Bebas Ongkir", href: "/free-shipping" },
-      { label: "Panduan Pembayaran & COD", href: "/payment-guide" },
+      { label: "Panduan Pembayaran & Pengiriman", href: "/payment-guide" },
       { label: "Hubungi Customer Care 24/7", href: "/contact" },
     ],
   },
   {
-    title: "Jelajahi & Jual",
+    title: "Tentang Jovique",
     links: [
       { label: "Tentang Jovique", href: "/about" },
-      { label: "Buka Toko Gratis", href: "/sell" },
-      { label: "Mitra Seller & Brand Resmi", href: "/partners" },
-      { label: "Jovique Pay & Saldo", href: "/wallet" },
-      { label: "Pusat Edukasi Seller", href: "/seller-center" },
+      { label: "Cerita Brand & Filosofi", href: "/about" },
+      { label: "Lookbook & Kampanye", href: "/lookbook" },
+      { label: "Keberlanjutan & Etika", href: "/sustainability" },
+      { label: "Panduan Ukuran & Gaya", href: "/size-guide" },
       { label: "Karier di Jovique", href: "/careers", badge: "Hiring" },
     ],
   },
@@ -56,7 +56,7 @@ const NAV_SECTIONS: NavSection[] = [
     links: [
       { label: "Syarat & Ketentuan Pengguna", href: "/terms" },
       { label: "Kebijakan Privasi Data", href: "/privacy" },
-      { label: "Perlindungan Pembeli (Escrow)", href: "/buyer-protection" },
+      { label: "Garansi Orisinalitas & Retur", href: "/authenticity" },
       { label: "Hak Kekayaan Intelektual", href: "/authenticity" },
       { label: "Pengaturan Cookie", href: "/cookies" },
     ],
@@ -99,7 +99,7 @@ const SOCIAL_LINKS = [
 export default function Footer({
   className = "",
   brandName = "JOVIQUE",
-  tagline = "Marketplace & Jual Beli Online Terpercaya",
+  tagline = "Official Online Store & Signature Fashion",
 }: FooterProps) {
   // State for interactive Newsletter
   const [email, setEmail] = useState("");
@@ -159,11 +159,11 @@ export default function Footer({
               {/* Left Column: Heading & Value */}
               <div className="lg:col-span-6 space-y-2">
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
-                  Dapatkan Voucher Diskon & Info Promo Spesial
+                  Dapatkan Informasi Koleksi Baru & Privilese Eksklusif
                 </h3>
                 <p className="text-xs sm:text-sm text-[#94A3B8] max-w-xl leading-relaxed">
-                  Daftarkan email Anda untuk mendapatkan kode voucher diskon belanja, kabar promo kilat,
-                  dan penawaran bebas ongkir dari toko pilihan setiap hari.
+                  Daftarkan email Anda untuk mendapatkan akses awal ke koleksi rilis terbatas, undangan acara privat Jovique,
+                  dan penawaran sambutan istimewa setiap musim.
                 </p>
               </div>
 
@@ -178,19 +178,19 @@ export default function Footer({
                         </svg>
                       </div>
                       <div>
-                        <h4 className="text-sm font-semibold text-white">Selamat Datang di Jovique Marketplace!</h4>
-                        <p className="text-xs text-[#94A3B8]">Kode voucher belanja hemat telah dikirim ke {email}</p>
+                        <h4 className="text-sm font-semibold text-white">Selamat Datang di Jovique Official!</h4>
+                        <p className="text-xs text-[#94A3B8]">Kode voucher sambutan telah dikirim ke {email}</p>
                       </div>
                     </div>
                     <div className="p-3 bg-[#0B2545] border border-[#1E3A8A] rounded-lg flex items-center justify-between gap-3">
                       <div>
-                        <span className="text-[10px] uppercase font-mono tracking-wider text-[#94A3B8] block">Voucher Belanja (10% Off):</span>
-                        <span className="font-mono text-xs font-bold text-[#60A5FA] tracking-wider">BELANJAHEMAT10</span>
+                        <span className="text-[10px] uppercase font-mono tracking-wider text-[#94A3B8] block">Voucher Selamat Datang (10% Off):</span>
+                        <span className="font-mono text-xs font-bold text-[#60A5FA] tracking-wider">JOVIQUEWELCOME10</span>
                       </div>
                       <button
                         type="button"
                         onClick={() => {
-                          navigator.clipboard.writeText("BELANJAHEMAT10");
+                          navigator.clipboard.writeText("JOVIQUEWELCOME10");
                           alert("Kode voucher disalin!");
                         }}
                         className="text-[11px] font-medium px-3 py-1.5 bg-[#1474ed] hover:bg-[#1d4ed8] text-white rounded-lg transition-colors cursor-pointer"
@@ -249,7 +249,7 @@ export default function Footer({
       </div>
 
       {/* =========================================================================
-          TIER 2: MAIN NAVIGATION DIRECTORY & MARKETPLACE IDENTITY
+          TIER 2: MAIN NAVIGATION DIRECTORY & JOVIQUE IDENTITY
           ========================================================================= */}
       <div className="relative max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-12 lg:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
@@ -265,13 +265,13 @@ export default function Footer({
             </Link>
 
             <p className="text-xs text-[#94A3B8] leading-relaxed max-w-sm">
-              Platform e-commerce terlengkap untuk jual beli jutaan produk berkualitas dari ribuan toko dan brand resmi terpercaya dengan jaminan transaksi aman, promo setiap hari, dan bebas ongkir ke seluruh Indonesia.
+              Rumah mode kontemporer Jovique menghadirkan koleksi busana dan aksesori eksklusif dengan presisi craftsmanship tinggi, desain modern berkarakter, dan pengalaman belanja personal langsung dari toko resmi Jovique.
             </p>
 
             {/* Social Channels */}
             <div className="space-y-2">
               <span className="text-[10px] font-mono uppercase tracking-widest text-[#64748B] block font-semibold">
-                Ikuti Komunitas & Promo Jovique
+                Ikuti Kanal Resmi Jovique
               </span>
               <div className="flex items-center gap-2">
                 {SOCIAL_LINKS.map((soc) => (

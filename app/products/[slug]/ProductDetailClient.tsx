@@ -113,7 +113,7 @@ export default function ProductDetailClient({
   // Discount calculation from database fields
   const hasDiscount = product.compare_at_price && product.compare_at_price > product.price;
   const discountPercentage = hasDiscount
-    ? Math.round(((product.compare_at_price - product.price) / product.compare_at_price) * 100)
+    ? Math.round(((product.compare_at_price! - product.price) / product.compare_at_price!) * 100)
     : 0;
 
   // Stock status helpers
@@ -172,7 +172,7 @@ export default function ProductDetailClient({
             <li>/</li>
             <li>
               <Link href="/products" className="hover:text-[#311744] hover:underline transition-colors">
-                Katalog Produk
+                Koleksi Produk
               </Link>
             </li>
             {product.category && (
@@ -312,7 +312,7 @@ export default function ProductDetailClient({
                 )}
 
                 {/* Rating & Reviews */}
-                {product.rating > 0 && (
+                {(product.rating ?? 0) > 0 && (
                   <div className="flex items-center gap-3">
                     <div className="flex items-center gap-1">
                       {Array.from({ length: 5 }).map((_, i) => (
@@ -320,7 +320,7 @@ export default function ProductDetailClient({
                           key={`star-${i}`}
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
-                          fill={i < Math.round(product.rating) ? "#311744" : "#e8e3ea"}
+                          fill={i < Math.round(product.rating ?? 0) ? "#311744" : "#e8e3ea"}
                           className="w-4 h-4"
                         >
                           <path
@@ -332,7 +332,7 @@ export default function ProductDetailClient({
                       ))}
                     </div>
                     <span className="text-sm font-semibold text-[#000200]">
-                      {product.rating.toFixed(1)}
+                      {(product.rating ?? 0).toFixed(1)}
                     </span>
                     <span className="text-xs text-[#5b4257]">
                       ({product.reviews_count} ulasan)
@@ -348,10 +348,10 @@ export default function ProductDetailClient({
                   {hasDiscount && (
                     <>
                       <span className="text-base text-[#8c827a] line-through font-normal">
-                        {formatPrice(product.compare_at_price)}
+                        {formatPrice(product.compare_at_price!)}
                       </span>
                       <span className="text-xs font-bold text-white bg-[#1474ed] px-2 py-0.5 rounded-md uppercase tracking-wider">
-                        Hemat {formatPrice(product.compare_at_price - product.price)}
+                        Hemat {formatPrice(product.compare_at_price! - product.price)}
                       </span>
                     </>
                   )}
@@ -533,25 +533,25 @@ export default function ProductDetailClient({
                   </p>
                 )}
 
-                {/* ── Marketplace Trust & Assurance Badges ── */}
+                {/* ── Jovique Brand Trust & Assurance Badges ── */}
                 <div className="p-4 bg-white/80 rounded-xl border border-[#e8e3ea] space-y-2.5 text-xs text-[#5b4257]">
                   <div className="flex items-center gap-2">
                     <svg className="w-4 h-4 text-emerald-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span className="font-medium text-[#000200]">Jaminan 100% Produk Asli dari Official Store & Seller Terverifikasi</span>
+                    <span className="font-medium text-[#000200]">Jaminan 100% Produk Asli & Eksklusif Langsung dari Jovique</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <svg className="w-4 h-4 text-[#1474ed] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.25V3.75m0 3.75l-4.5 4.5m4.5-4.5h4.5" />
                     </svg>
-                    <span>Bebas Ongkir & Pengiriman Cepat ke Seluruh Indonesia</span>
+                    <span>Bebas Ongkir & Pengiriman Aman ke Seluruh Indonesia</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <svg className="w-4 h-4 text-[#311744] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
                     </svg>
-                    <span>Garansi 7 Hari Pengembalian Barang & Dana Mudah</span>
+                    <span>Garansi 7 Hari Penukaran & Pengembalian Mudah</span>
                   </div>
                 </div>
 
@@ -672,10 +672,10 @@ export default function ProductDetailClient({
             <div className="flex items-center justify-between mb-8">
               <div>
                 <p className="text-[11px] uppercase tracking-widest font-mono text-[#5b4257] font-semibold mb-1">
-                  Rekomendasi Marketplace
+                  Rekomendasi Jovique
                 </p>
                 <h2 className="text-2xl sm:text-3xl font-serif text-[#000200] tracking-tight">
-                  Produk Serupa Lainnya
+                  Pilihan Serupa dari Jovique
                 </h2>
               </div>
               {product.category && (

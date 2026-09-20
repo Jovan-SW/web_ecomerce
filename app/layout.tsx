@@ -11,9 +11,9 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Jovique | Situs Jual Beli Online Terlengkap, Aman & Terpercaya",
+  title: "Jovique Official Store | Koleksi Busana & Fashion Eksklusif",
   description:
-    "Platform e-commerce & marketplace jual beli online terlengkap. Temukan ribuan brand resmi, jutaan produk pilihan, diskon menarik, bebas ongkir, dan jaminan pembayaran aman.",
+    "Official online store Jovique. Temukan koleksi pakaian dan aksesori eksklusif dengan kualitas terbaik, desain kontemporer elegan, dan kenyamanan tanpa kompromi.",
 };
 
 export default function RootLayout({

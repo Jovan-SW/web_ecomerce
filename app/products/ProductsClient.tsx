@@ -216,7 +216,7 @@ export default function ProductsClient({
             </li>
             <li>/</li>
             <li className="text-[#311744] font-semibold" aria-current="page">
-              Katalog Produk
+              Koleksi Jovique
             </li>
           </ol>
         </nav>
@@ -224,10 +224,10 @@ export default function ProductsClient({
         {/* Section Title */}
         <div className="max-w-3xl">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#000200] tracking-tight leading-tight">
-            Katalog Produk & Marketplace
+            Koleksi Eksklusif Jovique
           </h1>
           <p className="mt-2.5 text-xs sm:text-sm text-[#5b4257] font-normal leading-relaxed">
-            Temukan berbagai produk berkualitas dari berbagai kategori, brand resmi, dan seller terpercaya dengan penawaran harga terbaik dan jaminan keaslian.
+            Temukan rangkaian busana dan aksesori berkualitas dari Jovique. Didesain dengan presisi dan bahan pilihan untuk menghadirkan kenyamanan dan keanggunan sejati.
           </p>
         </div>
       </section>
@@ -244,7 +244,7 @@ export default function ProductsClient({
               onChange={handleSearchChange}
               onSearch={handleSearchSubmit}
               onClear={handleClearSearch}
-              placeholder="Cari produk, kategori, atau brand pilihanmu..."
+              placeholder="Cari busana, gaun, kemeja, atau aksesori Jovique..."
               showTrending={true}
               trendingKeywords={TRENDING_KEYWORDS}
               className="w-full"
@@ -258,7 +258,7 @@ export default function ProductsClient({
         <div className="lg:hidden mt-6 space-y-3 pb-3 border-b border-[#e8e3ea]">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-[#311744]">
-              Kategori Pakaian
+              Kategori Koleksi
             </span>
             {hasActiveFilters && (
               <button
@@ -345,7 +345,7 @@ export default function ProductsClient({
               {/* Kategori Navigation List */}
               <div className="space-y-1.5">
                 <p className="text-[11px] uppercase tracking-wider font-mono text-[#8c827a] font-semibold mb-2">
-                  Kategori Pakaian
+                  Kategori Koleksi
                 </p>
 
                 {/* All Collections Option */}
@@ -588,19 +588,19 @@ export default function ProductsClient({
                     🔍
                   </div>
                   <h3 className="text-xl font-serif text-[#000200] tracking-tight mb-2">
-                    Tidak Ada Produk yang Cocok
+                    Tidak Ada Koleksi yang Cocok
                   </h3>
                   <p className="text-xs sm:text-sm text-[#5b4257] leading-relaxed mb-6 font-normal">
                     {searchQuery.trim() ? (
                       <>
-                        Maaf, kami tidak menemukan produk yang cocok dengan kata kunci &ldquo;
+                        Maaf, kami tidak menemukan koleksi Jovique yang cocok dengan kata kunci &ldquo;
                         <strong className="text-[#000200] font-semibold">
                           {searchQuery}
                         </strong>
                         &rdquo;. Silakan coba kata kunci lain atau pilih kategori di samping.
                       </>
                     ) : (
-                      "Belum ada produk untuk kategori yang dipilih. Silakan jelajahi kategori produk lainnya."
+                      "Belum ada item untuk kategori ini. Silakan jelajahi pilihan koleksi Jovique lainnya."
                     )}
                   </p>
                   <div className="flex items-center justify-center gap-3">
@@ -610,7 +610,7 @@ export default function ProductsClient({
                       onClick={handleResetFilters}
                       className="rounded-xl px-6"
                     >
-                      Tampilkan Semua Produk ({initialProducts.length})
+                      Tampilkan Semua Koleksi ({initialProducts.length})
                     </Button>
                   </div>
                 </div>

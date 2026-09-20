@@ -41,16 +41,16 @@ export default async function Home() {
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#311744]/5 border border-[#311744]/12 text-[11px] font-mono tracking-wider text-[#311744] font-semibold mb-2.5">
                 <span className="w-2 h-2 rounded-full bg-[#1474ed]" />
-                Pilihan Terlaris • Rekomendasi Hari Ini
+                Signature Collection • Pilihan Terbaik Hari Ini
               </div>
               <h2
                 id="featured-products-heading"
                 className="text-2xl sm:text-4xl lg:text-5xl font-serif text-[#000200] tracking-tight leading-tight"
               >
-                Produk Terpopuler & Paling Diminati
+                Koleksi Paling Diminati & Terpopuler
               </h2>
               <p className="text-xs sm:text-sm text-[#5b4257] mt-2 font-normal max-w-xl leading-relaxed">
-                Pilihan produk terlaris dengan ulasan terbaik dari ribuan merchant dan brand resmi. Dapatkan penawaran harga bersaing serta jaminan kepuasan belanja.
+                Koleksi busana dan aksesori terfavorit yang dirancang secara eksklusif oleh Jovique. Dibuat dengan material premium untuk menyempurnakan gaya harian Anda.
               </p>
             </div>
 
@@ -60,7 +60,7 @@ export default async function Home() {
                 size="sm"
                 className="rounded-xl font-medium text-xs tracking-normal border-[#e8e3ea] hover:border-[#311744] hover:bg-[#f5eff8]"
               >
-                Lihat Semua Produk & Promo →
+                Lihat Semua Koleksi Jovique →
               </Button>
             </Link>
           </div>
@@ -71,15 +71,15 @@ export default async function Home() {
           products={topProducts}
           staggerReveal={true}
           loadingCount={10}
-          emptyTitle="Produk Rekomendasi Sedang Dipersiapkan"
-          emptyMessage="Daftar produk terpopuler sedang diperbarui. Silakan jelajahi katalog produk marketplace kami."
+          emptyTitle="Koleksi Rekomendasi Sedang Dipersiapkan"
+          emptyMessage="Daftar koleksi terpopuler sedang diperbarui. Silakan jelajahi katalog lengkap Jovique."
         />
 
         {/* Footer CTA Section Produk dengan Smooth Scroll Reveal */}
         <ScrollReveal direction="up" delay={150}>
           <div className="mt-12 sm:mt-16 text-center pt-8 border-t border-[#e8e3ea]">
             <p className="text-xs text-[#5b4257] uppercase tracking-wider font-mono font-medium mb-4">
-              Jelajahi Beragam Kategori & Pilihan Produk di Jovique Marketplace
+              Jelajahi Seluruh Koleksi Eksklusif & Busana Elegan di Jovique Official
             </p>
             <Link href="/products">
               <Button
@@ -87,15 +87,15 @@ export default async function Home() {
                 size="lg"
                 className="px-8 rounded-xl shadow-sm hover:shadow-[0_0_24px_rgba(49,23,68,0.25)]"
               >
-                Jelajahi Semua Produk & Promo →
+                Jelajahi Seluruh Koleksi Jovique →
               </Button>
             </Link>
             <div className="mt-4 flex items-center justify-center gap-4 text-[11px] text-[#5b4257] flex-wrap">
               <span>✓ Bebas Ongkir Seluruh Indonesia</span>
               <span>•</span>
-              <span>✓ Garansi 100% Original</span>
+              <span>✓ 100% Orisinal Jovique</span>
               <span>•</span>
-              <span>✓ Pembayaran Aman (Escrow & COD)</span>
+              <span>✓ Transaksi Aman & Terenkripsi</span>
               <span>•</span>
               <span>✓ Jaminan Retur 7 Hari</span>
             </div>
@@ -104,7 +104,7 @@ export default async function Home() {
       </section>
 
       {/* =========================================================================
-          3. SECTION: KEUNGGULAN JOVIQUE & FAQ MARKETPLACE
+          3. SECTION: KEUNGGULAN JOVIQUE & FAQ
           ========================================================================= */}
       <HomeFaq />
     </main>

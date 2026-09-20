@@ -5,7 +5,7 @@ import { ProfileClient } from "@/components";
 export const metadata: Metadata = {
   title: "Profil Akun Saya | Jovique Official Store",
   description:
-    "Kelola data akun, lihat keranjang belanja, wishlist produk impian, dan riwayat produk yang sudah dibeli di Jovique.",
+    "Kelola data akun member, pantau keranjang belanja, wishlist koleksi impian, dan riwayat pesanan resmi Anda di Jovique.",
 };
 
 export default function ProfilePage() {

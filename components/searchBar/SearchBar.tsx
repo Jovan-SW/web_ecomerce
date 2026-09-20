@@ -27,7 +27,7 @@ const DEFAULT_TRENDING = [
 ];
 
 /**
- * SearchBar: Komponen pencarian produk, kategori, dan brand di platform marketplace Jovique.
+ * SearchBar: Komponen pencarian busana dan koleksi di Jovique Official Store.
  * - Background putih bersih (bg-white)
  * - Logo search hitam pekat kontras tinggi
  * - Shortcut keyboard ⌘K / Ctrl+K
@@ -42,7 +42,7 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
       onChange,
       onSearch,
       onClear,
-      placeholder = "Cari produk, kategori, atau brand pilihan...",
+      placeholder = "Cari koleksi busana, kemeja, celana, atau aksesori Jovique...",
       showTrending = true,
       trendingKeywords = DEFAULT_TRENDING,
       isLoading = false,
