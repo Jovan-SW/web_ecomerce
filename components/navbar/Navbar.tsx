@@ -84,7 +84,7 @@ export default function Navbar({
     if (onSearchSubmit) {
       onSearchSubmit(query);
     } else if (query && query.trim()) {
-      router.push(`/products?q=${encodeURIComponent(query.trim())}`);
+      router.push(`/products?q=${encodeURIComponent(query.trim())}&category=all`);
       setMobileSearchOpen(false);
       setMobileMenuOpen(false);
     }
@@ -272,7 +272,7 @@ export default function Navbar({
             <SearchBar
               size="sm"
               showTrending={false}
-              placeholder="Cari koleksi busana & aksesori Jovique..."
+              placeholder="Cari kaos, kemeja, celana, sepatu, atau koleksi Jovique..."
               onSearch={handleSearchSubmit}
               className="w-full"
             />

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect, forwardRef } from "react";
+import { DEFAULT_TRENDING_KEYWORDS } from "@/utils/search";
 
 export interface SearchBarProps {
   value?: string;
@@ -17,22 +18,12 @@ export interface SearchBarProps {
   autoFocus?: boolean;
 }
 
-const DEFAULT_TRENDING = [
-  "Kaos Polos",
-  "Kemeja Pria",
-  "Sepatu Sneakers",
-  "Jaket & Outerwear",
-  "Celana Chino",
-  "Tas & Aksesoris",
-];
-
 /**
  * SearchBar: Komponen pencarian busana dan koleksi di Jovique Official Store.
- * - Background putih bersih (bg-white)
- * - Logo search hitam pekat kontras tinggi
+ * - Background putih bersih dengan aksen Electric Blue & Deep Navy
  * - Shortcut keyboard ⌘K / Ctrl+K
  * - Tombol clear cepat (✕)
- * - Dukungan trending search pills & micro-animations
+ * - Trending search pills interaktif
  */
 const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
   (
@@ -42,9 +33,9 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
       onChange,
       onSearch,
       onClear,
-      placeholder = "Cari koleksi busana, kemeja, celana, atau aksesori Jovique...",
+      placeholder = "Cari kaos, kemeja, celana, sepatu, atau koleksi spesifik Jovique...",
       showTrending = true,
-      trendingKeywords = DEFAULT_TRENDING,
+      trendingKeywords = DEFAULT_TRENDING_KEYWORDS,
       isLoading = false,
       size = "md",
       className = "",
@@ -108,24 +99,26 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
       inputRef.current?.focus();
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
+    const executeSearch = (searchQuery: string) => {
+      const trimmed = searchQuery.trim();
+      if (!isControlled) {
+        setInternalValue(trimmed);
+      }
+      if (onChange) {
+        onChange(trimmed);
+      }
       if (onSearch) {
-        onSearch(query.trim());
+        onSearch(trimmed);
       }
     };
 
+    const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      executeSearch(query);
+    };
+
     const handleTrendingClick = (keyword: string) => {
-      if (!isControlled) {
-        setInternalValue(keyword);
-      }
-      if (onChange) {
-        onChange(keyword);
-      }
-      if (onSearch) {
-        onSearch(keyword);
-      }
-      inputRef.current?.focus();
+      executeSearch(keyword);
     };
 
     // Sizing Styles
@@ -165,12 +158,12 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
           `}
         >
           {/* ========================================================
-              LOGO SEARCH (Blue & White Tech Accent)
+              LOGO SEARCH (Blue & Tech Accent)
              ======================================================== */}
           <button
             type="submit"
             aria-label="Lakukan pencarian"
-            className="shrink-0 text-[#0B2545] hover:text-[#1474ed] hover:scale-110 active:scale-95 transition-transform duration-200 focus:outline-none mr-3"
+            className="shrink-0 text-[#0B2545] hover:text-[#1474ed] hover:scale-110 active:scale-95 transition-transform duration-200 focus:outline-none mr-3 cursor-pointer"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -242,7 +235,7 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
                 type="button"
                 onClick={handleClear}
                 aria-label="Hapus kata kunci pencarian"
-                className="w-5 h-5 rounded-full flex items-center justify-center text-[#64748B] hover:text-[#0F172A] hover:bg-[#EFF6FF] transition-all duration-150 focus:outline-none"
+                className="w-5 h-5 rounded-full flex items-center justify-center text-[#64748B] hover:text-[#0F172A] hover:bg-[#EFF6FF] transition-all duration-150 focus:outline-none cursor-pointer"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -289,7 +282,7 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
                 key={`trending-${index}`}
                 type="button"
                 onClick={() => handleTrendingClick(keyword)}
-                className="text-[11px] text-[#475569] bg-white border border-[#E2E8F0] rounded-lg px-2.5 py-1 hover:border-[#1474ed] hover:text-[#1474ed] hover:bg-[#EFF6FF] hover:-translate-y-0.5 active:scale-95 transition-all duration-200 tracking-normal font-medium"
+                className="text-[11px] text-[#475569] bg-white border border-[#E2E8F0] rounded-lg px-2.5 py-1 hover:border-[#1474ed] hover:text-[#1474ed] hover:bg-[#EFF6FF] hover:-translate-y-0.5 active:scale-95 transition-all duration-200 tracking-normal font-medium cursor-pointer"
               >
                 {keyword}
               </button>

@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { SearchBar, ProductGrid, Button, ScrollReveal } from "@/components";
 import type { ProductWithDetails, Category } from "@/types/database";
 import type { ProductSortOption } from "@/services";
+import { searchProducts, DEFAULT_TRENDING_KEYWORDS } from "@/utils/search";
 
 export interface ProductsClientProps {
   initialProducts: ProductWithDetails[];
@@ -15,14 +16,7 @@ export interface ProductsClientProps {
   initialSort?: ProductSortOption;
 }
 
-const TRENDING_KEYWORDS = [
-  "Kaos Polos",
-  "Kemeja Pria",
-  "Sneakers Pria",
-  "Jaket & Outerwear",
-  "Celana Chino",
-  "Tas & Aksesoris",
-];
+const TRENDING_KEYWORDS = DEFAULT_TRENDING_KEYWORDS;
 
 const SORT_OPTIONS: { value: ProductSortOption; label: string }[] = [
   { value: "newest", label: "Paling Baru Ditambahkan" },
@@ -94,7 +88,10 @@ export default function ProductsClient({
 
   const handleSearchSubmit = (val: string) => {
     setSearchQuery(val);
-    updateUrlParams(val, selectedCategory, selectedSort);
+    // Saat user submit pencarian baru atau klik keyword tren, reset kategori ke "all"
+    // agar pencarian menyisir seluruh katalog Jovique tanpa terkunci di kategori lama
+    setSelectedCategory("all");
+    updateUrlParams(val, "all", selectedSort);
   };
 
   const handleClearSearch = () => {
@@ -125,71 +122,62 @@ export default function ProductsClient({
 
   // Hitung jumlah produk per kategori untuk badge pill
   const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = { all: initialProducts.length };
-    initialProducts.forEach((prod) => {
+    // Jika ada pencarian aktif, hitung jumlah item per kategori dari hasil pencarian agar sinkron
+    const baseList =
+      searchQuery.trim() !== ""
+        ? searchProducts(initialProducts, searchQuery)
+        : initialProducts;
+
+    const counts: Record<string, number> = { all: baseList.length };
+    baseList.forEach((prod) => {
       const slug = prod.category?.slug;
       if (slug) {
         counts[slug] = (counts[slug] || 0) + 1;
       }
     });
     return counts;
-  }, [initialProducts]);
+  }, [initialProducts, searchQuery]);
 
   // Filter & Urutkan Produk secara Responsif di Client
   const filteredProducts = useMemo(() => {
-    let result = [...initialProducts];
+    // 1. Pencarian Cerdas dengan Kamus Sinonim & Skor Relevansi Multi-Tier
+    let result =
+      searchQuery.trim() !== ""
+        ? searchProducts(initialProducts, searchQuery)
+        : [...initialProducts];
 
-    // 1. Filter Kategori
+    // 2. Filter Kategori (jika dipilih spesifik selain "all")
     if (selectedCategory !== "all") {
       result = result.filter(
         (prod) => prod.category?.slug === selectedCategory
       );
     }
 
-    // 2. Filter Keyword Pencarian (Bahasa Indonesia & Case-Insensitive)
-    if (searchQuery.trim() !== "") {
-      const q = searchQuery.toLowerCase().trim();
-      result = result.filter((prod) => {
-        const nameMatch = prod.name?.toLowerCase().includes(q);
-        const taglineMatch = prod.tagline?.toLowerCase().includes(q);
-        const descMatch = prod.description?.toLowerCase().includes(q);
-        const categoryMatch = prod.category?.name?.toLowerCase().includes(q);
-        const fitMatch = prod.fit_type?.toLowerCase().includes(q);
-        const materialsMatch = prod.materials?.toLowerCase().includes(q);
-
-        return (
-          nameMatch ||
-          taglineMatch ||
-          descMatch ||
-          categoryMatch ||
-          fitMatch ||
-          materialsMatch
-        );
-      });
-    }
-
-    // 3. Sorting Produk
-    switch (selectedSort) {
-      case "price-asc":
-        result.sort((a, b) => a.price - b.price);
-        break;
-      case "price-desc":
-        result.sort((a, b) => b.price - a.price);
-        break;
-      case "rating":
-        result.sort((a, b) => (b.rating || 0) - (a.rating || 0));
-        break;
-      case "name-asc":
-        result.sort((a, b) => a.name.localeCompare(b.name, "id"));
-        break;
-      case "newest":
-      default:
-        // Jika ada created_at urutkan berdasarkan waktu, jika tidak urutkan stabil
-        result.sort((a, b) => {
-          if (!a.created_at || !b.created_at) return 0;
-          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-        });
-        break;
+    // 3. Sorting Produk (jika bukan default relevansi saat pencarian teks aktif)
+    if (selectedSort !== "newest" || !searchQuery.trim()) {
+      switch (selectedSort) {
+        case "price-asc":
+          result.sort((a, b) => a.price - b.price);
+          break;
+        case "price-desc":
+          result.sort((a, b) => b.price - a.price);
+          break;
+        case "rating":
+          result.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+          break;
+        case "name-asc":
+          result.sort((a, b) => a.name.localeCompare(b.name, "id"));
+          break;
+        case "newest":
+        default:
+          result.sort((a, b) => {
+            if (!a.created_at || !b.created_at) return 0;
+            return (
+              new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+            );
+          });
+          break;
+      }
     }
 
     return result;
@@ -597,12 +585,27 @@ export default function ProductsClient({
                         <strong className="text-[#000200] font-semibold">
                           {searchQuery}
                         </strong>
-                        &rdquo;. Silakan coba kata kunci lain atau pilih kategori di samping.
+                        &rdquo;. Coba rekomendasi kata kunci populer berikut atau tampilkan seluruh koleksi.
                       </>
                     ) : (
                       "Belum ada item untuk kategori ini. Silakan jelajahi pilihan koleksi Jovique lainnya."
                     )}
                   </p>
+
+                  {/* Rekomendasi Kata Kunci Tren */}
+                  <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
+                    {DEFAULT_TRENDING_KEYWORDS.slice(0, 5).map((kw, i) => (
+                      <button
+                        key={`empty-sugg-${i}`}
+                        type="button"
+                        onClick={() => handleSearchSubmit(kw)}
+                        className="text-xs font-medium px-3 py-1.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-[#475569] hover:border-[#1474ed] hover:text-[#1474ed] hover:bg-[#EFF6FF] transition-all duration-150 cursor-pointer"
+                      >
+                        {kw}
+                      </button>
+                    ))}
+                  </div>
+
                   <div className="flex items-center justify-center gap-3">
                     <Button
                       variant="primary"

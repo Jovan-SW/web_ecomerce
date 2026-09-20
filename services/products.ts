@@ -1,5 +1,6 @@
 import { supabase } from "@/utils/supabase";
 import type { ProductWithDetails } from "@/types/database";
+import { getSearchSqlTerms } from "@/utils/search";
 
 export type ProductSortOption =
   | "newest"
@@ -114,12 +115,17 @@ export async function getProducts(
       query = query.lte("price", maxPrice);
     }
 
-    // 5. Pencarian Teks (Search)
+    // 5. Pencarian Teks (Search) dengan ekspansi istilah & sinonim
     if (search && search.trim() !== "") {
-      const cleanSearch = search.trim();
-      query = query.or(
-        `name.ilike.%${cleanSearch}%,description.ilike.%${cleanSearch}%,tagline.ilike.%${cleanSearch}%`
-      );
+      const searchTerms = getSearchSqlTerms(search);
+      const orClauses = searchTerms.flatMap((term) => [
+        `name.ilike.%${term}%`,
+        `tagline.ilike.%${term}%`,
+        `description.ilike.%${term}%`,
+      ]);
+      if (orClauses.length > 0) {
+        query = query.or(orClauses.join(","));
+      }
     }
 
     // 6. Sorting
