@@ -13,3 +13,6 @@ export * from "./variants";
 
 // Banners API
 export * from "./banners";
+
+// Wishlist API
+export * from "./wishlist";

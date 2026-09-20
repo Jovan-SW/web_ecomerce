@@ -8,6 +8,7 @@ import { getProducts } from "@/services/products";
 import { Button } from "@/components";
 import type { User } from "@supabase/supabase-js";
 import type { ProductWithDetails } from "@/types/database";
+import { useWishlist } from "@/context/WishlistContext";
 
 type ProfileTab = "overview" | "cart" | "wishlist" | "orders";
 
@@ -23,6 +24,8 @@ export default function ProfileClient() {
       ? tabParam
       : "overview"
   );
+
+  const { wishlistItems, removeFromWishlist } = useWishlist();
 
   // Data produk dari Supabase untuk mengisi Keranjang, Wishlist, dan Produk yang Dibeli
   const [products, setProducts] = useState<ProductWithDetails[]>([]);
@@ -170,7 +173,7 @@ export default function ProfileClient() {
 
   // Data Item untuk Keranjang, Wishlist, dan Orders
   const cartProducts = products.slice(0, 3).filter((p) => cartQuantities[p.id] !== undefined);
-  const wishlistProducts = products.slice(2, 6);
+  const wishlistProducts = wishlistItems.map((item) => item.product).filter(Boolean);
   const orderProducts = products.slice(0, 4);
 
   // Hitung subtotal keranjang
@@ -645,64 +648,97 @@ export default function ProfileClient() {
             <h2 className="text-lg font-bold text-[#0F172A]">
               Koleksi Favorit Tersimpan ({wishlistProducts.length})
             </h2>
-            <Link href="/products" className="text-xs font-semibold text-[#1474ED] hover:underline">
-              Lihat Koleksi Lain →
-            </Link>
+            <div className="flex items-center gap-3">
+              <Link href="/wishlist" className="text-xs font-semibold text-[#1474ED] hover:underline">
+                Halaman Wishlist Lengkap →
+              </Link>
+              <Link href="/products" className="text-xs font-semibold text-[#64748B] hover:text-[#0F172A] hover:underline">
+                Eksplor Koleksi →
+              </Link>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {wishlistProducts.map((product) => (
-              <div
-                key={product.id}
-                className="group rounded-3xl bg-white border border-[#E2E8F0] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
-              >
-                <div>
-                  {/* Foto Produk */}
-                  <div className="relative aspect-square bg-slate-100 overflow-hidden">
-                    {product.images?.[0] ? (
-                      <img
-                        src={product.images[0]}
-                        alt={product.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-xs text-slate-400">
-                        No Image
-                      </div>
-                    )}
-                    <span className="absolute top-3 left-3 px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/90 backdrop-blur-md text-[#1474ED] shadow-xs">
-                      ★ {product.rating || 4.9}
-                    </span>
-                  </div>
-
-                  {/* Info Produk */}
-                  <div className="p-4 space-y-1">
-                    <p className="text-[11px] text-[#64748B] uppercase tracking-wider font-semibold">
-                      {product.category?.name || "Jovique Official"}
-                    </p>
-                    <Link
-                      href={`/products/${product.slug}`}
-                      className="font-bold text-sm text-[#0F172A] hover:text-[#1474ED] transition-colors line-clamp-1"
-                    >
-                      {product.name}
-                    </Link>
-                    <p className="text-sm font-extrabold text-[#0F172A] pt-1">
-                      {formatRupiah(product.price)}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Tombol Aksi */}
-                <div className="p-4 pt-0">
-                  <Link href={`/products/${product.slug}`} className="block w-full">
-                    <Button variant="secondary" size="sm" fullWidth>
-                      Lihat Detail
-                    </Button>
-                  </Link>
-                </div>
+          {wishlistProducts.length === 0 ? (
+            <div className="rounded-3xl bg-white border border-[#E2E8F0] p-12 text-center">
+              <div className="w-16 h-16 rounded-full bg-rose-50 text-rose-500 mx-auto flex items-center justify-center mb-4">
+                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
               </div>
-            ))}
-          </div>
+              <h3 className="text-lg font-bold text-[#0F172A] mb-1">Belum Ada Koleksi di Wishlist</h3>
+              <p className="text-sm text-[#64748B] max-w-md mx-auto mb-6">
+                Simpan item pakaian dan aksesoris Jovique yang Anda sukai dengan menekan ikon hati pada produk.
+              </p>
+              <Link href="/products">
+                <Button variant="primary" size="md">
+                  Eksplor Koleksi Jovique
+                </Button>
+              </Link>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {wishlistProducts.map((product) => (
+                <div
+                  key={product.id}
+                  className="group rounded-3xl bg-white border border-[#E2E8F0] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
+                >
+                  <div>
+                    {/* Foto Produk */}
+                    <div className="relative aspect-square bg-slate-100 overflow-hidden">
+                      {product.images?.[0] ? (
+                        <img
+                          src={product.images[0]}
+                          alt={product.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-xs text-slate-400">
+                          No Image
+                        </div>
+                      )}
+                      <span className="absolute top-3 left-3 px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/90 backdrop-blur-md text-[#1474ED] shadow-xs">
+                        ★ {product.rating || 4.9}
+                      </span>
+                      <button
+                        onClick={() => removeFromWishlist(product.id)}
+                        title="Hapus dari Wishlist"
+                        className="absolute top-3 right-3 p-2 rounded-full bg-white/90 backdrop-blur-md text-rose-500 hover:bg-rose-50 transition-colors shadow-xs"
+                      >
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                        </svg>
+                      </button>
+                    </div>
+
+                    {/* Info Produk */}
+                    <div className="p-4 space-y-1">
+                      <p className="text-[11px] text-[#64748B] uppercase tracking-wider font-semibold">
+                        {product.category?.name || "Jovique Official"}
+                      </p>
+                      <Link
+                        href={`/products/${product.slug}`}
+                        className="font-bold text-sm text-[#0F172A] hover:text-[#1474ED] transition-colors line-clamp-1"
+                      >
+                        {product.name}
+                      </Link>
+                      <p className="text-sm font-extrabold text-[#0F172A] pt-1">
+                        {formatRupiah(product.price)}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Tombol Aksi */}
+                  <div className="p-4 pt-0">
+                    <Link href={`/products/${product.slug}`} className="block w-full">
+                      <Button variant="secondary" size="sm" fullWidth>
+                        Lihat Detail
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 

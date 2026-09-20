@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Product, ProductWithDetails } from "@/types/database";
+import { useWishlist } from "@/context/WishlistContext";
 
 export interface ProductCardProps {
   product: ProductWithDetails | Product;
@@ -29,7 +30,8 @@ export default function ProductCard({
   onWishlistToggle,
   className = "",
 }: ProductCardProps) {
-  const [wishlisted, setWishlisted] = useState(initialWishlisted);
+  const { isWishlisted: checkIsWishlisted, toggleWishlist } = useWishlist();
+  const wishlisted = checkIsWishlisted(product.id) || initialWishlisted;
   const [isHovered, setIsHovered] = useState(false);
 
   // Ambil varian jika tersedia di relasi
@@ -91,13 +93,15 @@ export default function ProductCard({
   const subtitle = product.tagline || product.description;
 
   // Handler klik tombol wishlist (Love)
-  const handleWishlistClick = (e: React.MouseEvent) => {
+  const handleWishlistClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    const nextState = !wishlisted;
-    setWishlisted(nextState);
+    const isNowWishlisted = await toggleWishlist(
+      product.id,
+      product as ProductWithDetails
+    );
     if (onWishlistToggle) {
-      onWishlistToggle(product.id, nextState);
+      onWishlistToggle(product.id, isNowWishlisted);
     }
   };
 
@@ -171,10 +175,10 @@ export default function ProductCard({
           aria-label={
             wishlisted ? "Hapus dari wishlist" : "Tambahkan ke wishlist"
           }
-          className={`absolute top-3 right-3 z-20 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 shadow-xs ${
+          className={`absolute top-3 right-3 z-20 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 shadow-xs cursor-pointer ${
             wishlisted
-              ? "bg-[#1474ed] text-white border border-[#1474ed]"
-              : "bg-white/95 backdrop-blur-xs text-[#0F172A] border border-[#E2E8F0] hover:bg-white hover:text-[#1474ed] hover:border-[#1474ed]"
+              ? "bg-[#e11d48] text-white border border-[#e11d48] shadow-[0_4px_12px_rgba(225,29,72,0.35)] scale-105"
+              : "bg-white/95 backdrop-blur-xs text-[#0F172A] border border-[#E2E8F0] hover:bg-white hover:text-[#e11d48] hover:border-[#e11d48]/50"
           }`}
         >
           <svg
@@ -186,7 +190,7 @@ export default function ProductCard({
             strokeLinecap="round"
             strokeLinejoin="round"
             className={`w-4 h-4 transition-transform duration-200 ${
-              wishlisted ? "scale-110" : "group-hover/btn:scale-110"
+              wishlisted ? "scale-110 text-white" : "group-hover/btn:scale-110"
             }`}
           >
             <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />

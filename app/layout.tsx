@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Navbar, Footer } from "@/components";
+import { WishlistProvider } from "@/context/WishlistContext";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
@@ -27,9 +28,11 @@ export default function RootLayout({
       className={`${plusJakartaSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#F8FAFC] text-[#0F172A] font-sans">
-        <Navbar wishlistCount={3} cartCount={2} />
-        <div className="flex-1">{children}</div>
-        <Footer />
+        <WishlistProvider>
+          <Navbar cartCount={2} />
+          <div className="flex-1">{children}</div>
+          <Footer />
+        </WishlistProvider>
       </body>
     </html>
   );

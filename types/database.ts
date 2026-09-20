@@ -47,6 +47,54 @@ export type Database = {
         }
         Relationships: []
       }
+      carts: {
+        Row: {
+          color: string
+          created_at: string
+          id: string
+          product_id: string
+          quantity: number
+          size: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          color: string
+          created_at?: string
+          id?: string
+          product_id: string
+          quantity?: number
+          size: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          color?: string
+          created_at?: string
+          id?: string
+          product_id?: string
+          quantity?: number
+          size?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "carts_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "carts_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       categories: {
         Row: {
           created_at: string | null
@@ -210,6 +258,42 @@ export type Database = {
         }
         Relationships: []
       }
+      wishlists: {
+        Row: {
+          created_at: string
+          id: string
+          product_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          product_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          product_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wishlists_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wishlists_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -359,6 +443,8 @@ export type Category = Tables<"categories">;
 export type Banner = Tables<"banners">;
 export type ProductVariant = Tables<"product_variants">;
 export type Profile = Tables<"profiles">;
+export type Wishlist = Tables<"wishlists">;
+export type Cart = Tables<"carts">;
 
 /**
  * Product + join relasi kategori & varian.
@@ -367,4 +453,8 @@ export type Profile = Tables<"profiles">;
 export type ProductWithDetails = Product & {
   category: Category | null;
   product_variants: ProductVariant[];
+};
+
+export type WishlistWithProduct = Wishlist & {
+  product: ProductWithDetails;
 };

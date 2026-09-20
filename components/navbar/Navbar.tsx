@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { SearchBar, Button } from "@/components";
 import { createClient } from "@/utils/supabase/client";
 import type { User, AuthChangeEvent, Session } from "@supabase/supabase-js";
+import { useWishlist } from "@/context/WishlistContext";
 
 export interface NavbarProps {
   wishlistCount?: number;
@@ -32,12 +33,15 @@ const PRODUCT_CATEGORIES = [
  * - Responsif untuk Desktop, Tablet, dan Mobile dengan Slide-in Drawer navigasi.
  */
 export default function Navbar({
-  wishlistCount = 3,
+  wishlistCount: propWishlistCount,
   cartCount = 2,
   className = "",
   onSearchSubmit,
 }: NavbarProps) {
   const router = useRouter();
+  const { wishlistCount: contextWishlistCount } = useWishlist();
+  const wishlistCount =
+    propWishlistCount !== undefined ? propWishlistCount : contextWishlistCount;
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productDropdownOpen, setProductDropdownOpen] = useState(false);
@@ -417,24 +421,31 @@ export default function Navbar({
                           <span>Keranjang Belanja</span>
                         </Link>
                         <Link
-                          href="/profile?tab=wishlist"
+                          href="/wishlist"
                           onClick={() => setUserDropdownOpen(false)}
-                          className="flex items-center gap-2.5 px-3 py-2 text-xs text-[#0F172A] hover:text-[#1474ED] hover:bg-[#F8FAFC] rounded-xl transition-colors"
+                          className="flex items-center justify-between px-3 py-2 text-xs text-[#0F172A] hover:text-[#1474ED] hover:bg-[#F8FAFC] rounded-xl transition-colors"
                         >
-                          <svg
-                            className="w-4 h-4 text-[#64748B]"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                            />
-                          </svg>
-                          <span>Wishlist Saya</span>
+                          <div className="flex items-center gap-2.5">
+                            <svg
+                              className="w-4 h-4 text-[#64748B]"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                              />
+                            </svg>
+                            <span>Wishlist Saya</span>
+                          </div>
+                          {wishlistCount > 0 && (
+                            <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-[#EFF6FF] text-[#1474ed]">
+                              {wishlistCount}
+                            </span>
+                          )}
                         </Link>
                         <Link
                           href="/profile?tab=orders"

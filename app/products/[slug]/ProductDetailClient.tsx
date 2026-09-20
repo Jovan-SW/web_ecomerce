@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button, ProductGrid, ScrollReveal } from "@/components";
 import type { ProductWithDetails } from "@/types/database";
+import { useWishlist } from "@/context/WishlistContext";
 
 /* ============================================================
    HELPERS
@@ -34,6 +35,9 @@ export default function ProductDetailClient({
   product,
   relatedProducts,
 }: ProductDetailClientProps) {
+  const { isWishlisted: checkIsWishlisted, toggleWishlist } = useWishlist();
+  const isWishlisted = checkIsWishlisted(product.id);
+
   // ── Photo Gallery State ──
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -265,6 +269,35 @@ export default function ProductDetailClient({
                       </span>
                     )}
                   </div>
+
+                  {/* Floating Wishlist Button */}
+                  <button
+                    type="button"
+                    onClick={() => toggleWishlist(product.id, product)}
+                    aria-label={
+                      isWishlisted ? "Hapus dari wishlist" : "Simpan ke wishlist"
+                    }
+                    className={`absolute top-4 right-4 z-20 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-md cursor-pointer ${
+                      isWishlisted
+                        ? "bg-[#e11d48] text-white border border-[#e11d48] shadow-[0_4px_16px_rgba(225,29,72,0.4)] scale-105"
+                        : "bg-white/95 backdrop-blur-md text-[#0F172A] border border-[#E2E8F0] hover:bg-white hover:text-[#e11d48] hover:border-[#e11d48]/50 hover:scale-105"
+                    }`}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill={isWishlisted ? "currentColor" : "none"}
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className={`w-5 h-5 transition-transform duration-200 ${
+                        isWishlisted ? "scale-110 text-white" : ""
+                      }`}
+                    >
+                      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                    </svg>
+                  </button>
 
                   {/* Image Counter */}
                   <div className="absolute bottom-4 right-4 z-10 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-sm text-white text-[11px] font-mono">
@@ -524,6 +557,34 @@ export default function ProductDetailClient({
                   >
                     Beli Langsung
                   </Button>
+                  <button
+                    type="button"
+                    onClick={() => toggleWishlist(product.id, product)}
+                    aria-label={
+                      isWishlisted ? "Hapus dari wishlist" : "Simpan ke wishlist"
+                    }
+                    className={`h-12 sm:h-13 px-5 rounded-xl border flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer shrink-0 ${
+                      isWishlisted
+                        ? "bg-[#e11d48] text-white border-[#e11d48] shadow-[0_4px_16px_rgba(225,29,72,0.35)]"
+                        : "bg-white text-[#0F172A] border-[#E2E8F0] hover:border-[#e11d48]/50 hover:text-[#e11d48] hover:bg-[#fff1f2]"
+                    }`}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill={isWishlisted ? "currentColor" : "none"}
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="w-5 h-5"
+                    >
+                      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                    </svg>
+                    <span className="text-xs font-semibold uppercase tracking-wider">
+                      {isWishlisted ? "Tersimpan" : "Wishlist"}
+                    </span>
+                  </button>
                 </div>
 
                 {/* Guidance if no selection */}
