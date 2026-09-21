@@ -9,6 +9,7 @@ import { Button } from "@/components";
 import type { User } from "@supabase/supabase-js";
 import type { ProductWithDetails } from "@/types/database";
 import { useWishlist } from "@/context/WishlistContext";
+import { useCart } from "@/context/CartContext";
 
 type ProfileTab = "overview" | "cart" | "wishlist" | "orders";
 
@@ -26,6 +27,13 @@ export default function ProfileClient() {
   );
 
   const { wishlistItems, removeFromWishlist } = useWishlist();
+  const {
+    cartItems,
+    cartCount,
+    subtotal: cartSubtotal,
+    updateQuantity: updateCartQuantity,
+    removeFromCart: removeCartItem,
+  } = useCart();
 
   // Data produk dari Supabase untuk mengisi Keranjang, Wishlist, dan Produk yang Dibeli
   const [products, setProducts] = useState<ProductWithDetails[]>([]);
@@ -171,16 +179,9 @@ export default function ProfileClient() {
   const fullName = user.user_metadata?.full_name || user.email?.split("@")[0] || "Member Jovique";
   const userInitial = fullName ? fullName[0].toUpperCase() : "U";
 
-  // Data Item untuk Keranjang, Wishlist, dan Orders
-  const cartProducts = products.slice(0, 3).filter((p) => cartQuantities[p.id] !== undefined);
+  // Data Item untuk Orders
   const wishlistProducts = wishlistItems.map((item) => item.product).filter(Boolean);
   const orderProducts = products.slice(0, 4);
-
-  // Hitung subtotal keranjang
-  const cartSubtotal = cartProducts.reduce((acc, p) => {
-    const qty = cartQuantities[p.id] || 1;
-    return acc + p.price * qty;
-  }, 0);
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
@@ -288,7 +289,7 @@ export default function ProfileClient() {
           >
             <p className="text-[11px] text-[#64748B] font-medium">Keranjang Belanja</p>
             <p className="text-lg font-bold text-[#0F172A] group-hover:text-[#1474ED] transition-colors mt-0.5">
-              {cartProducts.length} Item
+              {cartCount} Item
             </p>
           </div>
 
@@ -352,7 +353,7 @@ export default function ProfileClient() {
                 : "bg-[#E2E8F0] text-[#475569]"
             }`}
           >
-            {cartProducts.length}
+            {cartCount}
           </span>
         </button>
 
@@ -487,15 +488,35 @@ export default function ProfileClient() {
       {/* TAB 2: KERANJANG BELANJA */}
       {activeTab === "cart" && (
         <div className="animate-fade-in space-y-6">
-          {cartProducts.length === 0 ? (
-            <div className="text-center py-16 bg-white rounded-3xl border border-[#E2E8F0] p-8 space-y-4">
-              <div className="w-16 h-16 rounded-full bg-[#EFF6FF] text-[#1474ED] flex items-center justify-center mx-auto">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-bold text-[#0F172A]">
+              Keranjang Belanja ({cartCount} Barang)
+            </h2>
+            <div className="flex items-center gap-3">
+              <Link
+                href="/cart"
+                className="text-xs font-semibold text-[#1474ED] hover:underline"
+              >
+                Halaman Keranjang Lengkap →
+              </Link>
+              <Link
+                href="/products"
+                className="text-xs font-semibold text-[#64748B] hover:text-[#0F172A] hover:underline"
+              >
+                Lanjut Belanja →
+              </Link>
+            </div>
+          </div>
+
+          {cartItems.length === 0 ? (
+            <div className="rounded-3xl bg-white border border-[#E2E8F0] p-12 text-center">
+              <div className="w-16 h-16 rounded-full bg-blue-50 text-[#1474ED] mx-auto flex items-center justify-center mb-4">
                 <svg
                   className="w-8 h-8"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth="2"
+                  strokeWidth="1.8"
                 >
                   <path
                     strokeLinecap="round"
@@ -504,13 +525,15 @@ export default function ProfileClient() {
                   />
                 </svg>
               </div>
-              <h3 className="text-lg font-bold text-[#0F172A]">Keranjang Belanja Masih Kosong</h3>
-              <p className="text-xs sm:text-sm text-[#64748B] max-w-sm mx-auto">
-                Yuk jelajahi koleksi busana eksklusif Jovique dan temukan gaya favoritmu!
+              <h3 className="text-lg font-bold text-[#0F172A] mb-1">
+                Keranjang Belanja Anda Kosong
+              </h3>
+              <p className="text-sm text-[#64748B] max-w-md mx-auto mb-6">
+                Belum ada produk busana Jovique yang ditambahkan ke keranjang belanja Anda.
               </p>
               <Link href="/products">
                 <Button variant="primary" size="md">
-                  Jelajahi Koleksi Jovique
+                  Eksplor Koleksi Jovique
                 </Button>
               </Link>
             </div>
@@ -518,12 +541,13 @@ export default function ProfileClient() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               {/* Daftar Produk di Keranjang */}
               <div className="lg:col-span-8 space-y-4">
-                {cartProducts.map((product) => {
-                  const qty = cartQuantities[product.id] || 1;
-                  const itemTotal = product.price * qty;
+                {cartItems.map((item) => {
+                  const product = item.product;
+                  if (!product) return null;
+                  const itemTotal = product.price * item.quantity;
                   return (
                     <div
-                      key={product.id}
+                      key={item.id}
                       className="p-4 sm:p-5 rounded-3xl bg-white border border-[#E2E8F0] shadow-xs flex flex-col sm:flex-row items-start sm:items-center gap-4 transition-all hover:shadow-sm"
                     >
                       {/* Thumbnail Produk */}
@@ -545,7 +569,7 @@ export default function ProfileClient() {
                       </Link>
 
                       {/* Detail Produk */}
-                      <div className="flex-1 min-w-0 space-y-1">
+                      <div className="flex-1 min-w-0 space-y-1.5">
                         <span className="text-[10px] font-bold uppercase tracking-wider text-[#1474ED]">
                           {product.category?.name || "Koleksi Jovique"}
                         </span>
@@ -555,10 +579,21 @@ export default function ProfileClient() {
                         >
                           {product.name}
                         </Link>
+
+                        {/* Size & Color Badges */}
+                        <div className="flex items-center gap-2 pt-0.5">
+                          <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">
+                            Ukuran: {item.size}
+                          </span>
+                          <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">
+                            Warna: {item.color}
+                          </span>
+                        </div>
+
                         <p className="text-xs text-[#64748B]">
                           Harga Satuan: {formatRupiah(product.price)}
                         </p>
-                        <p className="text-sm font-extrabold text-[#0F172A] pt-1">
+                        <p className="text-sm font-extrabold text-[#0F172A]">
                           Total: {formatRupiah(itemTotal)}
                         </p>
                       </div>
@@ -569,17 +604,17 @@ export default function ProfileClient() {
                         <div className="flex items-center border border-[#CBD5E1] rounded-xl overflow-hidden bg-white shadow-2xs">
                           <button
                             type="button"
-                            onClick={() => updateQuantity(product.id, -1)}
+                            onClick={() => updateCartQuantity(item.id, item.quantity - 1)}
                             className="w-8 h-8 flex items-center justify-center text-[#475569] hover:bg-slate-100 transition-colors font-bold cursor-pointer"
                           >
                             -
                           </button>
                           <span className="w-10 text-center text-xs font-bold text-[#0F172A]">
-                            {qty}
+                            {item.quantity}
                           </span>
                           <button
                             type="button"
-                            onClick={() => updateQuantity(product.id, 1)}
+                            onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
                             className="w-8 h-8 flex items-center justify-center text-[#475569] hover:bg-slate-100 transition-colors font-bold cursor-pointer"
                           >
                             +
@@ -589,7 +624,7 @@ export default function ProfileClient() {
                         {/* Hapus Item */}
                         <button
                           type="button"
-                          onClick={() => removeFromCart(product.id)}
+                          onClick={() => removeCartItem(item.id)}
                           className="text-xs text-rose-500 hover:text-rose-700 font-medium cursor-pointer"
                         >
                           Hapus
@@ -608,7 +643,7 @@ export default function ProfileClient() {
 
                 <div className="space-y-2.5 text-xs sm:text-sm text-[#475569]">
                   <div className="flex justify-between">
-                    <span>Total Harga ({cartProducts.length} barang)</span>
+                    <span>Total Harga ({cartCount} barang)</span>
                     <span className="font-semibold text-[#0F172A]">{formatRupiah(cartSubtotal)}</span>
                   </div>
                   <div className="flex justify-between">
@@ -628,9 +663,11 @@ export default function ProfileClient() {
                   </div>
                 </div>
 
-                <Button variant="primary" size="md" fullWidth>
-                  Lanjut ke Pembayaran
-                </Button>
+                <Link href="/cart" className="block w-full">
+                  <Button variant="primary" size="md" fullWidth>
+                    Buka Halaman Checkout
+                  </Button>
+                </Link>
 
                 <p className="text-[11px] text-center text-[#94A3B8]">
                   🔒 Transaksi Aman & Terenkripsi Langsung oleh Jovique

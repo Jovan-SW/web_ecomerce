@@ -458,3 +458,7 @@ export type ProductWithDetails = Product & {
 export type WishlistWithProduct = Wishlist & {
   product: ProductWithDetails;
 };
+
+export type CartWithProduct = Cart & {
+  product: ProductWithDetails;
+};

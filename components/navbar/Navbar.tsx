@@ -7,6 +7,7 @@ import { SearchBar, Button } from "@/components";
 import { createClient } from "@/utils/supabase/client";
 import type { User, AuthChangeEvent, Session } from "@supabase/supabase-js";
 import { useWishlist } from "@/context/WishlistContext";
+import { useCart } from "@/context/CartContext";
 
 export interface NavbarProps {
   wishlistCount?: number;
@@ -34,7 +35,7 @@ const PRODUCT_CATEGORIES = [
  */
 export default function Navbar({
   wishlistCount: propWishlistCount,
-  cartCount = 2,
+  cartCount: propCartCount,
   className = "",
   onSearchSubmit,
 }: NavbarProps) {
@@ -42,6 +43,10 @@ export default function Navbar({
   const { wishlistCount: contextWishlistCount } = useWishlist();
   const wishlistCount =
     propWishlistCount !== undefined ? propWishlistCount : contextWishlistCount;
+
+  const { cartCount: contextCartCount } = useCart();
+  const cartCount =
+    propCartCount !== undefined ? propCartCount : contextCartCount;
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productDropdownOpen, setProductDropdownOpen] = useState(false);
@@ -401,7 +406,7 @@ export default function Navbar({
                           <span>Halaman Profil</span>
                         </Link>
                         <Link
-                          href="/profile?tab=cart"
+                          href="/cart"
                           onClick={() => setUserDropdownOpen(false)}
                           className="flex items-center gap-2.5 px-3 py-2 text-xs text-[#0F172A] hover:text-[#1474ED] hover:bg-[#F8FAFC] rounded-xl transition-colors"
                         >

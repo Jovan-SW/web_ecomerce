@@ -3,9 +3,11 @@
 import React, { useState, useMemo, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button, ProductGrid, ScrollReveal } from "@/components";
 import type { ProductWithDetails } from "@/types/database";
 import { useWishlist } from "@/context/WishlistContext";
+import { useCart } from "@/context/CartContext";
 
 /* ============================================================
    HELPERS
@@ -35,8 +37,13 @@ export default function ProductDetailClient({
   product,
   relatedProducts,
 }: ProductDetailClientProps) {
+  const router = useRouter();
   const { isWishlisted: checkIsWishlisted, toggleWishlist } = useWishlist();
+  const { addToCart } = useCart();
   const isWishlisted = checkIsWishlisted(product.id);
+
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [isBuyingNow, setIsBuyingNow] = useState(false);
 
   // ── Photo Gallery State ──
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -159,6 +166,41 @@ export default function ProductDetailClient({
     if (!selectedColor) return null;
     return uniqueColors.find((c) => c.color_hex.toLowerCase() === selectedColor)?.color_name || null;
   }, [selectedColor, uniqueColors]);
+
+  // Handler Tambah ke Keranjang
+  const handleAddToCart = async () => {
+    if (!selectedSize || !selectedColor) return;
+    try {
+      setIsAddingToCart(true);
+      await addToCart(
+        product,
+        selectedSize,
+        selectedColorName || selectedColor,
+        quantity
+      );
+    } finally {
+      setIsAddingToCart(false);
+    }
+  };
+
+  // Handler Beli Langsung (tambah ke keranjang lalu langsung ke halaman cart)
+  const handleBuyNow = async () => {
+    if (!selectedSize || !selectedColor) return;
+    try {
+      setIsBuyingNow(true);
+      const success = await addToCart(
+        product,
+        selectedSize,
+        selectedColorName || selectedColor,
+        quantity
+      );
+      if (success) {
+        router.push("/cart");
+      }
+    } finally {
+      setIsBuyingNow(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-warm-canvas ambient-glow-mesh pb-20">
@@ -538,24 +580,30 @@ export default function ProductDetailClient({
                     variant="primary"
                     size="lg"
                     fullWidth
-                    disabled={!canAddToCart}
+                    disabled={!canAddToCart || isAddingToCart}
+                    onClick={handleAddToCart}
                     leftIcon={
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                        <path d="M1 1.75A.75.75 0 0 1 1.75 1h1.628a1.75 1.75 0 0 1 1.734 1.51L5.18 3h13.07a.75.75 0 0 1 .733.917l-1.72 8.031a1.75 1.75 0 0 1-1.712 1.385H6.563a1.75 1.75 0 0 1-1.714-1.404l-1.91-10.236A.25.25 0 0 0 2.693 1.5H1.75A.75.75 0 0 1 1 .75ZM6 17.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM15.5 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
-                      </svg>
+                      isAddingToCart ? (
+                        <span className="inline-block animate-spin mr-1">↻</span>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                          <path d="M1 1.75A.75.75 0 0 1 1.75 1h1.628a1.75 1.75 0 0 1 1.734 1.51L5.18 3h13.07a.75.75 0 0 1 .733.917l-1.72 8.031a1.75 1.75 0 0 1-1.712 1.385H6.563a1.75 1.75 0 0 1-1.714-1.404l-1.91-10.236A.25.25 0 0 0 2.693 1.5H1.75A.75.75 0 0 1 1 .75ZM6 17.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM15.5 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
+                        </svg>
+                      )
                     }
                     className="rounded-xl"
                   >
-                    Tambah ke Keranjang
+                    {isAddingToCart ? "Menambahkan..." : "Tambah ke Keranjang"}
                   </Button>
                   <Button
                     variant="outline"
                     size="lg"
                     fullWidth
-                    disabled={!canAddToCart}
+                    disabled={!canAddToCart || isBuyingNow}
+                    onClick={handleBuyNow}
                     className="rounded-xl"
                   >
-                    Beli Langsung
+                    {isBuyingNow ? "Memproses..." : "Beli Langsung"}
                   </Button>
                   <button
                     type="button"
