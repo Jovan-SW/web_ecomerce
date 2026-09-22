@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components";
 
@@ -15,6 +16,7 @@ function formatRupiah(amount: number): string {
 }
 
 export default function CartClient() {
+  const router = useRouter();
   const {
     cartItems,
     cartCount,
@@ -374,10 +376,14 @@ export default function CartClient() {
               fullWidth
               className="rounded-2xl font-bold tracking-wide shadow-md"
               onClick={() => {
-                alert("Terima kasih! Fitur checkout pesanan Jovique akan segera tersedia.");
+                if (!user) {
+                  router.push("/auth/login?redirect=/checkout");
+                } else {
+                  router.push("/checkout");
+                }
               }}
             >
-              Lanjut ke Pembayaran →
+              Lanjut ke Pembayaran (Simulasi) →
             </Button>
             <p className="text-[11px] text-center text-[#94A3B8] leading-relaxed">
               🔒 Transaksi 100% Aman, Terenkripsi, dan Dijamin Langsung oleh Jovique Official Store.

@@ -39,7 +39,7 @@ export default function ProductDetailClient({
 }: ProductDetailClientProps) {
   const router = useRouter();
   const { isWishlisted: checkIsWishlisted, toggleWishlist } = useWishlist();
-  const { addToCart } = useCart();
+  const { addToCart, user } = useCart();
   const isWishlisted = checkIsWishlisted(product.id);
 
   const [isAddingToCart, setIsAddingToCart] = useState(false);
@@ -183,20 +183,21 @@ export default function ProductDetailClient({
     }
   };
 
-  // Handler Beli Langsung (tambah ke keranjang lalu langsung ke halaman cart)
+  // Handler Beli Langsung (langsung menuju simulasi pembayaran di /checkout)
   const handleBuyNow = async () => {
     if (!selectedSize || !selectedColor) return;
+    const checkoutUrl = `/checkout?buyNow=true&productId=${product.id}&size=${encodeURIComponent(
+      selectedSize
+    )}&color=${encodeURIComponent(selectedColorName || selectedColor)}&qty=${quantity}`;
+
+    if (!user) {
+      router.push(`/auth/login?redirect=${encodeURIComponent(checkoutUrl)}`);
+      return;
+    }
+
     try {
       setIsBuyingNow(true);
-      const success = await addToCart(
-        product,
-        selectedSize,
-        selectedColorName || selectedColor,
-        quantity
-      );
-      if (success) {
-        router.push("/cart");
-      }
+      router.push(checkoutUrl);
     } finally {
       setIsBuyingNow(false);
     }

@@ -5,9 +5,10 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { getProducts } from "@/services/products";
+import { getUserOrders } from "@/services/orders";
 import { Button } from "@/components";
 import type { User } from "@supabase/supabase-js";
-import type { ProductWithDetails } from "@/types/database";
+import type { ProductWithDetails, OrderWithItems } from "@/types/database";
 import { useWishlist } from "@/context/WishlistContext";
 import { useCart } from "@/context/CartContext";
 
@@ -20,11 +21,20 @@ export default function ProfileClient() {
 
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<ProfileTab>(
+  const [selectedTab, setSelectedTab] = useState<ProfileTab>(
     tabParam && ["overview", "cart", "wishlist", "orders"].includes(tabParam)
       ? tabParam
       : "overview"
   );
+  const activeTab =
+    tabParam && ["overview", "cart", "wishlist", "orders"].includes(tabParam)
+      ? tabParam
+      : selectedTab;
+
+  const setActiveTab = (tab: ProfileTab) => {
+    setSelectedTab(tab);
+    router.replace(`/profile?tab=${tab}`, { scroll: false });
+  };
 
   const { wishlistItems, removeFromWishlist } = useWishlist();
   const {
@@ -37,16 +47,12 @@ export default function ProfileClient() {
 
   // Data produk dari Supabase untuk mengisi Keranjang, Wishlist, dan Produk yang Dibeli
   const [products, setProducts] = useState<ProductWithDetails[]>([]);
+  const [userOrders, setUserOrders] = useState<OrderWithItems[]>([]);
+  const [loadingOrders, setLoadingOrders] = useState(true);
 
   // State kuantitas item di keranjang
   const [cartQuantities, setCartQuantities] = useState<Record<string, number>>({});
   const [copiedId, setCopiedId] = useState(false);
-
-  useEffect(() => {
-    if (tabParam && ["overview", "cart", "wishlist", "orders"].includes(tabParam)) {
-      setActiveTab(tabParam);
-    }
-  }, [tabParam]);
 
   useEffect(() => {
     const supabase = createClient();
@@ -55,6 +61,15 @@ export default function ProfileClient() {
     supabase.auth.getUser().then(({ data }) => {
       setUser(data?.user ?? null);
       setLoading(false);
+
+      if (data?.user) {
+        getUserOrders(data.user.id)
+          .then((orders) => setUserOrders(orders))
+          .catch((err) => console.error("Gagal memuat pesanan user:", err))
+          .finally(() => setLoadingOrders(false));
+      } else {
+        setLoadingOrders(false);
+      }
     });
 
     // 2. Ambil produk dari Supabase untuk ditampilkan di tab
@@ -90,21 +105,7 @@ export default function ProfileClient() {
     }
   };
 
-  const updateQuantity = (productId: string, delta: number) => {
-    setCartQuantities((prev) => {
-      const current = prev[productId] || 1;
-      const next = Math.max(1, current + delta);
-      return { ...prev, [productId]: next };
-    });
-  };
 
-  const removeFromCart = (productId: string) => {
-    setCartQuantities((prev) => {
-      const copy = { ...prev };
-      delete copy[productId];
-      return copy;
-    });
-  };
 
   // Format Rupiah
   const formatRupiah = (amount: number) => {
@@ -179,9 +180,8 @@ export default function ProfileClient() {
   const fullName = user.user_metadata?.full_name || user.email?.split("@")[0] || "Member Jovique";
   const userInitial = fullName ? fullName[0].toUpperCase() : "U";
 
-  // Data Item untuk Orders
+  // Data Item untuk Orders & Wishlist
   const wishlistProducts = wishlistItems.map((item) => item.product).filter(Boolean);
-  const orderProducts = products.slice(0, 4);
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
@@ -309,7 +309,7 @@ export default function ProfileClient() {
           >
             <p className="text-[11px] text-[#64748B] font-medium">Pesanan Selesai</p>
             <p className="text-lg font-bold text-[#0F172A] group-hover:text-[#1474ED] transition-colors mt-0.5">
-              {orderProducts.length} Pesanan
+              {userOrders.length} Pesanan
             </p>
           </div>
 
@@ -395,7 +395,7 @@ export default function ProfileClient() {
                 : "bg-[#E2E8F0] text-[#475569]"
             }`}
           >
-            {orderProducts.length}
+            {userOrders.length}
           </span>
         </button>
       </div>
@@ -782,100 +782,174 @@ export default function ProfileClient() {
       {/* TAB 4: PRODUK YANG SUDAH DIBELI (RIWAYAT PESANAN) */}
       {activeTab === "orders" && (
         <div className="animate-fade-in space-y-6">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-[#0F172A]">
-              Riwayat Pesanan Koleksi ({orderProducts.length} Pesanan)
-            </h2>
-            <span className="text-xs text-[#64748B]">Semua pesanan diproses langsung oleh Jovique</span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#F1F5F9] pb-4">
+            <div>
+              <div className="flex items-center gap-3">
+                <h2 className="text-lg font-bold text-[#0F172A]">
+                  Riwayat Pesanan ({userOrders.length} Pesanan)
+                </h2>
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-100 text-amber-900 border border-amber-300">
+                  Mode Simulasi Sandbox
+                </span>
+              </div>
+              <p className="text-xs text-[#64748B] mt-0.5">
+                Semua pesanan yang Anda beli disimpan secara resmi di database orders &amp; order_items.
+              </p>
+            </div>
+            <Link href="/products" className="text-xs font-semibold text-[#1474ED] hover:underline">
+              + Belanja Produk Lain
+            </Link>
           </div>
 
-          <div className="space-y-4">
-            {orderProducts.map((product, idx) => {
-              const orderId = `INV/JVQ/2026/09${100 + idx}`;
-              const orderDate = `1${idx + 2} September 2026`;
-              const isCompleted = idx !== 0;
+          {/* Loading Skeleton */}
+          {loadingOrders && (
+            <div className="space-y-4">
+              {[1, 2].map((i) => (
+                <div key={i} className="h-40 rounded-3xl bg-slate-100 animate-pulse" />
+              ))}
+            </div>
+          )}
 
-              return (
-                <div
-                  key={product.id}
-                  className="rounded-3xl bg-white border border-[#E2E8F0] shadow-xs p-5 sm:p-6 space-y-4 hover:border-[#1474ED]/40 transition-colors"
-                >
-                  {/* Header Order */}
-                  <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#F1F5F9] pb-3 text-xs">
-                    <div className="flex items-center gap-3">
-                      <span className="font-bold text-[#0F172A]">{orderId}</span>
-                      <span className="text-slate-300">•</span>
-                      <span className="text-[#64748B]">{orderDate}</span>
-                    </div>
+          {/* Empty State jika belum ada pesanan */}
+          {!loadingOrders && userOrders.length === 0 && (
+            <div className="rounded-3xl bg-white border border-[#E2E8F0] p-12 text-center shadow-xs">
+              <div className="w-16 h-16 rounded-2xl bg-slate-50 text-slate-400 mx-auto flex items-center justify-center font-bold text-2xl mb-4 border border-[#E2E8F0]">
+                📦
+              </div>
+              <h3 className="text-base font-bold text-[#0F172A] mb-1">
+                Belum Ada Riwayat Pesanan
+              </h3>
+              <p className="text-xs text-[#64748B] max-w-md mx-auto mb-6 leading-relaxed">
+                Anda belum melakukan transaksi pembelian koleksi busana Jovique. Beli produk langsung atau checkout dari keranjang dengan simulasi pembayaran instan tanpa uang asli.
+              </p>
+              <Link href="/products">
+                <Button variant="primary" size="md">
+                  Mulai Belanja Sekarang
+                </Button>
+              </Link>
+            </div>
+          )}
 
-                    <span
-                      className={`px-3 py-1 rounded-full text-[11px] font-bold ${
-                        isCompleted
-                          ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                          : "bg-amber-50 text-amber-700 border border-amber-200"
-                      }`}
-                    >
-                      {isCompleted ? "✓ Selesai" : "⏳ Sedang Dikirim"}
-                    </span>
-                  </div>
+          {/* List Pesanan Riil */}
+          {!loadingOrders && userOrders.length > 0 && (
+            <div className="space-y-5">
+              {userOrders.map((order) => {
+                const orderDate = new Date(
+                  order.paid_at || order.created_at || "2026-09-22T00:00:00.000Z"
+                ).toLocaleDateString("id-ID", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                });
 
-                  {/* Body Order: Detail Produk yang Dibeli */}
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4">
-                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-slate-100 overflow-hidden shrink-0 border border-[#E2E8F0]">
-                        {product.images?.[0] ? (
-                          <img
-                            src={product.images[0]}
-                            alt={product.name}
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center text-xs text-slate-400">
-                            No Image
-                          </div>
-                        )}
-                      </div>
+                const items = order.order_items || [];
 
-                      <div className="space-y-1">
-                        <Link
-                          href={`/products/${product.slug}`}
-                          className="font-bold text-sm sm:text-base text-[#0F172A] hover:text-[#1474ED] transition-colors"
-                        >
-                          {product.name}
-                        </Link>
-                        <p className="text-xs text-[#64748B]">
-                          1 Barang x {formatRupiah(product.price)}
-                        </p>
-                        <p className="text-[11px] text-emerald-600 font-medium">
-                          Bebas Ongkir (Pengiriman Khusus Jovique)
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Total Pembayaran & Tombol Beli Lagi */}
-                    <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto gap-3 pt-2 sm:pt-0 border-t sm:border-t-0 border-[#F1F5F9]">
-                      <div className="sm:text-right">
-                        <p className="text-[10px] text-[#64748B] uppercase tracking-wider">
-                          Total Belanja
-                        </p>
-                        <p className="text-base font-extrabold text-[#1474ED]">
-                          {formatRupiah(product.price)}
-                        </p>
+                return (
+                  <div
+                    key={order.id}
+                    className="rounded-3xl bg-white border border-[#E2E8F0] shadow-xs p-5 sm:p-6 space-y-5 hover:border-[#1474ED]/40 transition-colors"
+                  >
+                    {/* Header Order */}
+                    <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#F1F5F9] pb-3 text-xs">
+                      <div className="flex flex-wrap items-center gap-3">
+                        <span className="font-mono font-extrabold text-[#0F172A] bg-slate-100 px-2.5 py-1 rounded-lg">
+                          {order.id}
+                        </span>
+                        <span className="text-slate-300">•</span>
+                        <span className="text-[#64748B]">{orderDate}</span>
+                        <span className="text-slate-300">•</span>
+                        <span className="font-medium text-[#475569]">
+                          {order.payment_method || "Simulasi"}
+                        </span>
                       </div>
 
                       <div className="flex items-center gap-2">
-                        <Link href={`/products/${product.slug}`}>
-                          <Button variant="primary" size="sm">
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                          ✓ Lunas (Simulasi)
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Body Order: Daftar Seluruh Item yang Dibeli */}
+                    <div className="divide-y divide-[#F1F5F9]">
+                      {items.map((item, itmIdx) => (
+                        <div
+                          key={item.id || itmIdx}
+                          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 py-3 first:pt-0 last:pb-0"
+                        >
+                          <div className="flex items-center gap-4">
+                            <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-2xl bg-slate-100 overflow-hidden shrink-0 border border-[#E2E8F0]">
+                              {item.product_image ? (
+                                <img
+                                  src={item.product_image}
+                                  alt={item.product_name}
+                                  className="w-full h-full object-cover"
+                                />
+                              ) : (
+                                <div className="w-full h-full flex items-center justify-center text-xs text-slate-400">
+                                  Jovique
+                                </div>
+                              )}
+                            </div>
+
+                            <div className="space-y-1">
+                              <p className="font-bold text-sm text-[#0F172A]">
+                                {item.product_name}
+                              </p>
+                              <p className="text-xs text-[#64748B]">
+                                {item.quantity} Barang x {formatRupiah(item.price)}
+                              </p>
+                              <p className="text-[11px] text-emerald-600 font-medium">
+                                Bebas Ongkir (Pengiriman Khusus Jovique)
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="text-right sm:text-right w-full sm:w-auto">
+                            <p className="text-xs text-[#94A3B8]">Subtotal</p>
+                            <p className="text-sm font-extrabold text-[#0F172A]">
+                              {formatRupiah(item.price * item.quantity)}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Footer Order: Total Pembayaran & Aksi */}
+                    <div className="pt-3 border-t border-[#F1F5F9] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-[#64748B]">Total Pembayaran:</span>
+                        <span className="text-base font-extrabold text-[#1474ED]">
+                          {formatRupiah(order.total_amount)}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        {order.xendit_invoice_url && (
+                          <a
+                            href={order.xendit_invoice_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs text-[#1474ED] hover:underline font-semibold"
+                          >
+                            Invoice Xendit Sandbox ↗
+                          </a>
+                        )}
+                        <Link href="/products">
+                          <Button variant="secondary" size="sm">
                             Beli Lagi
                           </Button>
                         </Link>
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -20,3 +20,6 @@ export * from "./wishlist";
 // Cart API
 export * from "./cart";
 
+// Orders API
+export * from "./orders";
+
