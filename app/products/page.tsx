@@ -7,9 +7,28 @@ import type { ProductSortOption } from "@/services";
 export const revalidate = 60; // ISR revalidate setiap 60 detik
 
 export const metadata: Metadata = {
-  title: "Koleksi Busana & Produk | Jovique Official Store",
+  title: "Koleksi Busana & Produk Lengkap | Jovique Official Store",
   description:
-    "Jelajahi seluruh koleksi busana dan aksesori eksklusif dari Jovique. Dibuat dengan material premium, desain modern yang elegan, dan jaminan keaslian 100% dari Jovique.",
+    "Katalog lengkap pakaian pria & wanita Jovique Official. Temukan kemeja kasual, jaket outerwear, celana formal, dan kaos katun premium dengan jaminan originalitas & diskon spesial.",
+  keywords: [
+    "katalog busana jovique",
+    "baju pria wanita original",
+    "beli kemeja online",
+    "jaket outerwear branded",
+    "celana formal modern",
+    "toko fashion online indonesia",
+    "koleksi busana jovique",
+  ],
+  alternates: {
+    canonical: "/products",
+  },
+  openGraph: {
+    title: "Koleksi Lengkap Fashion Pria & Wanita | Jovique Official Store",
+    description:
+      "Jelajahi seluruh koleksi busana eksklusif Jovique Official. Material premium, desain kontemporer, dan gratis ongkir ke seluruh Indonesia.",
+    url: "/products",
+    type: "website",
+  },
 };
 
 interface PageProps {
