@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
@@ -29,17 +29,12 @@ export default function AuthCard({ initialMode = "login" }: AuthCardProps) {
   // Status & loading state
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(
+    urlError === "oauth_failed" ? "Gagal masuk dengan Google. Silakan coba lagi." : null
+  );
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const supabase = createClient();
-
-  // Tangani error dari redirect OAuth callback jika ada
-  useEffect(() => {
-    if (urlError === "oauth_failed") {
-      setErrorMessage("Gagal masuk dengan Google. Silakan coba lagi.");
-    }
-  }, [urlError]);
 
   // Reset form status saat berpindah mode
   const switchMode = (newMode: "login" | "register") => {
@@ -246,7 +241,7 @@ export default function AuthCard({ initialMode = "login" }: AuthCardProps) {
               <p className="text-sm text-slate-300 leading-relaxed">
                 {mode === "login"
                   ? "Masuk untuk melihat pesanan Anda, menyimpan wishlist favorit, dan menikmati layanan personal Jovique."
-                  : "Daftar sekarang untuk mendapatkan voucher selamat datang, akses peluncuran koleksi perdana, dan bebas ongkir ke seluruh Indonesia."}
+                  : "Daftar sekarang untuk mendapatkan akses peluncuran koleksi perdana dan bebas ongkir ke seluruh Indonesia."}
               </p>
             </div>
           </div>

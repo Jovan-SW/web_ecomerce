@@ -5,7 +5,7 @@ import { AuthCard } from "@/components";
 export const metadata: Metadata = {
   title: "Daftar Akun Baru | Jovique Official Store",
   description:
-    "Daftar akun member baru di Jovique. Nikmati voucher promo belanja perdana, jaminan produk original, dan pengiriman cepat.",
+    "Daftar akun member baru di Jovique. Nikmati akses koleksi eksklusif, jaminan produk original, dan pengiriman cepat.",
 };
 
 export default function RegisterPage() {

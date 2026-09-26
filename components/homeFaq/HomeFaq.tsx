@@ -36,9 +36,9 @@ const FAQ_ITEMS: FaqItem[] = [
   },
   {
     id: "faq-4",
-    question: "Apakah tersedia layanan Bebas Ongkir dan berapa estimasi pengirimannya?",
+    question: "Apakah tersedia layanan Bebas Ongkir?",
     answer:
-      "Ya! Anda bisa menikmati promo Bebas Ongkir ke seluruh wilayah Indonesia untuk setiap pembelian koleksi Jovique. Estimasi pengiriman berkisar 1–3 hari kerja untuk area Jabodetabek dan kota-kota besar, dikemas secara rapi dan terlindungi.",
+      "Ya! Anda bisa menikmati promo Bebas Ongkir untuk setiap pembelian koleksi Jovique dalam simulasi belanja di website ini.",
     category: "layanan",
   },
   {

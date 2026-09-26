@@ -101,33 +101,11 @@ export default function Footer({
   brandName = "JOVIQUE",
   tagline = "Official Online Store & Signature Fashion",
 }: FooterProps) {
-  // State for interactive Newsletter
-  const [email, setEmail] = useState("");
-  const [subscriptionState, setSubscriptionState] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [errorMessage, setErrorMessage] = useState("");
-
   // State for Mobile Accordion
   const [expandedSection, setExpandedSection] = useState<number | null>(null);
 
   const toggleSection = (index: number) => {
     setExpandedSection(expandedSection === index ? null : index);
-  };
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || !email.includes("@") || !email.includes(".")) {
-      setErrorMessage("Silakan masukkan alamat email yang valid.");
-      setSubscriptionState("error");
-      return;
-    }
-
-    setSubscriptionState("loading");
-    setErrorMessage("");
-
-    // Simulate luxury API subscription
-    setTimeout(() => {
-      setSubscriptionState("success");
-    }, 850);
   };
 
   return (
@@ -145,108 +123,7 @@ export default function Footer({
         aria-hidden="true"
       />
 
-      {/* =========================================================================
-          TIER 1: NEWSLETTER (High Conversion & Clean Luxury)
-          ========================================================================= */}
-      <div className="relative border-b border-[#1E293B] py-12 lg:py-16">
-        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10">
-          <div className="relative rounded-2xl border border-[#1E3A8A]/50 bg-gradient-to-br from-[#0B2545] via-[#0A192F] to-[#071324] p-6 sm:p-10 lg:p-12 overflow-hidden shadow-2xl">
-            {/* Subtle decorative grid lines */}
-            <div className="absolute top-0 right-0 w-80 h-80 bg-[#1474ed]/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-10 -left-10 w-80 h-80 bg-[#1D4ED8]/15 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-              {/* Left Column: Heading & Value */}
-              <div className="lg:col-span-6 space-y-2">
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
-                  Dapatkan Informasi Koleksi Baru & Privilese Eksklusif
-                </h3>
-                <p className="text-xs sm:text-sm text-[#94A3B8] max-w-xl leading-relaxed">
-                  Daftarkan email Anda untuk mendapatkan akses awal ke koleksi rilis terbatas, undangan acara privat Jovique,
-                  dan penawaran sambutan istimewa setiap musim.
-                </p>
-              </div>
-
-              {/* Right Column: Interactive Subscription Form */}
-              <div className="lg:col-span-6">
-                {subscriptionState === "success" ? (
-                  <div className="p-6 rounded-xl bg-[#071324] border border-[#1474ed]/50 text-left space-y-3 animate-fadeIn">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-[#1474ed]/20 text-[#1474ed] flex items-center justify-center">
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-semibold text-white">Selamat Datang di Jovique Official!</h4>
-                        <p className="text-xs text-[#94A3B8]">Kode voucher sambutan telah dikirim ke {email}</p>
-                      </div>
-                    </div>
-                    <div className="p-3 bg-[#0B2545] border border-[#1E3A8A] rounded-lg flex items-center justify-between gap-3">
-                      <div>
-                        <span className="text-[10px] uppercase font-mono tracking-wider text-[#94A3B8] block">Voucher Selamat Datang (10% Off):</span>
-                        <span className="font-mono text-xs font-bold text-[#60A5FA] tracking-wider">JOVIQUEWELCOME10</span>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          navigator.clipboard.writeText("JOVIQUEWELCOME10");
-                          alert("Kode voucher disalin!");
-                        }}
-                        className="text-[11px] font-medium px-3 py-1.5 bg-[#1474ed] hover:bg-[#1d4ed8] text-white rounded-lg transition-colors cursor-pointer"
-                      >
-                        Salin Kode
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubscribe} className="space-y-3">
-                    <div className="flex flex-col sm:flex-row gap-2">
-                      <div className="relative flex-1">
-                        <input
-                          type="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="Masukkan alamat email Anda..."
-                          required
-                          className="w-full h-12 px-4 bg-[#071324] border border-[#1E3A8A] focus:border-[#1474ed] focus:ring-2 focus:ring-[#1474ed]/20 text-white placeholder-[#64748B] text-xs transition-all outline-none rounded-xl"
-                        />
-                      </div>
-                      <button
-                        type="submit"
-                        disabled={subscriptionState === "loading"}
-                        className="h-12 px-6 bg-white hover:bg-[#EFF6FF] text-[#0B2545] hover:text-[#1474ed] text-xs uppercase tracking-[0.16em] font-bold transition-all duration-300 flex items-center justify-center gap-2 shrink-0 group shadow-md hover:shadow-[0_0_20px_rgba(20,116,237,0.3)] disabled:opacity-50 rounded-xl cursor-pointer"
-                      >
-                        {subscriptionState === "loading" ? (
-                          <span className="inline-block w-4 h-4 border-2 border-[#0B2545] border-t-transparent rounded-full animate-spin" />
-                        ) : (
-                          <>
-                            <span>Daftar Sekarang</span>
-                            <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                          </>
-                        )}
-                      </button>
-                    </div>
-
-                    {errorMessage && (
-                      <p className="text-[11px] text-rose-400 flex items-center gap-1.5">
-                        <svg className="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                        </svg>
-                        {errorMessage}
-                      </p>
-                    )}
-
-                    <p className="text-[10px] text-[#64748B] leading-relaxed">
-                      Dengan berlangganan, Anda menyetujui Kebijakan Privasi Jovique. Anda dapat berhenti berlangganan kapan pun tanpa biaya.
-                    </p>
-                  </form>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* =========================================================================
           TIER 2: MAIN NAVIGATION DIRECTORY & JOVIQUE IDENTITY

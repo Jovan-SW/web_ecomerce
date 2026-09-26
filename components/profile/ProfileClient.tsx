@@ -4,11 +4,10 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
-import { getProducts } from "@/services/products";
 import { getUserOrders } from "@/services/orders";
 import { Button } from "@/components";
 import type { User } from "@supabase/supabase-js";
-import type { ProductWithDetails, OrderWithItems } from "@/types/database";
+import type { OrderWithItems } from "@/types/database";
 import { useWishlist } from "@/context/WishlistContext";
 import { useCart } from "@/context/CartContext";
 
@@ -45,19 +44,14 @@ export default function ProfileClient() {
     removeFromCart: removeCartItem,
   } = useCart();
 
-  // Data produk dari Supabase untuk mengisi Keranjang, Wishlist, dan Produk yang Dibeli
-  const [products, setProducts] = useState<ProductWithDetails[]>([]);
   const [userOrders, setUserOrders] = useState<OrderWithItems[]>([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
-
-  // State kuantitas item di keranjang
-  const [cartQuantities, setCartQuantities] = useState<Record<string, number>>({});
   const [copiedId, setCopiedId] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
 
-    // 1. Ambil sesi user
+    // Ambil sesi user dan riwayat pesanan simulasi
     supabase.auth.getUser().then(({ data }) => {
       setUser(data?.user ?? null);
       setLoading(false);
@@ -71,23 +65,6 @@ export default function ProfileClient() {
         setLoadingOrders(false);
       }
     });
-
-    // 2. Ambil produk dari Supabase untuk ditampilkan di tab
-    getProducts({ limit: 8 })
-      .then((res) => {
-        if (res?.data) {
-          setProducts(res.data);
-          // Inisialisasi kuantitas default untuk produk keranjang
-          const initialQty: Record<string, number> = {};
-          res.data.slice(0, 3).forEach((p, idx) => {
-            initialQty[p.id] = idx === 0 ? 2 : 1;
-          });
-          setCartQuantities(initialQty);
-        }
-      })
-      .catch(() => {
-        // Fallback jika fetch error
-      });
   }, []);
 
   const handleSignOut = async () => {
@@ -282,7 +259,7 @@ export default function ProfileClient() {
         </div>
 
         {/* Quick Stats Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 pt-6 border-t border-[#F1F5F9]">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 pt-6 border-t border-[#F1F5F9]">
           <div
             onClick={() => setActiveTab("cart")}
             className="p-3.5 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#1474ED] transition-colors cursor-pointer group"
@@ -311,11 +288,6 @@ export default function ProfileClient() {
             <p className="text-lg font-bold text-[#0F172A] group-hover:text-[#1474ED] transition-colors mt-0.5">
               {userOrders.length} Pesanan
             </p>
-          </div>
-
-          <div className="p-3.5 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0]">
-            <p className="text-[11px] text-[#64748B] font-medium">Voucher Aktif</p>
-            <p className="text-lg font-bold text-emerald-600 mt-0.5">2 Siap Pakai</p>
           </div>
         </div>
       </div>
