@@ -16,49 +16,28 @@ interface NavSection {
 
 const NAV_SECTIONS: NavSection[] = [
   {
-    title: "Kategori Populer",
+    title: "Koleksi & Belanja",
     links: [
-      { label: "Semua Koleksi", href: "/products", badge: "Koleksi" },
-      { label: "Pakaian Pria & Wanita", href: "/categories/t-shirts-polos", badge: "Hot" },
-      { label: "Kemeja & Kasual", href: "/categories/shirts-flannels" },
-      { label: "Jaket & Outerwear", href: "/categories/jackets-outerwear" },
-      { label: "Celana & Trousers", href: "/categories/pants-trousers" },
-      { label: "Sepatu & Aksesoris", href: "/categories/accessories", badge: "Baru" },
-      { label: "Promo & Rilis Spesial", href: "/products", badge: "Diskon" },
-      { label: "Koleksi Terbaru", href: "/products" },
+      { label: "Semua Koleksi", href: "/products", badge: "Katalog" },
+      { label: "Koleksi Terbaru", href: "/products?sort=newest", badge: "Baru" },
+      { label: "Produk Terpopuler", href: "/products?sort=rating", badge: "Hot" },
+      { label: "Harga Termurah", href: "/products?sort=price-asc" },
     ],
   },
   {
-    title: "Layanan Pelanggan",
+    title: "Akun & Pesanan",
     links: [
-      { label: "Pusat Bantuan (FAQ)", href: "/faq" },
-      { label: "Lacak Status Pesanan", href: "/track-order" },
-      { label: "Cara Berbelanja Online", href: "/how-to-buy" },
-      { label: "Kebijakan Retur & Garansi", href: "/returns" },
-      { label: "Syarat Bebas Ongkir", href: "/free-shipping" },
-      { label: "Panduan Pembayaran & Pengiriman", href: "/payment-guide" },
-      { label: "Hubungi Customer Care 24/7", href: "/contact" },
+      { label: "Profil Saya", href: "/profile" },
+      { label: "Riwayat Pesanan", href: "/profile?tab=orders" },
+      { label: "Keranjang Belanja", href: "/cart" },
+      { label: "Daftar Keinginan (Wishlist)", href: "/wishlist" },
     ],
   },
   {
-    title: "Tentang Jovique",
+    title: "Bantuan & Informasi",
     links: [
-      { label: "Tentang Jovique", href: "/about" },
-      { label: "Cerita Brand & Filosofi", href: "/about" },
-      { label: "Lookbook & Kampanye", href: "/lookbook" },
-      { label: "Keberlanjutan & Etika", href: "/sustainability" },
-      { label: "Panduan Ukuran & Gaya", href: "/size-guide" },
-      { label: "Karier di Jovique", href: "/careers", badge: "Hiring" },
-    ],
-  },
-  {
-    title: "Keamanan & Kebijakan",
-    links: [
-      { label: "Syarat & Ketentuan Pengguna", href: "/terms" },
-      { label: "Kebijakan Privasi Data", href: "/privacy" },
-      { label: "Garansi Orisinalitas & Retur", href: "/authenticity" },
-      { label: "Hak Kekayaan Intelektual", href: "/authenticity" },
-      { label: "Pengaturan Cookie", href: "/cookies" },
+      { label: "Halaman Utama", href: "/" },
+      { label: "Pertanyaan Umum (FAQ)", href: "/#faq" },
     ],
   },
 ];
@@ -170,7 +149,7 @@ export default function Footer({
           </div>
 
           {/* Directory Link Columns (8 cols) */}
-          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-8">
             {NAV_SECTIONS.map((section, sIndex) => (
               <div key={section.title} className="border-b lg:border-b-0 border-[#1E293B] pb-4 lg:pb-0">
                 {/* Mobile Accordion Header */}

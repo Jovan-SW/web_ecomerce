@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
-import { Button } from "@/components";
 import ScrollReveal from "../common/ScrollReveal";
 
 interface FaqItem {
@@ -66,6 +64,7 @@ export default function HomeFaq({ className = "" }: { className?: string }) {
 
   return (
     <section
+      id="faq"
       className={`py-16 sm:py-24 border-t border-[#e8e3ea] relative overflow-hidden ${className}`}
       aria-labelledby="home-about-faq-title"
     >
@@ -176,38 +175,19 @@ export default function HomeFaq({ className = "" }: { className?: string }) {
             2. INTERACTIVE FAQ ACCORDION SECTION
            ======================================================== */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-start">
-          {/* Sisi Kiri: Judul FAQ & Customer Care Box */}
+          {/* Sisi Kiri: Judul FAQ */}
           <div className="lg:col-span-4 lg:sticky lg:top-28">
             <ScrollReveal direction="left">
-              <div className="space-y-6">
-                <div>
-                  <span className="text-[11px] uppercase tracking-wider text-[#1474ed] font-semibold">
-                    Layanan Pelanggan & Bantuan
-                  </span>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-[#0F172A] tracking-tight leading-tight mt-1.5">
-                    Punya Pertanyaan Seputar Koleksi Jovique?
-                  </h3>
-                  <p className="text-sm text-[#475569] leading-relaxed mt-2.5 font-normal">
-                    Berikut informasi penting mengenai pemesanan, panduan ukuran, jaminan orisinalitas, dan layanan purna jual Jovique.
-                  </p>
-                </div>
-
-                <div className="p-6 bg-white rounded-2xl border border-[#E2E8F0] shadow-sm space-y-4">
-                  <div className="flex items-center gap-2.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#0F172A]">
-                      Layanan Konsultasi & CS Jovique
-                    </span>
-                  </div>
-                  <p className="text-xs sm:text-[13px] text-[#475569] leading-relaxed">
-                    Butuh panduan memilih ukuran, rekomendasi gaya busana, atau informasi pengiriman? Tim Jovique siap membantu Anda dengan ramah.
-                  </p>
-                  <Link href="/products" className="block pt-1">
-                    <Button variant="outline" size="sm" fullWidth className="rounded-xl font-medium text-xs">
-                      Hubungi Layanan Pelanggan →
-                    </Button>
-                  </Link>
-                </div>
+              <div className="space-y-4">
+                <span className="text-[11px] uppercase tracking-wider text-[#1474ed] font-semibold">
+                  Pertanyaan Umum (FAQ)
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#0F172A] tracking-tight leading-tight mt-1.5">
+                  Punya Pertanyaan Seputar Koleksi Jovique?
+                </h3>
+                <p className="text-sm text-[#475569] leading-relaxed font-normal">
+                  Berikut informasi lengkap mengenai pemesanan, panduan ukuran, jaminan orisinalitas, dan kenyamanan berbelanja di Jovique.
+                </p>
               </div>
             </ScrollReveal>
           </div>
